@@ -459,9 +459,9 @@ caniuse-lite@^1.0.30001406:
   integrity sha512-SDIV6bgE1aVbK6XyxdURbUE89zY7+k1BBBaOwYwkNCglXlel/E7mELiHC64HQ+W0xSKlqWhV9Wh7iHxUjMs4fA==
 
 caniuse-lite@^1.0.30001449, caniuse-lite@^1.0.30001464:
-  version "1.0.30001474"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001474.tgz#13b6fe301a831fe666cce8ca4ef89352334133d5"
-  integrity sha512-iaIZ8gVrWfemh5DG3T9/YqarVZoYf0r188IjaGwx68j4Pf0SGY6CQkmJUIE+NZHkkecQGohzXmBGEwWDr9aM3Q==
+  version "1.0.30001478"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001478.tgz#0ef8a1cf8b16be47a0f9fc4ecfc952232724b32a"
+  integrity sha512-gMhDyXGItTHipJj2ApIvR+iVB5hd0KP3svMWWXDvZOmjzJJassGLMfxRkQCSYgGd2gtdL/ReeiyvMSFD1Ss6Mw==
 
 chalk@^4.0.0:
   version "4.1.2"
@@ -624,9 +624,9 @@ doctrine@^3.0.0:
     esutils "^2.0.2"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.353"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.353.tgz#20e9cb4c83a08e35b3314d3fa8988764c105e6b7"
-  integrity sha512-IdJVpMHJoBT/nn0GQ02wPfbhogDVpd1ud95lP//FTf5l35wzxKJwibB4HBdY7Q+xKPA1nkZ0UDLOMyRj5U5IAQ==
+  version "1.4.361"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.361.tgz#010ddd5e623470ab9d1bf776b009d11c3669a4e3"
+  integrity sha512-VocVwjPp05HUXzf3xmL0boRn5b0iyqC7amtDww84Jb1QJNPBc7F69gJyEeXRoriLBC4a5pSyckdllrXAg4mmRA==
 
 emoji-regex@^9.2.2:
   version "9.2.2"
@@ -1026,10 +1026,10 @@ fraction.js@^4.2.0:
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.2.0.tgz#448e5109a313a3527f5a3ab2119ec4cf0e0e2950"
   integrity sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==
 
-framer-motion@^10.11.2:
-  version "10.11.2"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-10.11.2.tgz#0c423acbc3be232b364365b84cf3fd8a519c1044"
-  integrity sha512-IrwuC9regNOU99JoM/Z62CAMA3awGV6AcF7e3bcgXk/ZoNlGSt5aVq0J7UAwtLmCkwVlRvBkiMnvv2mZ1GW2pg==
+framer-motion@^10.11.6:
+  version "10.11.6"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-10.11.6.tgz#1c59f9e2dcfa379f5dd1076eebdf8b11b7c62f80"
+  integrity sha512-QXfnUzPQqbJEnWpmtPaRB4OCuyH44uCys5Agg44LEQvItKTg0bou57WuhsNVuEyVCnMoAhrtRYiKeG/vAz6bFw==
   dependencies:
     tslib "^2.4.0"
   optionalDependencies:

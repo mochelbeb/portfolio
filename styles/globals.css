@@ -1,15 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html,
-body {
-  overflow: hidden;
+html {
   height: 100%;
 }
+
 body {
+  height: 100vh;
 }
 #__next {
-  height: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 * {
   @apply text-slate-50;

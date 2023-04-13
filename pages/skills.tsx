@@ -16,19 +16,17 @@ export default function Page() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="h-full">
-        <h1
-          {...handlers}
-          className="mx-auto  flex  w-fit flex-col  gap-1 pt-32 font-[cursive] text-9xl uppercase text-stone-100"
-        >
-          <span className="justify-self-start">
-            <span className="text-purple-500">S</span>KILL
-            <span className="text-purple-500">S</span>
-          </span>
-        </h1>
-        <div className="h-96"></div>
-        <div className="h-96"></div>
-      </main>
+      <h1
+        {...handlers}
+        className="mx-auto  flex  w-fit flex-col  gap-1 pt-32 font-[cursive] text-9xl uppercase text-stone-100"
+      >
+        <span className="justify-self-start">
+          <span className="text-purple-500">S</span>KILL
+          <span className="text-purple-500">S</span>
+        </span>
+      </h1>
+      <div className="h-96"></div>
+      <div className="h-96"></div>
     </Layout>
   );
 }
