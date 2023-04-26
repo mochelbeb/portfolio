@@ -10,7 +10,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const prevIndex = navigation.findIndex(
     (link) => link.href == router.query.from
   );
-  const mainRef = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [pressingLevel, setPressingLevel] = useState(0);
   const [isPressing, setIsPressing] = useState(false);
   const direction = prevIndex < index ? "right" : "left";
@@ -29,38 +29,6 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
     );
     setPressingLevel(0);
   }
-  useEffect(() => {
-    const main = mainRef.current;
-
-    if (!main) return;
-    let scrollEnd = false;
-    const scrollListener = () => {
-      if (main.offsetHeight + main.scrollTop + 10 >= main.scrollHeight) {
-        scrollEnd = true;
-      } else {
-        scrollEnd = false;
-      }
-    };
-    main.addEventListener("wheel", (e) => {
-      const direction = Math.sign(e.deltaY);
-      if (direction === 1 && scrollEnd) {
-        stillPressing(25);
-      }
-    });
-    window.addEventListener("keydown", (event) => {
-      const isNumLocked = event.getModifierState("NumLock");
-      if (
-        (event.code === "ArrowDown" ||
-          (event.code === "Numpad2" && !isNumLocked)) &&
-        scrollEnd
-      ) {
-        stillPressing(50);
-      }
-    });
-
-    main.addEventListener("scroll", scrollListener);
-    return () => main.removeEventListener("scroll", scrollListener);
-  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -76,15 +44,15 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   }, [isPressing, pressingLevel]);
   return (
     <>
-      <AppBar />
       <div
         ref={(el) => {
           handlers.ref(el);
-          mainRef.current = el;
+          ref.current = el;
         }}
         {...handlers.onMouseDown}
-        className="flex-1 overflow-y-auto overflow-x-hidden "
+        className="min-h-screen overflow-y-auto overflow-x-hidden "
       >
+        <AppBar ref={ref} />
         <motion.div
           initial={{
             x: direction === "left" ? "-100%" : "100%",
@@ -102,7 +70,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           <main>{children}</main>
         </motion.div>
         <motion.div
-          className="mx-auto h-2 rounded-md bg-purple-400"
+          className="mx-auto h-2 rounded-md bg-purple-100"
           animate={{ width: `${pressingLevel}%` }}
           exit={{ width: "100%" }}
           transition={{
