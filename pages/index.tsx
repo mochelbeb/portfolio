@@ -1,12 +1,9 @@
-import Layout from "@/features/layout/components/Layout";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter();
   return (
-    <Layout>
+    <>
       <Head>
         <title>Islam Naasani</title>
         <meta name="description" content="Islam Naasani's Portfolio" />
@@ -27,6 +24,6 @@ export default function Page() {
       <Link as="/about" href={{ pathname: "/about", query: { from: "/" } }}>
         About
       </Link>
-    </Layout>
+    </>
   );
 }
