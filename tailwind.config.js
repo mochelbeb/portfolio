@@ -17,6 +17,15 @@ module.exports = {
           main: colors.indigo["700"],
         },
       },
+      keyframes: {
+        appear: {
+          "0%": { height: "fit-content", opacity: 0 },
+          "100%": { height: "fit-content", opacity: 1 },
+        },
+      },
+      animation: {
+        appear: "appear 0.25s ease-in-out forwards",
+      },
     },
   },
   plugins: [],

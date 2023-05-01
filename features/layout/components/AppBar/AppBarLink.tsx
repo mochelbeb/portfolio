@@ -1,7 +1,7 @@
 import { Variants, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Tooltip } from "react-tooltip";
 import { AppBarOrigin, navigation } from ".";
 const linkVariants = {
@@ -33,40 +33,58 @@ export type LinkProps = {
 };
 export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
   const path = useRouter().pathname;
-  console.log(path, item.href);
-//TODO hide tooltip after hover (need keyframe animation)
+  const [toolTipOpen, setTooltipOpen] = useState(false);
+  //TODO hide tooltip after hover (need keyframe animation)
   return (
     <>
       <MotionLink
         as={item.href}
-        key={item.name}
         href={{ pathname: item.href, query: { from: path } }}
         className={
-          "pointer-events-auto border-y-2 border-solid border-transparent [&>.tooltip]:hover:opacity-100 [&>.tooltip]:focus:opacity-100 " +
+          "pointer-events-auto border-y-2 border-solid border-transparent " +
           (isDragging ? "pointer-events-none" : "")
         }
-        animate={origin}
-        variants={linkVariants}
-        transition={{ type: "spring" }}
         aria-label={item.name}
         aria-current={path === item.href ? "page" : undefined}
         data-tooltip-id={item.href}
         data-tooltip-content={item.name}
       >
-        {<item.icon className="h-10 w-10" />}
-        {!isDragging && (
-          <Tooltip
-            isOpen
-            className="tooltip absolute rounded-xl border-2 border-white/20 bg-black/40 p-2 opacity-0 transition-opacity duration-500"
-            id={item.href}
-            place={tooltipPos[origin]}
-          />
-        )}
-        {path === item.href && (
+        {path === item.href && ["top", "right"].includes(origin) && (
           <motion.div
-            className="mt-1 h-1  bg-white"
+            className="mb-1 h-1  rounded-sm"
+            style={{ backgroundColor: item.color }}
             layoutId="AppBarIndicator"
           />
+        )}
+        {path !== item.href && ["top", "right"].includes(origin) && (
+          <motion.div className="mb-1 h-1 " />
+        )}
+        <motion.div
+          animate={origin}
+          variants={linkVariants}
+          transition={{ type: "spring" }}
+        >
+          {<item.icon className="h-10 w-10" />}
+          {!isDragging && (
+            <Tooltip
+              isOpen={toolTipOpen}
+              setIsOpen={setTooltipOpen}
+              className="tooltip absolute animate-appear rounded-xl border-2 border-white/20 bg-black/40 p-2 hover:animate-appear"
+              id={item.href}
+              place={tooltipPos[origin]}
+            />
+          )}
+        </motion.div>
+
+        {path === item.href && ["left", "bottom"].includes(origin) && (
+          <motion.div
+            className="mt-1 h-1 rounded-sm"
+            style={{ backgroundColor: item.color }}
+            layoutId="AppBarIndicator"
+          />
+        )}
+        {path !== item.href && ["top", "right"].includes(origin) && (
+          <motion.div className="mt-1 h-1 " />
         )}
       </MotionLink>
     </>
