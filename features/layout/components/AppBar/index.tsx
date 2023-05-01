@@ -4,12 +4,11 @@ import { FcBusinessContact, FcIdea, FcSupport } from "react-icons/fc";
 import { MdDragIndicator } from "react-icons/md";
 import { AppBarLink } from "./AppBarLink";
 export const navigation = [
-  { name: "home", href: "/", icon: FcBusinessContact },
-  { name: "About", href: "/about", icon: FcIdea },
-  { name: "Skills", href: "/skills", icon: FcSupport },
+  { name: "home", href: "/", icon: FcBusinessContact, color: "#673AB7" },
+  { name: "About", href: "/about", icon: FcIdea, color: "#FBC02D" },
+  { name: "Skills", href: "/skills", icon: FcSupport, color: "#607D8B" },
 ];
 export type AppBarOrigin = "top" | "bottom" | "left" | "right";
-//TODO fix style prop changing between client and server
 type ContainerVariantParams = {
   rect: { width: number; height: number };
   screenRect: { width: number; height: number };
@@ -38,14 +37,14 @@ const containerVariantsGenerator = ({
     left: {
       x: 0,
       y: 0,
-      right: screenRect.width - rect.width + rect.width / 4,
+      right: screenRect.width - rect.width + rect.width / 8,
       top: (screenRect.height - rect.width) / 2,
       rotate: "90deg",
     },
     right: {
       x: 0,
       y: 0,
-      right: -rect.width / 4,
+      right: -rect.width / 8,
       top: (screenRect.height - rect.width) / 2,
       rotate: "90deg",
     },
@@ -117,6 +116,61 @@ export const AppBar = ({}: AppBarProps) => {
       );
     }
   }, []);
+  useEffect(() => {
+    let lastScrollTop = 0;
+    const scrollEventListener = (e: Event) => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const hide = scrollTop > lastScrollTop;
+      switch (origin) {
+        case "bottom":
+          if (hide) {
+            animationControls.start({
+              y: screenRect.height + 1.5 * rect.height,
+            });
+          } else {
+            animationControls.start({ y: containerVariants["bottom"].y });
+          }
+          break;
+        case "top":
+          if (hide) {
+            animationControls.start({
+              y: -1.5 * rect.height,
+            });
+          } else {
+            animationControls.start({ y: containerVariants["top"].y });
+          }
+          break;
+        case "left":
+          if (hide) {
+            animationControls.start({
+              x: -1.5 * rect.width,
+            });
+          } else {
+            animationControls.start({ x: 0 });
+          }
+          break;
+        case "right":
+          if (hide) {
+            animationControls.start({
+              x: 1.5 * rect.width,
+            });
+          } else {
+            animationControls.start({ x: 0 });
+          }
+          break;
+      }
+    };
+    window.addEventListener("scroll", scrollEventListener);
+    return () => window.removeEventListener("scroll", scrollEventListener);
+  }, [
+    animationControls,
+    containerVariants,
+    origin,
+    rect,
+    screenRect.height,
+    screenRect.width,
+  ]);
   return (
     <motion.nav
       ref={ref}

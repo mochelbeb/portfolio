@@ -34,7 +34,6 @@ export type LinkProps = {
 export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
   const path = useRouter().pathname;
   const [toolTipOpen, setTooltipOpen] = useState(false);
-  //TODO hide tooltip after hover (need keyframe animation)
   return (
     <>
       <MotionLink
