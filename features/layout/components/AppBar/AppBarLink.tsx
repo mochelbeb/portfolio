@@ -1,25 +1,25 @@
+import { navigation } from "@/constants/navigation";
 import { Variants, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { Tooltip } from "react-tooltip";
-import { AppBarOrigin, navigation } from ".";
+import { AppBarOrigin } from ".";
+//? previously rotate: "0deg" after a yarn-upgrade-all it stopped working
+// and this for some reason fixed it
 const linkVariants = {
   top: {
-    rotate: "0deg",
+    transform: "rotate(0deg)",
   },
-  bottom: {
-    rotate: "0deg",
-  },
+  bottom: { transform: "rotate(0deg)" },
   left: {
-    rotate: "-90deg",
+    transform: "rotate(-90deg)",
   },
   right: {
-    rotate: "-90deg",
+    transform: "rotate(-90deg)",
   },
 } satisfies Variants;
 
-const MotionLink = motion(Link);
 const tooltipPos = {
   right: "left",
   left: "right",
@@ -36,7 +36,7 @@ export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
   const [toolTipOpen, setTooltipOpen] = useState(false);
   return (
     <>
-      <MotionLink
+      <Link
         as={item.href}
         href={{ pathname: item.href, query: { from: path } }}
         className={
@@ -85,7 +85,7 @@ export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
         {path !== item.href && ["top", "right"].includes(origin) && (
           <motion.div className="mt-1 h-1 " />
         )}
-      </MotionLink>
+      </Link>
     </>
   );
 };

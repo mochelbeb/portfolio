@@ -1,64 +1,16 @@
-import { Variants, motion, useAnimation, useDragControls } from "framer-motion";
+import { navigation } from "@/constants/navigation";
+import usePrevious from "@/hooks/usePrevious";
+import { useScreenRect } from "@/hooks/useScreenRect";
+import storage from "@/utils/storage";
+import { PanInfo, motion, useAnimation, useDragControls } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { FcBusinessContact, FcIdea, FcSupport } from "react-icons/fc";
 import { MdDragIndicator } from "react-icons/md";
+import {
+  appBarVariants,
+  hideOnScrollVariants,
+} from "../../utils/appBarFramerVariants";
 import { AppBarLink } from "./AppBarLink";
-export const navigation = [
-  { name: "home", href: "/", icon: FcBusinessContact, color: "#673AB7" },
-  { name: "About", href: "/about", icon: FcIdea, color: "#FBC02D" },
-  { name: "Skills", href: "/skills", icon: FcSupport, color: "#607D8B" },
-];
 export type AppBarOrigin = "top" | "bottom" | "left" | "right";
-type ContainerVariantParams = {
-  rect: { width: number; height: number };
-  screenRect: { width: number; height: number };
-};
-const containerVariantsGenerator = ({
-  rect,
-  screenRect,
-}: ContainerVariantParams) =>
-  ({
-    top: {
-      x: 0,
-      y: 0,
-      marginTop: 10,
-      right: (screenRect.width - rect.width) / 2,
-      top: "unset",
-      rotate: "0deg",
-    },
-    bottom: {
-      x: 0,
-      y: screenRect.height - rect.height - 20,
-      marginBottom: 10,
-      right: (screenRect.width - rect.width) / 2,
-      top: "unset",
-      rotate: "0deg",
-    },
-    left: {
-      x: 0,
-      y: 0,
-      right: screenRect.width - rect.width + rect.width / 8,
-      top: (screenRect.height - rect.width) / 2,
-      rotate: "90deg",
-    },
-    right: {
-      x: 0,
-      y: 0,
-      right: -rect.width / 8,
-      top: (screenRect.height - rect.width) / 2,
-      rotate: "90deg",
-    },
-    draggingHorizontal: {
-      rotate: "0deg",
-    },
-    draggingVertical: {
-      rotate: "90deg",
-    },
-    small: {},
-    visible: {
-      opacity: 1,
-    },
-  } satisfies Variants);
 
 export type AppBarProps = {};
 export const AppBar = ({}: AppBarProps) => {
@@ -67,13 +19,31 @@ export const AppBar = ({}: AppBarProps) => {
   const [origin, setOrigin] = useState<AppBarOrigin>("top");
   const animationControls = useAnimation();
   const [rect, setRect] = useState({ width: 0, height: 0 });
-  const [screenRect, setScreenRect] = useState({ width: 0, height: 0 });
+  const screenRect = useScreenRect();
+  const prevScreenRect = usePrevious(screenRect);
   const [isDragging, setIsDragging] = useState(false);
   const dragControls = useDragControls();
-  const containerVariants = useMemo(
-    () => containerVariantsGenerator({ screenRect, rect }),
+  const navVariants = useMemo(
+    () => appBarVariants({ screenRect, rect }),
     [rect, screenRect]
   );
+
+  const handleOriginChange = (_: Event, info: PanInfo) => {
+    if (!info) return;
+    if (info.point.x < screenRect.width / 4) {
+      animationControls.start("draggingVertical");
+      setOrigin("left");
+    } else if (info.point.x > (3 * screenRect.width) / 4) {
+      animationControls.start("draggingVertical");
+      setOrigin("right");
+    } else if (info.point.y < screenRect.height / 2) {
+      animationControls.start("draggingHorizontal");
+      setOrigin("top");
+    } else if (info.point.y > screenRect.height / 2) {
+      animationControls.start("draggingHorizontal");
+      setOrigin("bottom");
+    }
+  };
   useEffect(() => {
     setRect({
       width: ref.current?.clientWidth ?? 0,
@@ -82,137 +52,71 @@ export const AppBar = ({}: AppBarProps) => {
   }, []);
 
   useEffect(() => {
-    const resizerListener = () => {
-      const screenRect = document.documentElement.getBoundingClientRect();
-      setScreenRect({
-        width: screenRect.width,
-        height: screenRect.height,
-      });
+    if (prevScreenRect !== screenRect) {
       setTimeout(() => animationControls.start(origin), 10);
-    };
-    if (typeof window !== "undefined") {
-      const screenRect = document.documentElement.getBoundingClientRect();
-
-      setScreenRect({
-        width: screenRect.width,
-        height: screenRect.height,
-      });
-      window.addEventListener("resize", resizerListener);
     }
-    return () => window.removeEventListener("resize", resizerListener);
-  }, [animationControls, origin]);
+  }, [animationControls, origin, prevScreenRect, screenRect]);
+
   useEffect(() => {
-    animationControls.start(["small", "visible"], {
+    animationControls.start("visible", {
       delay: 0.25,
     });
   }, [animationControls, storedOrigin]);
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setOrigin(
-        (localStorage.getItem("appBarOrigin") as AppBarOrigin) ?? "top"
-      );
-      setStoredOrigin(
-        (localStorage.getItem("appBarOrigin") as AppBarOrigin) ?? "top"
-      );
-    }
+    const storedAppBarOrigin = storage.getAppBarOrigin() ?? "top";
+    setOrigin(storedAppBarOrigin);
+    setStoredOrigin(storedAppBarOrigin);
   }, []);
+
   useEffect(() => {
     let lastScrollTop = 0;
-    const scrollEventListener = (e: Event) => {
+    let startAnimation = false;
+    let lastShowOrHide: "show" | "hide" | null = null;
+    const scrollEventListener = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
-      const hide = scrollTop > lastScrollTop;
-      switch (origin) {
-        case "bottom":
-          if (hide) {
-            animationControls.start({
-              y: screenRect.height + 1.5 * rect.height,
-            });
-          } else {
-            animationControls.start({ y: containerVariants["bottom"].y });
-          }
-          break;
-        case "top":
-          if (hide) {
-            animationControls.start({
-              y: -1.5 * rect.height,
-            });
-          } else {
-            animationControls.start({ y: containerVariants["top"].y });
-          }
-          break;
-        case "left":
-          if (hide) {
-            animationControls.start({
-              x: -1.5 * rect.width,
-            });
-          } else {
-            animationControls.start({ x: 0 });
-          }
-          break;
-        case "right":
-          if (hide) {
-            animationControls.start({
-              x: 1.5 * rect.width,
-            });
-          } else {
-            animationControls.start({ x: 0 });
-          }
-          break;
+      const hideOrShow = scrollTop > lastScrollTop ? "hide" : "show";
+      startAnimation = lastShowOrHide !== hideOrShow;
+      lastShowOrHide = hideOrShow;
+      if (startAnimation) {
+        animationControls.start(
+          hideOnScrollVariants(navVariants, screenRect, rect)[origin][
+            hideOrShow
+          ]
+        );
       }
     };
     window.addEventListener("scroll", scrollEventListener);
     return () => window.removeEventListener("scroll", scrollEventListener);
   }, [
     animationControls,
-    containerVariants,
+    navVariants,
     origin,
     rect,
+    screenRect,
     screenRect.height,
     screenRect.width,
   ]);
   return (
     <motion.nav
       ref={ref}
-      className="pointer-events-none fixed z-50 flex  justify-center gap-1 bg-white/5 p-4"
+      className="pointer-events-none fixed z-50 flex w-fit justify-center gap-1  rounded-3xl bg-white/5 p-4 opacity-0"
       drag
-      style={{
-        ...containerVariants[storedOrigin],
-        minWidth: "fit-content",
-        opacity: 0,
-        borderRadius: "20px",
-      }}
+      style={navVariants[storedOrigin]}
       draggable
       onDragStart={() => {
         setIsDragging(true);
       }}
+      onDrag={handleOriginChange}
       onDragEnd={() => {
-        animationControls.start(["small", origin], {
-          type: "tween",
-          bounce: 0.4,
-        });
-        localStorage.setItem("appBarOrigin", origin);
+        animationControls.start(origin);
+        storage.setAppBarOrigin(origin);
         setIsDragging(false);
-      }}
-      onDrag={(_, info) => {
-        if (!info) return;
-        if (info.point.x < screenRect.width / 4) {
-          animationControls.start("draggingVertical");
-          setOrigin("left");
-        } else if (info.point.x > (3 * screenRect.width) / 4) {
-          animationControls.start("draggingVertical");
-          setOrigin("right");
-        } else if (info.point.y < screenRect.height / 2) {
-          animationControls.start("draggingHorizontal");
-          setOrigin("top");
-        } else if (info.point.y > screenRect.height / 2) {
-          animationControls.start("draggingHorizontal");
-          setOrigin("bottom");
-        }
       }}
       dragControls={dragControls}
       animate={animationControls}
-      variants={containerVariants}
+      variants={navVariants}
       transition={{
         type: "tween",
       }}
