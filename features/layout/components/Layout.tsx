@@ -4,9 +4,9 @@ import AppBar from "./AppBar";
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
-      <div className="min-h-screen overflow-y-auto overflow-x-hidden ">
+      <div className="flex h-full min-h-screen  w-full overflow-y-auto overflow-x-hidden ">
         <AppBar />
-        <main>{children}</main>
+        <main className="flex-1">{children}</main>
       </div>
     </>
   );
