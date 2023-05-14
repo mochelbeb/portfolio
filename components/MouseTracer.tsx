@@ -12,8 +12,6 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
       const SPEED = 0.01;
       const duration =
         Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) / SPEED;
-      console.log(duration);
-
       ref.current.animate(
         {
           left: `${x2}px`,
@@ -30,12 +28,12 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
     };
   }, []);
   return (
-    <div className="relative h-full w-full">
+    <div className="fixed inset-0 -z-10">
       <div
         ref={ref}
-        className="absolute -top-[100%] left-0 aspect-square h-52 animate-spin-slow  rounded-full bg-gradient-to-r from-purple-500  to-green-300 "
+        className="absolute -top-[100%] left-0 aspect-square h-64 animate-spin-slow  rounded-full bg-gradient-to-r from-purple-500  to-green-300 "
       />
-      <div className="absolute inset-0 z-10 backdrop-blur-[100px]"></div>
+      <div className="absolute inset-0 z-10 brightness-50 backdrop-blur-[100px]"></div>
     </div>
   );
 };

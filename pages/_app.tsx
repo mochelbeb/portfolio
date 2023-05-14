@@ -1,3 +1,4 @@
+import { MouseTracer } from "@/components/MouseTracer";
 import { Layout } from "@/features/layout";
 import "@/styles/globals.css";
 import { AnimatePresence } from "framer-motion";
@@ -8,6 +9,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <AnimatePresence mode="wait" initial={false}>
       <Layout>
         <Component {...pageProps} key={router.asPath} />
+        <MouseTracer />
       </Layout>
     </AnimatePresence>
   );

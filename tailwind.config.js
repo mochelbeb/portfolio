@@ -26,7 +26,7 @@ module.exports = {
 
         rotate: {
           from: { rotate: "0deg" },
-          "50%": { scale: "1 1.5" },
+          "50%": { scale: "2 1.5" },
           to: {
             rotate: "360deg",
           },
