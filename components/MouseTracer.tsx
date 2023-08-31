@@ -28,7 +28,7 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
     };
   }, []);
   return (
-    <div className="fixed inset-0 -z-10">
+    <div className="fixed inset-0 -z-10 ">
       <div
         ref={ref}
         className="absolute -top-[100%] left-0 aspect-square h-64 animate-spin-slow  rounded-full bg-gradient-to-r from-purple-500  to-green-300 "

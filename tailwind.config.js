@@ -16,7 +16,7 @@ module.exports = {
           ...colors.indigo,
           main: colors.indigo["700"],
         },
-        background: colors.zinc["900"],
+        background: colors.gray["800"],
       },
       keyframes: {
         appear: {
@@ -36,7 +36,7 @@ module.exports = {
         appear: "appear 0.25s ease-in-out forwards",
       },
       animation: {
-        "spin-slow": "rotate 15s linear infinite",
+        "spin-slow": "rotate 13s linear infinite",
       },
     },
   },
