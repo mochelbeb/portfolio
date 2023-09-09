@@ -1,3 +1,5 @@
+"use client";
+
 import { Variants, motion, useAnimationControls } from "framer-motion";
 import { FC, useEffect, useRef, useState } from "react";
 const variants: Variants = {
@@ -75,7 +77,7 @@ function getDistance(width: number, index1: number, index2: number) {
   console.log(
     Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)),
     index1,
-    index2
+    index2,
   );
 
   return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));

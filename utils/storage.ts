@@ -1,4 +1,4 @@
-import { AppBarOrigin } from "@/features/layout";
+import { AppBarOrigin } from "@/app/layout/AppBar";
 
 const storage = {
   getAppBarOrigin: () => {

@@ -1,3 +1,5 @@
+"use client";
+
 import { navigation } from "@/constants/navigation";
 import usePrevious from "@/hooks/usePrevious";
 import { useScreenRect } from "@/hooks/useScreenRect";
@@ -5,11 +7,8 @@ import storage from "@/utils/storage";
 import { PanInfo, motion, useAnimation, useDragControls } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
-import {
-  appBarVariants,
-  hideOnScrollVariants,
-} from "../../utils/appBarFramerVariants";
 import { AppBarLink } from "./AppBarLink";
+import { appBarVariants, hideOnScrollVariants } from "./appBarFramerVariants";
 export type AppBarOrigin = "top" | "bottom" | "left" | "right";
 
 export type AppBarProps = {};
@@ -25,7 +24,7 @@ export const AppBar = ({}: AppBarProps) => {
   const dragControls = useDragControls();
   const navVariants = useMemo(
     () => appBarVariants({ screenRect, rect }),
-    [rect, screenRect]
+    [rect, screenRect],
   );
 
   const handleOriginChange = (_: Event, info: PanInfo) => {
@@ -74,8 +73,7 @@ export const AppBar = ({}: AppBarProps) => {
     let startAnimation = false;
     let lastShowOrHide: "show" | "hide" | null = null;
     const scrollEventListener = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const hideOrShow = scrollTop > lastScrollTop ? "hide" : "show";
       startAnimation = lastShowOrHide !== hideOrShow;
       lastShowOrHide = hideOrShow;
@@ -83,9 +81,10 @@ export const AppBar = ({}: AppBarProps) => {
         animationControls.start(
           hideOnScrollVariants(navVariants, screenRect, rect)[origin][
             hideOrShow
-          ]
+          ],
         );
       }
+      lastScrollTop = scrollTop;
     };
     window.addEventListener("scroll", scrollEventListener);
     return () => window.removeEventListener("scroll", scrollEventListener);

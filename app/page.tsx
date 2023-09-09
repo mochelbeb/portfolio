@@ -1,6 +1,7 @@
-import { About, Header } from "@/features/home";
 import Head from "next/head";
-
+import { About } from "./home/About";
+import { Header } from "./home/Header";
+import { Skills } from "./home/Skills";
 export default function Page() {
   return (
     <>
@@ -12,6 +13,7 @@ export default function Page() {
       </Head>
       <Header />
       <About />
+      <Skills />
       <div className="h-[200vh]" />
     </>
   );

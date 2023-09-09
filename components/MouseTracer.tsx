@@ -1,3 +1,4 @@
+"use client";
 import { FC, useEffect, useRef } from "react";
 export type MouseTracerProps = {};
 export const MouseTracer: FC<MouseTracerProps> = ({}) => {
@@ -17,7 +18,7 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
           left: `${x2}px`,
           top: `${y2}px`,
         },
-        { duration, fill: "forwards" }
+        { duration, fill: "forwards" },
       );
     };
     window.addEventListener("mouseover", listener);

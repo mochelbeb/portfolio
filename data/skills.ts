@@ -1,140 +1,123 @@
 type Skill = {
   name: string;
-  type: "language" | "library/framework" | "database" | "tool";
-  level: "beginner" | "intermediate" | "advanced";
-  image: string;
+  type: "language" | "library" | "framework" | "database" | "tool";
+  level: "beginner" | "intermediate" | "proficient";
 };
 export const skills: Skill[] = [
   {
     name: "JavaScript",
-    level: "advanced",
+    level: "proficient",
     type: "language",
-    image: "images/javascript.png",
   },
   {
     name: "React",
-    level: "advanced",
-    type: "library/framework",
-    image: "images/javascript.png",
+    level: "proficient",
+    type: "library",
   },
   {
     name: "TypeScript",
-    level: "advanced",
+    level: "proficient",
     type: "language",
-    image: "images/javascript.png",
   },
   {
     name: "Material UI",
-    level: "advanced",
-    type: "library/framework",
-    image: "images/javascript.png",
+    level: "proficient",
+    type: "library",
   },
   {
     name: "React Query",
     level: "intermediate",
-    type: "library/framework",
-    image: "images/javascript.png",
+    type: "library",
+  },
+
+  {
+    name: "Tailwind",
+    level: "intermediate",
+    type: "framework",
+  },
+  {
+    name: "Next.js",
+    level: "beginner",
+    type: "framework",
   },
   {
     name: "HTML",
-    level: "advanced",
+    level: "proficient",
     type: "language",
-    image: "images/javascript.png",
   },
   {
     name: "CSS",
-    level: "advanced",
-    type: "library/framework",
-    image: "images/javascript.png",
+    level: "proficient",
+    type: "language",
   },
   {
     name: "SASS",
     level: "intermediate",
     type: "language",
-    image: "images/javascript.png",
-  },
-  {
-    name: "Tailwind CSS",
-    level: "beginner",
-    type: "library/framework",
-    image: "images/javascript.png",
-  },
-  {
-    name: "Next.js",
-    level: "beginner",
-    type: "library/framework",
-    image: "images/javascript.png",
   },
   {
     name: "Express",
     level: "beginner",
-    type: "library/framework",
-    image: "images/javascript.png",
+    type: "framework",
   },
   {
     name: "MongoDB",
     level: "beginner",
     type: "database",
-    image: "images/javascript.png",
   },
   {
     name: "Node.js",
     level: "beginner",
-    type: "library/framework",
-    image: "images/javascript.png",
+    type: "tool",
   },
   {
     name: "Jest",
     level: "beginner",
-    type: "library/framework",
-    image: "images/javascript.png",
+    type: "library",
   },
   {
     name: "Mongoose",
     level: "beginner",
-    type: "library/framework",
-    image: "images/javascript.png",
-  },
-  {
-    name: "Passport.js",
-    level: "beginner",
-    type: "library/framework",
-    image: "images/javascript.png",
+    type: "library",
   },
   {
     name: "Pug",
     level: "beginner",
     type: "language",
-    image: "images/javascript.png",
   },
   {
     name: "npm",
     level: "intermediate",
     type: "tool",
-    image: "images/javascript.png",
   },
   {
     name: "Yarn",
     level: "intermediate",
     type: "tool",
-    image: "images/javascript.png",
+  },
+  {
+    name: "Pnpm",
+    level: "intermediate",
+    type: "tool",
   },
   {
     name: "Ubuntu",
     level: "intermediate",
     type: "tool",
-    image: "images/javascript.png",
   },
   {
-    name: "Windows 10",
+    name: "Windows",
     level: "intermediate",
     type: "tool",
-    image: "images/javascript.png",
   },
   {
     name: "Git",
     level: "intermediate",
     type: "tool",
-    image: "images/javascript.png",
+  },
+  {
+    name: "Trello",
+    level: "intermediate",
+    type: "tool",
   },
 ];

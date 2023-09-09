@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable react/no-unescaped-entities */
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
@@ -6,9 +7,9 @@ export type AboutProps = {};
 export const About: FC<AboutProps> = ({}) => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    setScrolled(window.scrollY > 0.1 * window.innerHeight);
+    setScrolled(window.scrollY > 0.05 * window.innerHeight);
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 0.1 * window.innerHeight) {
+      if (window.scrollY > 0.05 * window.innerHeight) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -16,7 +17,7 @@ export const About: FC<AboutProps> = ({}) => {
     });
   }, []);
   return (
-    <section className="min-w-screen mx-10">
+    <section className="mb-44">
       {scrolled && (
         <div className="flex flex-col justify-center px-2">
           <motion.h4
@@ -47,7 +48,7 @@ export const About: FC<AboutProps> = ({}) => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={scrolled ? { y: 0, opacity: 1 } : { opacity: 0, y: 500 }}
-          className="flex-[2] py-3 text-xl"
+          className="flex-[2] py-3 text-md md:text-xl"
           transition={{ type: "tween", ...transition }}
         >
           Hello, I'm Islam, and I'm a creative problem solver with a passion for

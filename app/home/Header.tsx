@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 
@@ -6,9 +8,9 @@ export type HeaderProps = {};
 export const Header: FC<HeaderProps> = ({}) => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    setScrolled(window.scrollY > 0.1 * window.innerHeight);
+    setScrolled(window.scrollY > 0.05 * window.innerHeight);
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 0.1 * window.innerHeight) {
+      if (window.scrollY > 0.05 * window.innerHeight) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -16,7 +18,7 @@ export const Header: FC<HeaderProps> = ({}) => {
     });
   }, []);
   return (
-    <section className="min-h-[20vh] w-screen pt-[20vh] font-[cursive]">
+    <section className="min-h-[20vh] pt-[20vh] font-[cursive]">
       {!scrolled && (
         <motion.header className="flex flex-col items-center text-center">
           <motion.img

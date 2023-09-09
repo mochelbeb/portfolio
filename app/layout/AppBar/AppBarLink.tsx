@@ -1,7 +1,7 @@
 import { navigation } from "@/constants/navigation";
 import { Variants, motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { FC } from "react";
 import { AppBarOrigin } from ".";
 //? previously rotate: "0deg" after a yarn-upgrade-all it stopped working
@@ -31,7 +31,7 @@ export type LinkProps = {
   isDragging: boolean;
 };
 export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
-  const path = useRouter().pathname;
+  const path = usePathname();
   return (
     <>
       <Link
