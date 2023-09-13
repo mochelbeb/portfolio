@@ -20,7 +20,7 @@ export const Header: FC<HeaderProps> = ({}) => {
   return (
     <section className="min-h-[20vh] pt-[20vh] font-[cursive]">
       {!scrolled && (
-        <motion.header className="flex flex-col items-center text-center">
+        <motion.header className="flex flex-col gap-1 items-center text-center">
           <motion.img
             transition={transition}
             src="/pfp.jpg"
@@ -37,7 +37,7 @@ export const Header: FC<HeaderProps> = ({}) => {
           <motion.h2
             transition={transition}
             layoutId="home-header-title"
-            className="w-fit pt-3 text-2xl text-yellow-50 md:pt-5 md:text-5xl"
+            className="w-fit pt-1 text-2xl text-yellow-50 md:pt-5 md:text-5xl"
           >
             Front-end Developer
           </motion.h2>

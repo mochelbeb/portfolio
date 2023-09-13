@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { skills } from "@/data/skills";
+import { SKILLS } from "@/data/skills";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -13,8 +13,8 @@ import { FC } from "react";
 export type SkillsProps = {};
 export const Skills: FC<SkillsProps> = ({}) => {
   return (
-    <section className="min-h-[20vh] pt-[20vh] font-[cursive] flex flex-col gap-2">
-      <motion.h2 className="text-5xl md:text-7xl">Skills</motion.h2>
+    <section className="min-h-[20vh] pt-[20vh] font-[cursive] flex flex-col gap-3">
+      <motion.h2 className="text-4xl">Skills</motion.h2>
       <div className="flex flex-col items-center gap-3 text-md md:text-xl">
         <ul className="flex flex-row gap-5 bg-gray-600/40 rounded-xl w-fit p-2">
           <li className="flex gap-2 items-center ">
@@ -31,7 +31,7 @@ export const Skills: FC<SkillsProps> = ({}) => {
           </li>
         </ul>
         <ul className="flex flex-wrap  gap-2 bg-gray-900/40 p-10 rounded-xl max-w-4xl">
-          {skills.map((skill) => (
+          {SKILLS.map((skill) => (
             <TooltipProvider key={skill.name}>
               <Tooltip delayDuration={1}>
                 <li

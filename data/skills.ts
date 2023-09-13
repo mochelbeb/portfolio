@@ -3,7 +3,7 @@ type Skill = {
   type: "language" | "library" | "framework" | "database" | "tool";
   level: "beginner" | "intermediate" | "proficient";
 };
-export const skills: Skill[] = [
+export const SKILLS: Skill[] = [
   {
     name: "JavaScript",
     level: "proficient",

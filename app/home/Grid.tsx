@@ -74,11 +74,5 @@ function getDistance(width: number, index1: number, index2: number) {
   let y1 = index1 % width;
   let x2 = Math.floor(index2 / width);
   let y2 = index2 % width;
-  console.log(
-    Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)),
-    index1,
-    index2,
-  );
-
   return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }

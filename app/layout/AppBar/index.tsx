@@ -6,7 +6,6 @@ import { useScreenRect } from "@/hooks/useScreenRect";
 import storage from "@/utils/storage";
 import { PanInfo, motion, useAnimation, useDragControls } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MdDragIndicator } from "react-icons/md";
 import { AppBarLink } from "./AppBarLink";
 import { appBarVariants, hideOnScrollVariants } from "./appBarFramerVariants";
 export type AppBarOrigin = "top" | "bottom" | "left" | "right";
@@ -129,7 +128,8 @@ export const AppBar = ({}: AppBarProps) => {
           origin={origin}
         />
       ))}
-      <MdDragIndicator className="pointer-events-auto m-auto h-7 w-7" />
+      {/* TODO icon */}
+      <div className="pointer-events-auto m-auto h-7 w-7" />
     </motion.nav>
   );
 };

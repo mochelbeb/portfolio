@@ -17,13 +17,13 @@ export const About: FC<AboutProps> = ({}) => {
     });
   }, []);
   return (
-    <section className="mb-44">
+    <section className="pt-52">
       {scrolled && (
         <div className="flex flex-col justify-center px-2">
           <motion.h4
             transition={transition}
             layoutId="home-header-name"
-            className="w-fit font-[cursive] text-2xl md:text-4xl"
+            className="w-fit text-2xl md:text-4xl"
           >
             Islam Naasani
           </motion.h4>
