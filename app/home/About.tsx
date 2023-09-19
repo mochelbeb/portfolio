@@ -1,53 +1,37 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities */
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 const transition = { duration: 0.4 };
 export type AboutProps = {};
 export const About: FC<AboutProps> = ({}) => {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    setScrolled(window.scrollY > 0.05 * window.innerHeight);
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 0.05 * window.innerHeight) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    });
-  }, []);
   return (
-    <section className="pt-52">
-      {scrolled && (
-        <div className="flex flex-col justify-center px-2">
-          <motion.h4
-            transition={transition}
-            layoutId="home-header-name"
-            className="w-fit text-2xl md:text-4xl"
-          >
-            Islam Naasani
-          </motion.h4>
-          <motion.span
-            transition={transition}
-            layoutId="home-header-title"
-            className="text-1xl md:text-1xl h-fit w-fit pl-2 text-gray-200"
-          >
-            Front-end Developer
-          </motion.span>
-        </div>
-      )}
+    <section>
+      <div className="flex flex-col justify-center px-2">
+        <motion.h4
+          transition={transition}
+          layoutId="home-header-name"
+          className="w-fit text-2xl md:text-4xl"
+        >
+          Islam Naasani
+        </motion.h4>
+        <motion.span
+          transition={transition}
+          layoutId="home-header-title"
+          className="text-1xl md:text-1xl h-fit w-fit pl-2 text-gray-200"
+        >
+          Front-end Developer
+        </motion.span>
+      </div>
       <div className="mx-10">
-        {scrolled && (
-          <motion.img
-            transition={transition}
-            layoutId="home-header-icon"
-            src="/pfp.jpg"
-            className="float-right mx-4 aspect-square w-[30%] rounded-full"
-          />
-        )}
+        <motion.img
+          transition={transition}
+          layoutId="home-header-icon"
+          src="/pfp.jpg"
+          className="float-right mx-4 aspect-square w-[30%] rounded-full"
+        />
         <motion.p
           initial={{ opacity: 0 }}
-          animate={scrolled ? { y: 0, opacity: 1 } : { opacity: 0, y: 500 }}
           className="flex-[2] py-3 text-md md:text-xl"
           transition={{ type: "tween", ...transition }}
         >

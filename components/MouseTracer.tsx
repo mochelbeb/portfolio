@@ -3,6 +3,9 @@ import { FC, useEffect, useRef } from "react";
 export type MouseTracerProps = {};
 export const MouseTracer: FC<MouseTracerProps> = ({}) => {
   const ref = useRef<HTMLDivElement | null>(null);
+  const animateRandomPosition = ()=>{
+
+  }
   useEffect(() => {
     const listener = (e: MouseEvent | TouchEvent) => {
       if (!ref.current) return;
@@ -41,9 +44,9 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
     <div className="fixed inset-0 -z-10 ">
       <div
         ref={ref}
-        className="absolute -top-[10%] left-0 aspect-square h-64 animate-spin-slow  rounded-full bg-gradient-to-r from-purple-500  to-green-300 "
+        className="absolute -top-[10%] left-0 aspect-square h-96 animate-spin-slow  rounded-full bg-gradient-to-r from-purple-700  to-green-500"
       />
-      <div className="absolute inset-0 z-10 brightness-50 backdrop-blur-[100px]"></div>
+      <div className="absolute inset-0 z-10 brightness-[0.7] backdrop-blur-[125px]"></div>
     </div>
   );
 };

@@ -1,123 +1,127 @@
+import { ReactNode } from "react";
+
 type Skill = {
   name: string;
   type: "language" | "library" | "framework" | "database" | "tool";
-  level: "beginner" | "intermediate" | "proficient";
+  description: ReactNode;
 };
 export const SKILLS: Skill[] = [
   {
     name: "JavaScript",
-    level: "proficient",
     type: "language",
+    description:
+      "I have 3+ years of experience with it, I used it for building Front-end, Back-end and even for scripting",
   },
   {
     name: "React",
-    level: "proficient",
     type: "library",
+    description:
+      "My go to UI library, with 2+ years of building applications with it, be it dashboards, PWAs or websites.",
   },
   {
     name: "TypeScript",
-    level: "proficient",
     type: "language",
+    description: <></>,
   },
   {
     name: "Material UI",
-    level: "proficient",
     type: "library",
+    description: <></>,
   },
   {
     name: "React Query",
-    level: "intermediate",
     type: "library",
+    description: <></>,
   },
 
   {
     name: "Tailwind",
-    level: "intermediate",
     type: "framework",
+    description: <></>,
   },
   {
     name: "Next.js",
-    level: "beginner",
     type: "framework",
+    description: <></>,
   },
   {
     name: "HTML",
-    level: "proficient",
     type: "language",
+    description: <></>,
   },
   {
     name: "CSS",
-    level: "proficient",
     type: "language",
+    description: <></>,
   },
   {
     name: "SASS",
-    level: "intermediate",
     type: "language",
+    description: <></>,
   },
   {
     name: "Express",
-    level: "beginner",
     type: "framework",
+    description: <></>,
   },
   {
     name: "MongoDB",
-    level: "beginner",
     type: "database",
+    description: <></>,
   },
   {
     name: "Node.js",
-    level: "beginner",
     type: "tool",
+    description: <></>,
   },
   {
     name: "Jest",
-    level: "beginner",
     type: "library",
+    description: <></>,
   },
   {
     name: "Mongoose",
-    level: "beginner",
     type: "library",
+    description: <></>,
   },
   {
     name: "Pug",
-    level: "beginner",
     type: "language",
+    description: <></>,
   },
   {
     name: "npm",
-    level: "intermediate",
     type: "tool",
+    description: <></>,
   },
   {
     name: "Yarn",
-    level: "intermediate",
     type: "tool",
+    description: <></>,
   },
   {
     name: "Pnpm",
-    level: "intermediate",
     type: "tool",
+    description: <></>,
   },
   {
     name: "Ubuntu",
-    level: "intermediate",
     type: "tool",
+    description: <></>,
   },
   {
     name: "Windows",
-    level: "intermediate",
     type: "tool",
+    description: <></>,
   },
   {
     name: "Git",
-    level: "intermediate",
     type: "tool",
+    description: <></>,
   },
   {
     name: "Trello",
-    level: "intermediate",
     type: "tool",
+    description: <></>,
   },
 ];

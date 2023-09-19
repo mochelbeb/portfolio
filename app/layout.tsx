@@ -14,7 +14,7 @@ export default function App({ children }: { children: ReactNode }) {
       <body className="dark bg-background flex h-full min-h-screen w-full overflow-y-auto overflow-x-hidden">
         <main className="flex-1">
           <MDXProvider components={{}}>
-            <AnimatePresence mode="wait" initial={false}>
+            <AnimatePresence initial={false}>
               <Fragment key={pathname}>
                 <AppBar />
                 {children}
