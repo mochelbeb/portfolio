@@ -1,4 +1,8 @@
 ---
+title: HUMYAPP
+summary: A social media platform for selling and buying second-hand items
+smallCover: /projects/humy/logo.png
+featured: 3
 skills: React,TypeScript,Materia-UI,React Query
 ---
 

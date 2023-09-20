@@ -1,4 +1,8 @@
 ---
+title: Safra Binakra
+summary: A platform that aims to ease the way people book for trips between cities.
+smallCover: /projects/safra-binakra/logo.svg
+featured: 1
 skills: React,TypeScript,Materia-UI,React Query
 ---
 
