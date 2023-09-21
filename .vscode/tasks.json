@@ -25,7 +25,7 @@
     {
       "label": "Development",
       "type": "shell",
-      "command": "yarn",
+      "command": "pnpm",
       "args": ["dev"],
       "group": "none",
       "presentation": {
