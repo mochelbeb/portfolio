@@ -30,11 +30,7 @@ export const About: FC<AboutProps> = ({}) => {
           src="/pfp.jpg"
           className="float-right mx-4 aspect-square w-[30%] rounded-full"
         />
-        <motion.p
-          initial={{ opacity: 0 }}
-          className="flex-[2] py-3 text-md md:text-xl"
-          transition={{ type: "tween", ...transition }}
-        >
+        <p className="flex-[2] py-3 text-md md:text-xl">
           Hello, I'm Islam, and I'm a creative problem solver with a passion for
           web development. Currently pursuing my studies in Information
           Technology Engineering at Aleppo University, I've been honing my
@@ -53,7 +49,7 @@ export const About: FC<AboutProps> = ({}) => {
           high-quality work that meets or exceeds expectations. I'm excited
           about the possibilities that lie ahead and look forward to
           collaborating with you on your next project.
-        </motion.p>
+        </p>
       </div>
     </section>
   );

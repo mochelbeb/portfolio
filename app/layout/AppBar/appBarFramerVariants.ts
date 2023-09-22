@@ -10,29 +10,29 @@ export const appBarVariants = ({ rect, screenRect }: ContainerVariantParams) =>
     top: {
       x: 0,
       y: 0,
-      right: (screenRect.width - rect.width) / 2,
+      left: (screenRect.width - rect.width) / 2,
       top: 10,
       rotate: "0deg",
     },
     bottom: {
       x: 0,
       y: screenRect.height - rect.height - 10,
-      right: (screenRect.width - rect.width) / 2,
+      left: (screenRect.width - rect.width) / 2,
       top: "unset",
       rotate: "0deg",
     },
     left: {
       x: 0,
       y: 0,
-      right: screenRect.width - rect.width + rect.width / 5,
-      top: (screenRect.height - rect.width) / 2,
+      left: -rect.width * 0.2,
+      top: (screenRect.height - rect.height) / 2,
       rotate: "90deg",
     },
     right: {
       x: 0,
       y: 0,
-      right: -rect.width / 5,
-      top: (screenRect.height - rect.width) / 2,
+      left: screenRect.width - rect.width / 1.1,
+      top: (screenRect.height - rect.height) / 2,
       rotate: "90deg",
     },
     draggingHorizontal: {
@@ -44,11 +44,11 @@ export const appBarVariants = ({ rect, screenRect }: ContainerVariantParams) =>
     visible: {
       opacity: 1,
     },
-  } satisfies Variants);
+  }) satisfies Variants;
 export const hideOnScrollVariants = (
   containerVariants: ReturnType<typeof appBarVariants>,
   screenRect: Rect,
-  AppBarRect: Rect
+  AppBarRect: Rect,
 ) => ({
   top: {
     hide: {

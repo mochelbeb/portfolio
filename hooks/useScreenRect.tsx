@@ -5,17 +5,14 @@ export const useScreenRect = () => {
   const [screenRect, setScreenRect] = useState<Rect>({ width: 0, height: 0 });
   useEffect(() => {
     const resizerListener = () => {
-      const screenRect = document.documentElement.getBoundingClientRect();
       setScreenRect({
-        width: screenRect.width,
-        height: screenRect.height,
+        width: window.innerWidth,
+        height: window.innerHeight,
       });
     };
-    const screenRect = document.documentElement.getBoundingClientRect();
-
     setScreenRect({
-      width: screenRect.width,
-      height: screenRect.height,
+      width: window.innerWidth,
+      height: window.innerHeight,
     });
     window.addEventListener("resize", resizerListener);
 

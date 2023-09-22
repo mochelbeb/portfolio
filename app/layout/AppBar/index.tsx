@@ -5,6 +5,7 @@ import usePrevious from "@/hooks/usePrevious";
 import { useScreenRect } from "@/hooks/useScreenRect";
 import storage from "@/utils/storage";
 import { PanInfo, motion, useAnimation, useDragControls } from "framer-motion";
+import { Grip } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AppBarLink } from "./AppBarLink";
 import { appBarVariants, hideOnScrollVariants } from "./appBarFramerVariants";
@@ -51,7 +52,8 @@ export const AppBar = ({}: AppBarProps) => {
 
   useEffect(() => {
     if (prevScreenRect !== screenRect) {
-      setTimeout(() => animationControls.start(origin), 10);
+      const timeout = setTimeout(() => animationControls.start(origin), 10);
+      return () => clearTimeout(timeout);
     }
   }, [animationControls, origin, prevScreenRect, screenRect]);
 
@@ -99,10 +101,12 @@ export const AppBar = ({}: AppBarProps) => {
   return (
     <motion.nav
       ref={ref}
-      className="pointer-events-none fixed z-50 flex w-fit justify-center gap-1  rounded-3xl bg-white/5 p-4 opacity-0"
+      className="pointer-events-none fixed z-50 flex w-fit justify-center gap-2 rounded-3xl bg-background/60 p-4 opacity-0"
       drag
       style={navVariants[storedOrigin]}
       draggable
+      layout
+      layoutRoot
       onDragStart={() => {
         setIsDragging(true);
       }}
@@ -128,8 +132,10 @@ export const AppBar = ({}: AppBarProps) => {
           origin={origin}
         />
       ))}
-      {/* TODO icon */}
-      <div className="pointer-events-auto m-auto h-7 w-7" />
+      <Grip
+        role="button"
+        className="pointer-events-auto m-auto h-6 w-6 text-muted-foreground"
+      />
     </motion.nav>
   );
 };

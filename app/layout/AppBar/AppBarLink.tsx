@@ -1,4 +1,11 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { navigation } from "@/constants/navigation";
+import { cn } from "@/lib/utils";
 import { Variants, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -33,48 +40,60 @@ export type LinkProps = {
 export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
   const path = usePathname();
   return (
-    <>
-      <Link
-        as={item.href}
-        href={{ pathname: item.href, query: { from: path } }}
-        className={
-          "pointer-events-auto border-y-2 border-solid border-transparent " +
-          (isDragging ? "pointer-events-none" : "")
-        }
-        aria-label={item.name}
-        aria-current={path === item.href ? "page" : undefined}
-        data-tooltip-id={item.href}
-        data-tooltip-content={item.name}
-      >
-        {path === item.href && ["top", "right"].includes(origin) && (
-          <motion.div
-            className="mb-1 h-1  rounded-sm"
-            style={{ backgroundColor: item.color }}
-            layoutId="AppBarIndicator"
-          />
-        )}
-        {path !== item.href && ["top", "right"].includes(origin) && (
-          <motion.div className="mb-1 h-1 " />
-        )}
-        <motion.div
-          animate={origin}
-          variants={linkVariants}
-          transition={{ type: "spring" }}
-        >
-          {<item.icon className="h-10 w-10" />}
-        </motion.div>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Link
+            as={item.href}
+            href={{ pathname: item.href, query: { from: path } }}
+            className={cn(
+              "pointer-events-auto border-y-2 border-solid border-transparent",
+              isDragging && "pointer-events-none",
+            )}
+            aria-label={item.name}
+            aria-current={path === item.href ? "page" : undefined}
+            data-tooltip-id={item.href}
+            data-tooltip-content={item.name}
+          >
+            {path === item.href && ["top", "right"].includes(origin) && (
+              <motion.div
+                className="mb-1 h-1 rounded-sm"
+                style={{ backgroundColor: item.color }}
+                layoutId="AppBarIndicator"
+              />
+            )}
+            {path !== item.href && ["top", "right"].includes(origin) && (
+              <motion.div className="mb-1 h-1" />
+            )}
+            <motion.div
+              animate={origin}
+              variants={linkVariants}
+              transition={{ type: "spring" }}
+            >
+              {
+                <item.icon
+                  className={cn("h-10 w-10 transition-colors")}
+                  style={{
+                    color: path === item.href ? item.color : "inherit",
+                  }}
+                />
+              }
+            </motion.div>
 
-        {path === item.href && ["left", "bottom"].includes(origin) && (
-          <motion.div
-            className="mt-1 h-1 rounded-sm"
-            style={{ backgroundColor: item.color }}
-            layoutId="AppBarIndicator"
-          />
-        )}
-        {path !== item.href && ["top", "right"].includes(origin) && (
-          <motion.div className="mt-1 h-1 " />
-        )}
-      </Link>
-    </>
+            {path === item.href && ["left", "bottom"].includes(origin) && (
+              <motion.div
+                className="mt-1 h-1 rounded-sm"
+                style={{ backgroundColor: item.color }}
+                layoutId="AppBarIndicator"
+              />
+            )}
+            {path !== item.href && ["top", "right"].includes(origin) && (
+              <motion.div className="mt-1 h-1 " />
+            )}
+          </Link>
+        </TooltipTrigger>
+        <TooltipContent>{item.name}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };

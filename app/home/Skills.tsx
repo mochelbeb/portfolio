@@ -7,9 +7,9 @@ export type SkillsProps = {};
 export const Skills: FC<SkillsProps> = ({}) => {
   const [selectedSkill, setSelectedSkill] = useState(SKILLS[0]);
   return (
-    <section className="min-h-[20vh] pt-[20vh] font-[cursive] flex flex-col gap-3">
+    <section className="font-[cursive] flex flex-col gap-3">
       <motion.h2 className="text-4xl">Skills</motion.h2>
-      <div className="flex gap-2 bg-gray-900/40 p-4 rounded-lg max-w-5xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-stretch gap-2 bg-gray-900/40 p-4 rounded-lg max-w-5xl mx-auto">
         <motion.div
           key={selectedSkill.name}
           className="flex-1 border-2 border-foreground p-2 rounded-xl min-h-[200px]"
@@ -35,7 +35,7 @@ export const Skills: FC<SkillsProps> = ({}) => {
                 onClick={() => setSelectedSkill(skill)}
                 key={skill.name}
                 layoutId={`skill-${skill.name}`}
-                className="border-2 border-foreground p-2 rounded-lg"
+                className="flex-grow  md:flex-grow-0 border-2 border-foreground p-2 rounded-lg"
               >
                 <motion.p
                   className="text-md md:text-xl"

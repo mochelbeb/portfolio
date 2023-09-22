@@ -7,7 +7,7 @@ const transition = { duration: 0.45 };
 export type HeaderProps = {};
 export const Header: FC<HeaderProps> = ({}) => {
   return (
-    <section className="min-h-[100vh] pt-[20vh] font-[cursive]">
+    <section className="min-h-[100vh] pt-[30vh] font-[cursive]">
       <motion.header className="flex flex-col gap-1 items-center text-center">
         <motion.h1
           transition={transition}
