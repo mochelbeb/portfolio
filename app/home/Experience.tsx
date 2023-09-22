@@ -13,7 +13,7 @@ export const Experience: FC<ExperienceProps> = ({}) => {
   return (
     <section className="flex flex-col">
       <h2 className="text-4xl mb-3">Career</h2>
-      {EXPERIENCES.toReversed().map((exp, i, arr) => (
+      {[...EXPERIENCES].reverse().map((exp, i, arr) => (
         <article key={i} className="flex flex-row">
           <div className="min-h-full flex flex-col items-center">
             <div
