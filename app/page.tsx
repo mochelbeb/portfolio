@@ -8,7 +8,7 @@ import { Skills } from "./home/Skills";
 
 export const metadata: Metadata = {
   title: "Islam Naasani",
-  description: "Islam Naasani's Personal Website",
+  description: "Software Developer",
   icons: ["/favicon.ico"],
 };
 

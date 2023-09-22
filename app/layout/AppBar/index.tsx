@@ -14,8 +14,8 @@ export type AppBarOrigin = "top" | "bottom" | "left" | "right";
 export type AppBarProps = {};
 export const AppBar = ({}: AppBarProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [storedOrigin, setStoredOrigin] = useState<AppBarOrigin>("top");
-  const [origin, setOrigin] = useState<AppBarOrigin>("top");
+  const [storedOrigin, setStoredOrigin] = useState<AppBarOrigin>("bottom");
+  const [origin, setOrigin] = useState<AppBarOrigin>("bottom");
   const animationControls = useAnimation();
   const [rect, setRect] = useState({ width: 0, height: 0 });
   const screenRect = useScreenRect();
