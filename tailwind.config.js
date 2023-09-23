@@ -65,12 +65,19 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        "rect-to-circle": {
+          "0%": { height: 530, width: "200vw", top: "-100vh", left: "-100vw" },
+          "60%": { height: 530, width: "200vw", top: "100vh", left: "100vw" },
+          "61%": { height: 450, width: 450, top: "130vh", left: "10vw" },
+          "100%": { height: "30vw", width: "30vw", top: "90vh", left: "0vw" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         appear: "appear 0.25s ease-in-out forwards",
-        "spin-slow": "rotate 15s linear infinite",
+        "spin-slow":
+          "rotate 15s linear infinite, rect-to-circle 10s linear forwards",
       },
     },
   },

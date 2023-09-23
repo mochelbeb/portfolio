@@ -1,37 +1,49 @@
+"use client";
 import { EXPERIENCES } from "@/data/experiences";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { motion, useInView } from "framer-motion";
 import humanize from "humanize-duration";
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
-import { FC } from "react";
+import { FC, useRef } from "react";
 export type ExperienceProps = {};
 export const Experience: FC<ExperienceProps> = ({}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, {
+    amount: "some",
+    once: true,
+    margin: "80%",
+  });
   return (
     <section className="flex flex-col">
       <h2 className="text-4xl mb-3">Career</h2>
       {[...EXPERIENCES].reverse().map((exp, i, arr) => (
-        <article key={i} className="flex flex-row">
-          <div className="min-h-full flex flex-col items-center">
-            <div
-              className={cn(
-                "w-1 h-2 bg-foreground/60",
-                i === 0 && "pt-2 bg-transparent",
-              )}
+        <motion.article key={i} ref={ref} className="flex flex-row">
+          <div className="min-h-full flex flex-col items-center w-3 min-w-fit">
+            <motion.div
+              initial={{ height: 0, width: 0 }}
+              animate={
+                isInView ? { height: 12, width: 12 } : { height: 0, width: 0 }
+              }
+              transition={{ delay: 1.4 * i - 0.4, duration: 0.4 }}
+              className="bg-foreground rounded-full"
             />
-            <div className="w-3 h-3 bg-foreground rounded-full" />
-            <div
+            <motion.div
+              initial={{ flex: 0 }}
+              animate={isInView ? { flex: 1 } : { flex: 0 }}
+              transition={{ delay: 1.4 * i, duration: 1.4 }}
               className={cn(
                 "flex-1 w-1 bg-foreground/60",
                 i === arr.length - 1 && "bg-transparent pb-3",
               )}
             />
           </div>
-          <div className="flex flex-col gap-1 px-3 pb-3">
-            <h6 className="text-xl font-bold">{exp.title}</h6>
+          <div className="flex flex-col gap-1 px-3 pb-20 max-w-[90vw]">
+            <h6 className="text-xl font-bold -mt-2">{exp.title}</h6>
             <p className="[&>a]:border-b-foreground/60 [&>a]:border-b-2 ps-2 text-lg">
               {exp.company}
               {exp.location && " • "}
@@ -61,7 +73,7 @@ export const Experience: FC<ExperienceProps> = ({}) => {
             </p>
             <div className="max-w-xl ps-2 pt-1">{exp.description}</div>
           </div>
-        </article>
+        </motion.article>
       ))}
     </section>
   );

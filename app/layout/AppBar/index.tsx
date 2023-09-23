@@ -29,16 +29,17 @@ export const AppBar = ({}: AppBarProps) => {
 
   const handleOriginChange = (_: Event, info: PanInfo) => {
     if (!info) return;
+    const y = info.point.y - window.scrollY;
     if (info.point.x < screenRect.width / 4) {
       animationControls.start("draggingVertical");
       setOrigin("left");
     } else if (info.point.x > (3 * screenRect.width) / 4) {
       animationControls.start("draggingVertical");
       setOrigin("right");
-    } else if (info.point.y < screenRect.height / 2) {
+    } else if (y < screenRect.height / 2) {
       animationControls.start("draggingHorizontal");
       setOrigin("top");
-    } else if (info.point.y > screenRect.height / 2) {
+    } else if (y > screenRect.height / 2) {
       animationControls.start("draggingHorizontal");
       setOrigin("bottom");
     }

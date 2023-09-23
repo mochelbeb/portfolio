@@ -1,14 +1,13 @@
 "use client";
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 export type MouseTracerProps = {};
 export const MouseTracer: FC<MouseTracerProps> = ({}) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const animateRandomPosition = ()=>{
-
-  }
+  const [isTrackingActive, setIsTrackingActive] = useState(false);
   useEffect(() => {
     const listener = (e: MouseEvent | TouchEvent) => {
       if (!ref.current) return;
+      if (!isTrackingActive) return;
       const x1 = ref.current.getBoundingClientRect().left;
       const y1 = ref.current.getBoundingClientRect().top;
       let x2 = 0;
@@ -20,7 +19,7 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
         x2 = e.touches[0].clientX - ref.current.clientWidth / 2;
         y2 = e.touches[0].clientY - ref.current.clientHeight / 2;
       }
-      const SPEED = 0.01;
+      const SPEED = 0.005;
       const duration =
         Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) / SPEED;
       ref.current.animate(
@@ -39,12 +38,15 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
       window.removeEventListener("mousemove", listener);
       window.addEventListener("touchstart", listener);
     };
+  }, [isTrackingActive]);
+  useEffect(() => {
+    setTimeout(() => setIsTrackingActive(true), 6000);
   }, []);
   return (
     <div className="fixed inset-0 -z-10 ">
       <div
         ref={ref}
-        className="absolute -top-[10%] left-0 aspect-square h-96 animate-spin-slow  rounded-full bg-gradient-to-r from-purple-700  to-green-500"
+        className="absolute -bottom-[50%] s-0 -rotate-45 animate-spin-slow rounded-full bg-gradient-to-r from-purple-700  to-green-500"
       />
       <div className="absolute inset-0 z-10 brightness-[0.7] backdrop-blur-[125px]"></div>
     </div>
