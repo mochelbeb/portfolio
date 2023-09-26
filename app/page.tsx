@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { About } from "./home/About";
-import { Experience } from "./home/Experience";
+import { Experiences } from "./home/Experiences";
 import { Footer } from "./home/Footer";
 import { Header } from "./home/Header";
 import { Projects } from "./home/Projects";
@@ -18,7 +18,7 @@ export default function Page() {
       <div className="px-2 md:px-10 flex flex-col gap-52">
         <Header />
         <About />
-        <Experience />
+        <Experiences />
         <Projects />
         <Skills />
       </div>

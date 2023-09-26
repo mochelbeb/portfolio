@@ -34,6 +34,7 @@ export default async function Page() {
     .sort((a, b) => a.rank - b.rank);
   return (
     <>
+      {path.join("./data/projects", files[0])}
       <h1 className="text-5xl pt-32 text-center">Projects</h1>
       <p className="text-center text-lg p-1">
         Projects I&apos;ve worked on, either for work, university or personal

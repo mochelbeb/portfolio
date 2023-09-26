@@ -31,7 +31,7 @@ export const About: FC<AboutProps> = ({}) => {
           className="float-right mx-4 aspect-square w-[30%] rounded-full"
         />
         <p className="flex-[2] py-3 text-md md:text-xl">
-          Hello, I'm Islam, and I'm a creative problem solver with a passion for
+          {`Hello, I'm Islam, and I'm a creative problem solver with a passion for
           web development. Currently pursuing my studies in Information
           Technology Engineering at Aleppo University, I've been honing my
           skills in front-end development since early 2021, when I embarked on
@@ -49,6 +49,7 @@ export const About: FC<AboutProps> = ({}) => {
           high-quality work that meets or exceeds expectations. I'm excited
           about the possibilities that lie ahead and look forward to
           collaborating with you on your next project.
+        `}
         </p>
       </div>
     </section>

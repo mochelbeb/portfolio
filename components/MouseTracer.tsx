@@ -1,9 +1,17 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { FC, useEffect, useRef, useState } from "react";
+import classes from "./MouseTracer.module.css";
 export type MouseTracerProps = {};
 export const MouseTracer: FC<MouseTracerProps> = ({}) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isTrackingActive, setIsTrackingActive] = useState(false);
+  const [startPosition, setStartPosition] = useState<
+    "not-scrolled" | "scrolled" | null
+  >(null);
+  useEffect(() => {
+    setStartPosition(window.scrollY === 0 ? "not-scrolled" : "scrolled");
+  }, []);
   useEffect(() => {
     const listener = (e: MouseEvent | TouchEvent) => {
       if (!ref.current) return;
@@ -46,7 +54,10 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
     <div className="fixed inset-0 -z-10 ">
       <div
         ref={ref}
-        className="absolute -bottom-[50%] s-0 -rotate-45 animate-spin-slow rounded-full bg-gradient-to-r from-purple-700  to-green-500"
+        className={cn(
+          "absolute rounded-full bg-gradient-to-r from-red-600 to-purple-700",
+          classes.animate,
+        )}
       />
       <div className="absolute inset-0 z-10 brightness-[0.7] backdrop-blur-[125px]"></div>
     </div>

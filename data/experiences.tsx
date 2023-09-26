@@ -21,7 +21,21 @@ export const EXPERIENCES: Experience[] = [
     from: "2019-9",
     to: null,
     noDuration: true,
-    description: "",
+    description: (
+      <>
+        <p>
+          CLICK Online is a product startup, I worked in the development team on
+          two product. One is Safra Binakra which is a centralized platform for
+          inland traveling, offering users the ability to seamlessly search,
+          compare, and book realtime seats in trips.
+        </p>
+        <p className="pt-1">
+          The second is still underdevelopment, I worked there with various
+          technologies mostly those around SPAs and achieving a seamless
+          experience
+        </p>
+      </>
+    ),
   },
   {
     title: "Full Stack JavaScript Course (MERN stack)",
@@ -35,7 +49,21 @@ export const EXPERIENCES: Experience[] = [
     ),
     from: "2021/01",
     to: "2022/08",
-    description: <></>,
+    description: (
+      <>
+        <p>
+          CLICK Online is a product startup, I worked in the development team on
+          two product. One is Safra Binakra which is a centralized platform for
+          inland traveling, offering users the ability to seamlessly search,
+          compare, and book realtime seats in trips.
+        </p>
+        <p className="pt-1">
+          The second is still underdevelopment, I worked there with various
+          technologies mostly those around SPAs and achieving a seamless
+          experience
+        </p>
+      </>
+    ),
   },
   {
     title: "Front-end Developer",
@@ -47,7 +75,21 @@ export const EXPERIENCES: Experience[] = [
     location: "Aleppo, Syria",
     from: "2022-10",
     to: "2022-12-8",
-    description: <></>,
+    description: (
+      <>
+        <p>
+          CLICK Online is a product startup, I worked in the development team on
+          two product. One is Safra Binakra which is a centralized platform for
+          inland traveling, offering users the ability to seamlessly search,
+          compare, and book realtime seats in trips.
+        </p>
+        <p className="pt-1">
+          The second is still underdevelopment, I worked there with various
+          technologies mostly those around SPAs and achieving a seamless
+          experience
+        </p>
+      </>
+    ),
   },
   {
     title: "Front-end Developer",
@@ -58,9 +100,9 @@ export const EXPERIENCES: Experience[] = [
     description: (
       <>
         <p>
-          CLICK Online is a product startup, I worked with the development team
-          on two product. One is Safra Binakra which is a centralized platform
-          for inland traveling, offering users the ability to seamlessly search,
+          CLICK Online is a product startup, I worked in the development team on
+          two product. One is Safra Binakra which is a centralized platform for
+          inland traveling, offering users the ability to seamlessly search,
           compare, and book realtime seats in trips.
         </p>
         <p className="pt-1">

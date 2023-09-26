@@ -28,7 +28,7 @@ export const Projects: FC<ProjectsProps> = async ({}) => {
       <h2 className="text-4xl my-2">Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 justify-center">
         {parsed.map((project, index) => (
-          <Card key={index}>
+          <Card key={index} className="overflow-hidden">
             <Link
               href={`/projects/${project.slug}`}
               className="p-5 bg-card/70 flex flex-col gap-1"
