@@ -1,55 +1,58 @@
 "use client";
-/* eslint-disable react/no-unescaped-entities */
 import { motion } from "framer-motion";
 import { FC } from "react";
-const transition = { duration: 0.4 };
 export type AboutProps = {};
 export const About: FC<AboutProps> = ({}) => {
   return (
     <section>
       <div className="flex flex-col justify-center px-2">
-        <motion.h4
-          transition={transition}
-          layoutId="home-header-name"
-          className="w-fit text-2xl md:text-4xl"
-        >
-          Islam Naasani
-        </motion.h4>
-        <motion.span
-          transition={transition}
-          layoutId="home-header-title"
-          className="text-1xl md:text-1xl h-fit w-fit pl-2 text-gray-200"
-        >
+        <h4 className="w-fit text-5xl md:text-4xl">Islam Naasani</h4>
+        <span className="text-2xl md:text-1xl h-fit w-fit ps-3 text-gray-200">
           Front-end Developer
-        </motion.span>
+        </span>
       </div>
       <div className="mx-10">
-        <motion.img
-          transition={transition}
-          layoutId="home-header-icon"
-          src="/pfp.jpg"
-          className="float-right mx-4 aspect-square w-[30%] rounded-full"
-        />
-        <p className="flex-[2] py-3 text-md md:text-xl">
-          {`Hello, I'm Islam, and I'm a creative problem solver with a passion for
-          web development. Currently pursuing my studies in Information
-          Technology Engineering at Aleppo University, I've been honing my
-          skills in front-end development since early 2021, when I embarked on
-          The Odin Project course. Over the past 2+ years, I've become
-          proficient in using React and TypeScript to build beautiful,
-          responsive, and user-friendly web applications. I'm also familiar with
-          back-end development using Express.js and MongoDB, having built a
-          Facebook clone project with these technologies. I'm proud to have half
-          a year of professional experience as a front-end developer, where I've
-          worked on admin dashboards and progressive web applications (PWA) that
-          help businesses achieve their goals. My passion for creating intuitive
-          and visually appealing user interfaces drives me to constantly improve
-          my skills and stay up-to-date with the latest technologies. Whether
-          I'm working solo or as part of a team, I always strive to deliver
-          high-quality work that meets or exceeds expectations. I'm excited
-          about the possibilities that lie ahead and look forward to
-          collaborating with you on your next project.
-        `}
+        <p className="flex-1 py-3 text-2xl [&_a]:border-b-2 [&_a]:border-b-foreground">
+          <motion.img
+            transition={{ type: "tween" }}
+            src="/pfp.jpg"
+            initial={{ scale: 1, x: 0, y: 0 }}
+            whileHover={{ scale: 1.5, x: -100, y: 50 }}
+            whileTap={{ scale: 1.5, x: -100, y: 50 }}
+            className="float-right mt-2 mx-4 aspect-square  max-w-xs w-[30%] rounded-3xl cursor-pointer"
+          />
+          My journey into the world of web development began at the start of
+          2021 when I embarked on The Odin {`Project's `}
+          <a href="https://www.theodinproject.com/paths/full-stack-javascript">
+            full-stack course
+          </a>
+          . Throughout this comprehensive program, I delved into both front-end
+          and back-end technologies, laying the foundation for my career in web
+          development.
+          <br />
+          <br />
+          {`I'm currently in my senior year studying Computer
+           Science engineering at Aleppo University.`}
+          <br />
+          {`In 2022, I started working professionally as a front-end developer.
+           I focus my work on crafting usable and accessible web apps with
+           an extensive focus on building dashboards.`}
+          <br />
+          <br />
+          {`When I'm not coding, you'll often find me exploring new technologies
+           or deepening my knowledge by consuming blog posts, books, and podcasts,
+           I also recently started sharing some technical tips on`}{" "}
+          <a href="https://www.linkedin.com/in/islam-nassani-994a32194/">
+            LinkedIn.
+          </a>
+          <br />
+          <br />
+          {`I'm excited to connect with fellow developers and tech
+           enthusiasts to collaborate and share ideas.`}
+          <br />
+          {`I keep up with
+            the current trends in the web ecosystem by subscribing
+            to tech newsletters.`}
         </p>
       </div>
     </section>

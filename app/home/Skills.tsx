@@ -35,7 +35,7 @@ export const Skills: FC<SkillsProps> = ({}) => {
                 onClick={() => setSelectedSkill(skill)}
                 key={skill.name}
                 layoutId={`skill-${skill.name}`}
-                className="flex-grow  md:flex-grow-0 border-2 border-foreground p-2 rounded-lg"
+                className="flex-grow  md:flex-grow-0 border-2 border-foreground p-2 rounded-lg min-w-[60px]"
               >
                 <motion.p
                   className="text-md md:text-xl"

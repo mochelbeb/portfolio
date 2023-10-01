@@ -26,7 +26,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
   });
   return (
     <section className="flex flex-col justify-center">
-      <h2 className="text-4xl mb-10">Career</h2>
+      <h2 className="text-5xl mb-10">Career</h2>
       {[...EXPERIENCES].reverse().map((exp, i, arr) => (
         <motion.article key={i} ref={ref} className="grid grid-cols-11">
           <div
@@ -51,7 +51,10 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
                         ? { height: 12, width: 12 }
                         : { height: 0, width: 0 }
                     }
-                    transition={{ delay: 2.8 * i - 0.8, duration: 0.8 }}
+                    transition={{
+                      delay: Math.max(2.8 * i - 0.8, 0),
+                      duration: 0.8,
+                    }}
                     className="bg-foreground rounded-full"
                   />
                 </TooltipTrigger>
@@ -75,7 +78,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 2.8 * i - 0.8, duration: 0.8 }}
+            transition={{ delay: Math.max(2.8 * i - 0.8, 0), duration: 0.8 }}
             className={cn(
               "flex flex-col gap-1 pb-20 sm:pb-5 max-w-[90vw] col-span-10 sm:col-span-5",
               i % 2 != 0 && "sm:order-1",
@@ -110,7 +113,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
                 </>
               )}
             </p>
-            <div className="max-w-xl ps-2 pt-1">{exp.description}</div>
+            <div className="ps-2 pt-1 text-lg">{exp.description}</div>
           </motion.div>
         </motion.article>
       ))}

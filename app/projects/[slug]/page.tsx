@@ -1,7 +1,9 @@
 import { Badge } from "@/components/ui/badge";
+import { IS_DEVELOPMENT } from "@/constants/flags";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
 import Image from "next/image";
+import Link from "next/link";
 import path from "path";
 import { projectMatterSchema } from "../page";
 type Props = {
@@ -19,15 +21,20 @@ type Props = {
 //   };
 // }
 export default async function Page({ params }: Props) {
+  if (!IS_DEVELOPMENT)
+    return (
+      <div className="text-5xl flex flex-col items-center mt-[10%]">
+        <p> Coming Soon...</p>
+        <Link href="/" className="underline text-lg">
+          return to home
+        </Link>
+      </div>
+    );
   const project = await readMdFile(
     path.join("./data/projects", `${params.slug}.md`),
   ).catch((e) => console.log(e));
   if (!project) {
-    return (
-      <div>
-        error {path.join("./data/projects", `${params.slug}.md`, process.cwd())}
-      </div>
-    );
+    return <div>error {path.join("./data/projects", `${params.slug}.md`)}</div>;
   }
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (

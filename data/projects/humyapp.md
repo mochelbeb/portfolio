@@ -1,6 +1,6 @@
 ---
 title: HUMYAPP
-summary: A social media platform for selling and buying second-hand items
+summary: an interactive application that provides home food ordering and delivery services.
 smallCover: /projects/humy/logo.png
 largeCover: /projects/humy/logo.png
 skills: React,TypeScript,Materia-UI,React Query

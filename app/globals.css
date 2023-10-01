@@ -76,6 +76,7 @@
   * {
     @apply border-border;
     font-family: Nunito, sans-serif;
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     @apply bg-background text-foreground;

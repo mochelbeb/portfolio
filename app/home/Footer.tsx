@@ -24,7 +24,7 @@ export const Footer: FC<FooterProps> = ({}) => {
             </Link>
           </li>
           <li>
-            <Link href={"/Projects"} className="hover:underline">
+            <Link href={"/projects"} className="hover:underline">
               Projects
             </Link>
           </li>
