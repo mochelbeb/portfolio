@@ -39,7 +39,7 @@ export const SKILLS: Skill[] = [
   {
     name: "Tailwind",
     type: "framework",
-    description: "I starting to enjoy it recently, especially while shadcn/ui",
+    description: "I starting to enjoy it recently, especially with shadcn/ui",
   },
   {
     name: "Radix UI",
@@ -54,16 +54,16 @@ export const SKILLS: Skill[] = [
       "Still getting comfortable with. currently I've only built with it this site.",
   },
   {
-    name: "HTML",
-    type: "language",
-    description:
-      "I've good grasp on the available elements and their semantic uses.",
-  },
-  {
     name: "Git",
     type: "tool",
     description:
       "Very comfortable with it, including branching, solving merge conflicts and rebasing.",
+  },
+  {
+    name: "HTML",
+    type: "language",
+    description:
+      "I've got grasp on the available elements and their semantic uses.",
   },
   {
     name: "CSS",
@@ -78,7 +78,7 @@ export const SKILLS: Skill[] = [
       "Used it in the past, although currently the need for it is decreasing as more of it features are getting implemented in CSS",
   },
   {
-    name: "Express",
+    name: "Express.js",
     type: "framework",
     description:
       "Built some personal projects with it. I can use & write middlewares to create a CRUD app with auth.",
@@ -86,7 +86,7 @@ export const SKILLS: Skill[] = [
   {
     name: "MongoDB",
     type: "database",
-    description: "Used it with express as a database solution.",
+    description: "Used it with express.",
   },
   {
     name: "Node.js",
@@ -99,18 +99,6 @@ export const SKILLS: Skill[] = [
     type: "library",
     description:
       "I've used it to write 200+ unit test for an API I wrote. I have a good understanding of TDD principles.",
-  },
-  {
-    name: "Mongoose",
-    type: "library",
-    description:
-      "The ODM I've used to create schemas for my MongoDB's collections.",
-  },
-  {
-    name: "Pug",
-    type: "language",
-    description:
-      "Used it in a couple of MVC projects I've done with Express.js",
   },
   {
     name: "npm",

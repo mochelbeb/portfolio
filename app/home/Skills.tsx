@@ -31,18 +31,21 @@ export const Skills: FC<SkillsProps> = ({}) => {
           <ul className="flex flex-wrap gap-2 rounded-xl">
             {SKILLS.filter((skill) => skill !== selectedSkill).map((skill) => (
               <motion.li
-                role="button"
-                onClick={() => setSelectedSkill(skill)}
                 key={skill.name}
                 layoutId={`skill-${skill.name}`}
-                className="flex-grow  md:flex-grow-0 border-2 border-foreground p-2 rounded-lg min-w-[60px]"
+                className="flex-grow md:flex-grow-0 border-2 border-primary  rounded-lg"
               >
-                <motion.p
-                  className="text-md md:text-xl"
-                  layoutId={`skill-${skill.name}-name`}
+                <button
+                  onClick={() => setSelectedSkill(skill)}
+                  className="p-2 focus-visible:ring-4 focus-visible:ring-purple-800 focus-visible:outline-none focus-visible:ring-offset-2 rounded-lg min-w-[60px]"
                 >
-                  {skill.name}
-                </motion.p>
+                  <motion.p
+                    className="text-md md:text-xl"
+                    layoutId={`skill-${skill.name}-name`}
+                  >
+                    {skill.name}
+                  </motion.p>
+                </button>
               </motion.li>
             ))}
           </ul>

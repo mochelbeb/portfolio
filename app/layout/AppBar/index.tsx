@@ -134,6 +134,7 @@ export const AppBar = ({}: AppBarProps) => {
         />
       ))}
       <Grip
+        //TODO use button
         role="button"
         className="pointer-events-auto m-auto h-6 w-6 text-muted-foreground"
       />
