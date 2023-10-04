@@ -22,13 +22,13 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
   const isInView = useInView(ref, {
     amount: "some",
     once: true,
-    margin: "100%",
+    margin: "-20%",
   });
   return (
-    <section className="flex flex-col justify-center">
+    <section className="flex flex-col justify-center" ref={ref}>
       <h2 className="text-5xl mb-10">Career</h2>
       {[...EXPERIENCES].reverse().map((exp, i, arr) => (
-        <motion.article key={i} ref={ref} className="grid grid-cols-11">
+        <motion.article key={i} className="grid grid-cols-11">
           <div
             className={cn(
               "col-span-5 hidden sm:block",
