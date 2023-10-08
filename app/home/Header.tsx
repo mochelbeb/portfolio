@@ -9,8 +9,8 @@ export const Header: FC<HeaderProps> = ({}) => {
     <section className="min-h-[100vh] pt-[30vh] font-[cursive]">
       <motion.header className="flex flex-col gap-1 items-center text-center ">
         <motion.h1
-          whileInView={{ y: 0, opacity: 1 }}
-          initial={{ y: +20, opacity: 0.3 }}
+          initial={{ y: 0, opacity: 1 }}
+          whileInView={{ y: [+20, 0], opacity: [0.3, 1] }}
           transition={{ type: "spring" }}
           className="w-fit text-5xl md:text-8xl select-none cursor-grab active:cursor-grabbing"
           drag
@@ -20,8 +20,8 @@ export const Header: FC<HeaderProps> = ({}) => {
           Islam Naasani
         </motion.h1>
         <motion.h2
-          whileInView={{ y: 0, opacity: 1 }}
-          initial={{ y: +20, opacity: 0.3 }}
+          initial={{ y: 0, opacity: 1 }}
+          whileInView={{ y: [20, 0], opacity: [0.3, 1] }}
           transition={{ type: "spring" }}
           className="w-fit pt-1 text-2xl text-yellow-50 md:pt-5 md:text-5xl select-none"
         >
