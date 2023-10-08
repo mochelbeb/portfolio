@@ -17,13 +17,6 @@ const linkVariants = {
     transform: "rotate(-90deg)",
   },
 } satisfies Variants;
-
-const tooltipPos = {
-  right: "left",
-  left: "right",
-  top: "bottom",
-  bottom: "top",
-} as const;
 export type LinkProps = {
   item: (typeof navigation)[number];
   origin: AppBarOrigin;
