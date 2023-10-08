@@ -33,10 +33,17 @@ export default async function Page() {
     }))
     .sort((a, b) => a.rank - b.rank);
   return (
+    <div className="mt-36 w-full gap-2 flex flex-col items-center">
+      <p>{process.env.PWD}</p>
+      <p>{process.env.PWD}</p>
+      <p>{path.join(process.env.PWD ?? "", `./data/projects/`)}</p>
+    </div>
+  );
+  return (
     <>
       <h1 className="text-5xl pt-32 text-center">Projects</h1>
       <p className="text-center text-lg p-1">
-        Projects I&apos;ve worked on, either for work, university or personal
+        Projects I&apos;ve worked on, either for work, university or personal.
       </p>
       <div className="flex flex-col gap-3 max-w-xl mx-auto mt-10 px-2">
         {projects.map((project) => (
