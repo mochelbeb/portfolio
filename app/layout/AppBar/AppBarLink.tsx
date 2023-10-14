@@ -1,9 +1,3 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { navigation } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
 import { Variants, motion } from "framer-motion";
@@ -11,8 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC } from "react";
 import { AppBarOrigin } from ".";
-//? previously rotate: "0deg" after a yarn-upgrade-all it stopped working
-// and this for some reason fixed it
 const linkVariants = {
   top: {
     transform: "rotate(0deg)",
@@ -39,61 +31,33 @@ export type LinkProps = {
 };
 export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
   const path = usePathname();
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link
-            as={item.href}
-            href={{ pathname: item.href, query: { from: path } }}
-            className={cn(
-              "pointer-events-auto border-y-2 border-solid border-transparent",
-              isDragging && "pointer-events-none",
-            )}
-            aria-label={item.name}
-            aria-current={path === item.href ? "page" : undefined}
-            data-tooltip-id={item.href}
-            data-tooltip-content={item.name}
-          >
-            {path === item.href && ["top", "right"].includes(origin) && (
-              <motion.div
-                className="mb-1 h-1 rounded-sm"
-                style={{ backgroundColor: item.color }}
-                layoutId="AppBarIndicator"
-              />
-            )}
-            {path !== item.href && ["top", "right"].includes(origin) && (
-              <motion.div className="mb-1 h-1" />
-            )}
-            <motion.div
-              animate={origin}
-              variants={linkVariants}
-              transition={{ type: "spring" }}
-            >
-              {
-                <item.icon
-                  className={cn("h-10 w-10 transition-colors")}
-                  style={{
-                    color: path === item.href ? item.color : "inherit",
-                  }}
-                />
-              }
-            </motion.div>
+  const isActive =
+    (item.startWith && path.startsWith(item.href)) || path == item.href;
 
-            {path === item.href && ["left", "bottom"].includes(origin) && (
-              <motion.div
-                className="mt-1 h-1 rounded-sm"
-                style={{ backgroundColor: item.color }}
-                layoutId="AppBarIndicator"
-              />
-            )}
-            {path !== item.href && ["top", "right"].includes(origin) && (
-              <motion.div className="mt-1 h-1 " />
-            )}
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent>{item.name}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+  return (
+    <Link
+      href={item.href}
+      className={cn(
+        "pointer-events-auto border-y-2 border-solid border-transparent",
+        (origin === "right" || origin === "left") && "py-1.5",
+        isDragging && "pointer-events-none",
+      )}
+      aria-current={isActive ? "page" : undefined}
+    >
+      <motion.div
+        animate={origin}
+        variants={linkVariants}
+        transition={{ type: "spring" }}
+        className="flex flex-col justify-center items-center"
+      >
+        <motion.span
+          style={{
+            color: isActive ? item.color : "var(--foreground)",
+          }}
+        >
+          {item.name}
+        </motion.span>
+      </motion.div>
+    </Link>
   );
 };

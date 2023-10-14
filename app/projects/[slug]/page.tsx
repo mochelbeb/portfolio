@@ -1,40 +1,38 @@
 import { Badge } from "@/components/ui/badge";
-import { IS_DEVELOPMENT } from "@/constants/flags";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
+import { FileX2 } from "lucide-react";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import path from "path";
 import { projectMatterSchema } from "../page";
 type Props = {
   params: { slug: string };
 };
-// export async function generateMetadata(
-//   { params }: Props,
-//   parent: ResolvingMetadata,
-// ): Promise<Metadata> {
-//   const title = (
-//     await readMdFile(path.join(`./data/projects/${params.slug}.md`))
-//   ).frontmatter.title;
-//   return {
-//     title: `${title} | Projects`,
-//   };
-// }
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const title = (
+    await readMdFile(path.join(`./data/projects/${params.slug}.md`)).catch(
+      (e) => console.error(e),
+    )
+  )?.frontmatter.title;
+  return {
+    title: title ? `${title} | Projects` : "Project Not Found",
+  };
+}
 export default async function Page({ params }: Props) {
-  if (!IS_DEVELOPMENT)
-    return (
-      <div className="text-5xl flex flex-col items-center mt-[10%]">
-        <p> Coming Soon...</p>
-        <Link href="/" className="underline text-lg">
-          return to home
-        </Link>
-      </div>
-    );
   const project = await readMdFile(
     path.join("./data/projects", `${params.slug}.md`),
-  ).catch((e) => console.log(e));
+  ).catch((e) => console.error(e));
   if (!project) {
-    return <div>error {path.join("./data/projects", `${params.slug}.md`)}</div>;
+    return (
+      <div className="mt-36 w-full gap-2 flex flex-col items-center">
+        <FileX2 className="h-24 w-24" />
+        <p className="text-3xl">{`Project not Found`}</p>
+      </div>
+    );
   }
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (

@@ -1,11 +1,10 @@
-import { Github, Lightbulb, User2 } from "lucide-react";
 export const navigation = [
-  { name: "Home", href: "/", icon: User2, color: "#673AB7" },
-  { name: "Blog", href: "/blog", icon: Lightbulb, color: "#0ffa7d" },
+  { name: "Home", href: "/", color: "rgb(229 101 255)", startWith: false },
+  { name: "Blog", href: "/blog", color: "rgb(0 182 133)", startWith: true },
   {
     name: "Projects",
     href: "/projects",
-    icon: Github,
     color: "#FBC02D",
+    startWith: true,
   },
 ];
