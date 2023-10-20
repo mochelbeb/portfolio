@@ -26,7 +26,10 @@ export default async function Page({ params }: Props) {
     getPublicPath(`md/projects/${params.slug}.md`),
   ).catch((e) => console.error(e));
 
-  if (!project) return <p>Project not Found</p>;
+  if (!project)
+    return (
+      <p className="text-center w-full mt-20 text-4xl">Project not Found</p>
+    );
 
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (

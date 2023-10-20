@@ -6,7 +6,6 @@ import { readdirSync } from "fs";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import path from "path";
 import { z } from "zod";
 
 export const metadata: Metadata = {
@@ -33,13 +32,6 @@ export default async function Page() {
       slug: files[i].split(".")[0],
     }))
     .sort((a, b) => a.rank - b.rank);
-  return (
-    <div className="mt-36 w-full gap-2 flex flex-col items-center">
-      <p>{process.env.PWD}</p>
-      <p>{process.env.PWD}</p>
-      <p>{path.join(process.env.PWD ?? "", `./data/projects/`)}</p>
-    </div>
-  );
   return (
     <>
       <h1 className="text-5xl pt-32 text-center">Projects</h1>
