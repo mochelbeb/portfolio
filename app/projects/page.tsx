@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { readMdFile } from "@/utils/md";
+import { getPublicPath } from "@/utils/utils";
 import { readdirSync } from "fs";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -21,10 +22,10 @@ export const projectMatterSchema = z.object({
   rank: z.number(),
 });
 export default async function Page() {
-  const files = readdirSync("./data/projects", "utf8");
+  const files = readdirSync(getPublicPath("md/projects"), "utf8");
   const projects = (
     await Promise.all(
-      files.map((file) => readMdFile(path.join("./data/projects", file))),
+      files.map((file) => readMdFile(getPublicPath(`md/projects/${file}`))),
     )
   )
     .map((md, i) => ({

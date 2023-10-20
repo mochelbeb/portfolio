@@ -7,7 +7,3 @@ skills: React,TypeScript,Materia-UI,React Query
 featured: true
 rank: 2
 ---
-
-## uBay
-
-a Facebook clone with the core features (posts, likes, comments, friends)

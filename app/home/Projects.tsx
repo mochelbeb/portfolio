@@ -4,17 +4,17 @@ import { readMdFile } from "@/utils/md";
 import { readdirSync } from "fs";
 import Image from "next/image";
 import Link from "next/link";
-import path from "path";
 import { FC } from "react";
 
+import { getPublicPath } from "@/utils/utils";
 import { projectMatterSchema } from "../projects/page";
 
 export type ProjectsProps = {};
 export const Projects: FC<ProjectsProps> = async ({}) => {
-  const files = readdirSync("./data/projects", "utf8");
+  const files = readdirSync(getPublicPath("md/projects"), "utf8");
   const parsed = (
     await Promise.all(
-      files.map((file) => readMdFile(path.join("./data/projects", file))),
+      files.map((file) => readMdFile(getPublicPath(`md/projects/${file}`))),
     )
   )
     .map((md, i) => ({
