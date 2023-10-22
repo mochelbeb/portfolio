@@ -1,10 +1,38 @@
 ---
 title: PurpleBook
 summary: Facebook clone with all the essential features.
-smallCover: /projects/purple-book/logo.svg
-largeCover: /projects/purple-book/10.png
+smallCover: /media/projects/purple-book/logo.svg
+largeCover: /media/projects/purple-book/1.jpg
 skills: React,TypeScript,Express,MongoDB,SASS
 rank: 4
 ---
 
-Facebook clone with all the essential features.
+## About
+
+a Facebook clone with the core features (posts, likes, comments, friends), this project was the final project of [The Full Stack JavaScript Course](https://www.theodinproject.com/paths/full-stack-javascript) from [theodingproject.com](theodingproject.com)
+
+I did both of the back-end and the front-end.
+
+- Live: [purplebook-i3b.onrender.com](https://purplebook-i3b.onrender.com/)
+- API documentation: [Postman](https://documenter.getpostman.com/view/18509081/VUxXLj6o)
+- To review the back-end code: [github.com/i-3b/purpleBook-API](https://github.com/i-3b/purpleBook-API)
+- To review the front-end code: [github.com/i-3b/purpleBook-client](https://github.com/i-3b/purpleBook-client)
+
+### Back-end
+
+- first time using Typescript for back-end
+- Wrote unit tests (around 200 test) using Jest.
+- Oauth2 (login with Facebook)
+- Complex MongoDB aggregation pipelines (queries) the most challenging was friend recommendations query.
+
+### Front-end
+
+- I tried to make components reusable as often as I can (cards, buttons, a hook for paged lists).
+- I used more SCSS features (extending classes, variables, partials).
+
+## Gallery
+
+<div className="grid md:grid-cols-2 gap-1 [&_img]:m-0">![Feed](/media/projects/purple-book/1.jpg)
+![User profile](/media/projects/purple-book/2.jpg)
+![Friends](/media/projects/purple-book/3.jpg)
+![Post's comments](/media/projects/purple-book/4.jpg)</div>

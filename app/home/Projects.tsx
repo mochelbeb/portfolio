@@ -7,6 +7,7 @@ import Link from "next/link";
 import { FC } from "react";
 
 import { getPublicPath } from "@/utils/utils";
+import { ArrowRight } from "lucide-react";
 import { projectMatterSchema } from "../projects/page";
 
 export type ProjectsProps = {};
@@ -56,6 +57,12 @@ export const Projects: FC<ProjectsProps> = async ({}) => {
           </Card>
         ))}
       </div>
+      <a
+        href="/projects"
+        className="mx-auto py-2 px-4 rounded-lg bg-card hover:bg-accent"
+      >
+        View All Projects <ArrowRight className="inline-block" />
+      </a>
     </section>
   );
 };

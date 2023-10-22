@@ -59,7 +59,7 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
           classes.animate,
         )}
       />
-      <div className="absolute inset-0 z-10 brightness-[0.7] backdrop-blur-[125px]"></div>
+      <div className="absolute inset-0 z-10 brightness-[0.5] backdrop-blur-[125px]"></div>
     </div>
   );
 };

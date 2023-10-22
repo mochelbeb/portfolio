@@ -22,24 +22,29 @@ export async function generateMetadata(
   };
 }
 export default async function Page({ params }: Props) {
+  let error: any = null;
   const project = await readMdFile(
     getPublicPath(`md/projects/${params.slug}.md`),
-  ).catch((e) => console.error(e));
+  ).catch((e) => {
+    console.error(e);
+    error = e;
+  });
 
-  if (!project)
+  if (error?.code === "ENOENT")
     return (
       <p className="text-center w-full mt-20 text-4xl">Project not Found</p>
     );
+  if (!project) throw error;
 
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (
-    <article className="max-w-3xl mx-auto mt-20 flex flex-col gap-3 text-lg">
-      <h1 className="text-5xl font-bold">{matter.title}</h1>
+    <article className="max-w-3xl mx-auto px-4 mt-4 sm:mt-20 flex flex-col gap-3 text-lg">
+      <h1 className="text-4xl sm:text-5xl font-bold">{matter.title}</h1>
       <p>{matter.summary}</p>
       <ul className="list-none flex flex-wrap justify-end  mt-auto pt-2 gap-1  w-full">
         {matter.skills.map((skill) => (
           <li key={skill}>
-            <Badge variant="outline" className="bg-muted text-lg">
+            <Badge variant="outline" className="bg-muted text-sm sm:text-lg">
               {skill}
             </Badge>
           </li>
@@ -49,12 +54,12 @@ export default async function Page({ params }: Props) {
         width={1000}
         height={1000}
         priority
-        className="max-h-[40vh] object-contain object-top"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        className="rounded-md w-full mx-auto"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw"
         src={matter.largeCover}
         alt="project's home page"
       />
-      <div className="max-w-full prose dark:prose-invert prose-p:text-foreground p-2">
+      <div className="max-w-full prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground p-2">
         <MDXRemote {...project} />
       </div>
     </article>

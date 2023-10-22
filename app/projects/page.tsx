@@ -38,7 +38,7 @@ export default async function Page() {
       <p className="text-center text-lg p-1">
         Projects I&apos;ve worked on, either for work, university or personal.
       </p>
-      <div className="flex flex-col gap-3 max-w-xl mx-auto mt-10 px-2">
+      <div className="flex flex-col gap-3 max-w-xl mx-auto p-8">
         {projects.map((project) => (
           <Card key={project.slug} className="bg-card/70">
             <Link
