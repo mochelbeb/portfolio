@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { About } from "./home/About";
 import { Experiences } from "./home/Experiences";
-import { Footer } from "./home/Footer";
 import { Header } from "./home/Header";
 import { Projects } from "./home/Projects";
 import { Skills } from "./home/Skills";
@@ -22,7 +21,6 @@ export default function Page() {
         <Projects />
         <Skills />
       </div>
-      <Footer />
     </>
   );
 }

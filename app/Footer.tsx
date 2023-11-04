@@ -5,7 +5,7 @@ import { ComponentPropsWithoutRef, FC } from "react";
 export type FooterProps = {};
 export const Footer: FC<FooterProps> = ({}) => {
   return (
-    <footer className="[&a]:hover:underline bg-background/70 mt-28 p-20 gap-10 flex flex-col md:flex-row justify-center sm:justify-between mx-auto text-xl ">
+    <footer className="[&a]:hover:underline bg-background/70 mt-28 p-20 gap-10 flex flex-col md:flex-row justify-center sm:justify-between text-xl ">
       <div className="flex flex-col gap-4">
         <h5 className="text-3xl">
           <Link href="/" className="hover:underline">
