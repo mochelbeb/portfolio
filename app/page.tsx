@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Islam Naasani",
   description: "Front-end Developer",
   icons: ["/favicon.ico"],
+  
 };
 
 export default function Page() {
