@@ -1,21 +1,24 @@
 "use client";
 import { MouseTracer } from "@/components/MouseTracer";
+import MDXComponents from "@/components/ui/md";
 import { MDXProvider } from "@mdx-js/react";
 import { ReactNode } from "react";
+import { Footer } from "./Footer";
 import "./globals.css";
 import AppBar from "./layout/AppBar";
 
 export default function App({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className="dark bg-background flex h-full min-h-screen w-full overflow-y-auto overflow-x-hidden">
+      <body className="dark bg-background flex flex-col h-full min-h-screen w-full overflow-y-auto overflow-x-hidden">
         <main className="flex-1">
-          <MDXProvider components={{}}>
+          <MDXProvider components={MDXComponents}>
             <AppBar />
             {children}
             <MouseTracer />
           </MDXProvider>
         </main>
+        <Footer />
       </body>
     </html>
   );

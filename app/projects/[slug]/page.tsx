@@ -59,7 +59,7 @@ export default async function Page({ params }: Props) {
         src={matter.largeCover}
         alt="project's home page"
       />
-      <div className="max-w-full prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground p-2">
+      <div className="bg-zinc-900 p-10 max-w-full prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground">
         <MDXRemote {...project} />
       </div>
     </article>

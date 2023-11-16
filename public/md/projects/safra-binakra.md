@@ -2,7 +2,7 @@
 title: Safra Binakra
 summary: A platform that aims to ease the way people book for trips between cities.
 smallCover: /media/projects/safra-binakra/logo.svg
-largeCover: /media/projects/safra-binakra/10.png
+largeCover: /media/projects/safra-binakra/home-desktop.png
 skills: React,TypeScript,Materia-UI,React Query
 featured: true
 rank: 1
@@ -20,7 +20,21 @@ The main objective of the platform is to centralize the management of operations
 - Responsive. Can work on any device.
 - Behaves as a native application (PWA).
 
-**User Application Gallery Coming Soon...**
+<div className="grid md:grid-cols-2 [&_img]:m-0 gap-1 mb-1">![home on desktop](/media/projects/safra-binakra/home-desktop.png)
+![Home search on desktop](/media/projects/safra-binakra/home-search-desktop.png)</div>
+
+<div className="grid grid-cols-2 sm:grid-cols-3 [&_img]:m-0 gap-1">![Home](/media/projects/safra-binakra/home.png)
+![Home search](/media/projects/safra-binakra/home-search.png)
+![Trip details](/media/projects/safra-binakra/trip-details.png)
+![Trip seat booking](/media/projects/safra-binakra/booking.png)
+![Tickets](/media/projects/safra-binakra/tickets.png)
+![Ticket](/media/projects/safra-binakra/ticket-details.png)
+![Branches list](/media/projects/safra-binakra/branches.png)
+![Branch's trip search](/media/projects/safra-binakra/branch-search.png)
+![My trips](/media/projects/safra-binakra/my-trips.png)
+![Settings](/media/projects/safra-binakra/settings.png)
+![Skeleton loading](/media/projects/safra-binakra/skeleton.png)
+![English](/media/projects/safra-binakra/english.png)</div>
 
 <br/>
 ### Dashboard
@@ -29,4 +43,14 @@ The main objective of the platform is to centralize the management of operations
 - Manage owners, branches and customers.
 - Track ongoing trips with the ability to also books seats in realtime.
 
-**Dashboard Gallery Coming Soon...**
+<div className="grid md:grid-cols-2 [&_img]:m-0 gap-1 mb-1">![Home](/media/projects/safra-binakra/dash-home.png)
+![Branches table](/media/projects/safra-binakra/dash-branches.png)
+![Bus models](/media/projects/safra-binakra/dash-bus-model.png)
+![Bus model form](/media/projects/safra-binakra/dash-bus-model-create.png)
+![Customers table](/media/projects/safra-binakra/dash-customers.png)
+![Admin form](/media/projects/safra-binakra/dash-admin-create.png)
+![Owners table](/media/projects/safra-binakra/dash-owners.png)
+![Policy rich editor](/media/projects/safra-binakra/dash-policy.png)
+![Trips table](/media/projects/safra-binakra/dash-trips.png)
+![Trip details dialog](/media/projects/safra-binakra/dash-trip-details.png)
+![Skeleton loading](/media/projects/safra-binakra/dash-skeleton.png)</div>
