@@ -1,11 +1,12 @@
 "use client";
+import { Link } from "@/components/ui/link";
 import { motion } from "framer-motion";
 import { FC } from "react";
 export type AboutProps = {};
 export const About: FC<AboutProps> = ({}) => {
   return (
     <section className="mx-10">
-      <p className="flex-1 py-3 text-2xl [&_a]:border-b-2 [&_a]:border-b-foreground">
+      <p className="flex-1 py-3 text-2xl">
         <motion.img
           transition={{ type: "tween" }}
           src="/pfp.jpg"
@@ -16,9 +17,12 @@ export const About: FC<AboutProps> = ({}) => {
         />
         My journey into the world of web development began at the start of 2021
         when I embarked on The Odin {`Project's `}
-        <a href="https://www.theodinproject.com/paths/full-stack-javascript">
+        <Link
+          target="_blank"
+          href="https://www.theodinproject.com/paths/full-stack-javascript"
+        >
           full-stack course
-        </a>
+        </Link>
         . Throughout this comprehensive program, I delved into both front-end
         and back-end technologies, laying the foundation for my career in web
         development.
@@ -35,9 +39,12 @@ export const About: FC<AboutProps> = ({}) => {
         {`When I'm not coding, you'll often find me exploring new technologies
            or deepening my knowledge by consuming blog posts, books, and podcasts,
            I also recently started sharing some technical tips on`}{" "}
-        <a href="https://www.linkedin.com/in/islam-nassani-994a32194/">
+        <Link
+          target="_blank"
+          href="https://www.linkedin.com/in/islam-nassani-994a32194/"
+        >
           LinkedIn.
-        </a>
+        </Link>
         <br />
         <br />
         {`I'm excited to connect with fellow developers and tech

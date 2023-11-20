@@ -86,7 +86,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
             )}
           >
             <h6 className="text-xl font-bold -mt-2">{exp.title}</h6>
-            <p className="[&>a]:border-b-foreground/60 [&>a]:border-b-2 ps-2 text-lg">
+            <p className="ps-2 text-lg">
               {exp.company}
               {exp.location && " • "}
               <span className="text-secondary-foreground">{exp.location}</span>
@@ -113,9 +113,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
                 </>
               )}
             </p>
-            <div className="ps-2 pt-1 text-lg [&_a]:border-b-2 [&_a]:border-foreground/70">
-              {exp.description}
-            </div>
+            <div className="ps-2 pt-1 text-lg">{exp.description}</div>
           </motion.div>
         </motion.article>
       ))}
