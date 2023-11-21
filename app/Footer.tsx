@@ -45,7 +45,7 @@ export const Footer: FC<FooterProps> = ({}) => {
             <Linkedin aria-label="LinkedIn" />
           </FooterLink>
           <FooterLink
-            href={"islamnaasani@gmail.com"}
+            href={"mailto:islamnaasani@gmail.com"}
             gradientProps={{ className: "from-red-700 to-orange-500" }}
           >
             <Mail aria-label="Email" />
