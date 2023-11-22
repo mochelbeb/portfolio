@@ -1,7 +1,7 @@
 ---
 title: HumyApp
 summary: an interactive application that provides home food ordering and delivery services.
-smallCover: /media/projects/humy/logo.png
+smallCover: /media/projects/humy/cover.png
 largeCover: /media/projects/humy/2.png
 skills: React,TypeScript,Materia-UI,React Query
 featured: true

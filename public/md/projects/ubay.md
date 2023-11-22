@@ -1,7 +1,7 @@
 ---
 title: uBay
 summary: A social media platform for selling and buying second-hand items.
-smallCover: /media/projects/ubay/logo.svg
+smallCover: /media/projects/ubay/cover.png
 largeCover: /media/projects/ubay/home.jpg
 skills: React,TypeScript,Materia-UI,React Query
 featured: true

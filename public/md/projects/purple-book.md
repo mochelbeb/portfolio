@@ -1,7 +1,7 @@
 ---
 title: PurpleBook
 summary: Facebook clone with all the essential features.
-smallCover: /media/projects/purple-book/logo.svg
+smallCover: /media/projects/purple-book/cover.png
 largeCover: /media/projects/purple-book/1.jpg
 skills: React,TypeScript,Express,MongoDB,SASS
 rank: 4

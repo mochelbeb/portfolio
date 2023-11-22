@@ -58,7 +58,6 @@ export const Projects: FC<ProjectsProps> = async ({}) => {
         ))}
       </div>
       <Link
-        target="_blank"
         href="/projects"
         className="mx-auto py-2 px-4 rounded-lg bg-card hover:bg-accent"
       >
