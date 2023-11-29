@@ -2,9 +2,9 @@ import { Badge } from "@/components/ui/badge";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath } from "@/utils/utils";
+import { projectMatterSchema } from "@/validation/project";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
-import { projectMatterSchema } from "../page";
 type Props = {
   params: { slug: string };
 };

@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath } from "@/utils/utils";
+import { blogMatterSchema } from "@/validation/blog";
 import { readFileSync } from "fs";
 import { Metadata, ResolvingMetadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
@@ -10,7 +11,6 @@ import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import "../../md-code.css";
-import { blogMatterSchema } from "../page";
 type Props = {
   params: { slug: string };
 };

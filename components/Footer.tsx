@@ -1,12 +1,12 @@
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { cn } from "@/lib/utils";
-import { Github, Linkedin, Mail, Send } from "lucide-react";
+import { Github, Linkedin, Mail, Send, Twitter } from "lucide-react";
 import Link from "next/link";
 import { ComponentPropsWithoutRef, FC } from "react";
 export type FooterProps = {};
 export const Footer: FC<FooterProps> = ({}) => {
   return (
-    <footer className="bg-background/70 p-5 md:p-20 grid grid-cols-1 lg:grid-cols-3 justify-center gap-4 md:gap-0 text-xl">
+    <footer className="p-5 md:p-20 grid grid-cols-1 lg:grid-cols-3 justify-center gap-4 lg:gap-0 text-xl">
       <div className="flex flex-col gap-4">
         <h5 className="text-3xl">
           <Link href="/" className="hover:underline">
@@ -50,6 +50,12 @@ export const Footer: FC<FooterProps> = ({}) => {
             gradientProps={{ className: "from-red-700 to-orange-500" }}
           >
             <Mail aria-label="Email" />
+          </FooterLink>
+          <FooterLink
+            gradientProps={{ className: "from-blue-300 to-blue-600" }}
+            href="https://twitter.com/i_3b___"
+          >
+            <Twitter aria-label="Twitter" />
           </FooterLink>
           <FooterLink
             href={"https://t.me/islam_naasani"}
