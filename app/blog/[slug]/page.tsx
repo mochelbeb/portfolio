@@ -16,13 +16,14 @@ type Props = {
   params: { slug: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const title = (
+  const frontmatter = (
     await readMdFile(getPublicPath(`md/blog/${params.slug}.md`)).catch((e) =>
       console.error(e),
     )
-  )?.frontmatter.title;
+  )?.frontmatter;
   return {
-    title: title ? `${title} | Blog` : "Post Not Found",
+    title: frontmatter ? `${frontmatter.title} | Blog` : "Post Not Found",
+    description: frontmatter ? (frontmatter.summary as string) : "",
   };
 }
 export default async function Page({ params }: Props) {
