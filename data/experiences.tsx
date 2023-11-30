@@ -95,14 +95,13 @@ export const EXPERIENCES: Experience[] = [
           I have had the opportunity to work with a great team on a huge
           project, which was a food delivery service called HumyApp it has been
           uploaded to the store and currently has over 10k users. I worked in
-          the front-end team.
+          the front-end team building the admin dashboard.
         </p>
         <p className="pt-1">
-          building the admin dashboard, our work was mainly complex forms and
-          CRUD operations to manage all the the three applications (customer,
-          driver, pioneer) such as reviewing new drivers and posting customized
-          notifications. The dashboard also has a permission-based authorization
-          system.
+          Our work was mainly crafting complex forms and CRUD operations to
+          manage all the the three applications (customer, driver, pioneer) such
+          as reviewing new drivers and posting customized notifications. The
+          dashboard also has a permission-based authorization system.
         </p>
       </>
     ),
