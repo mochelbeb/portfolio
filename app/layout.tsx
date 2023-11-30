@@ -1,5 +1,4 @@
 "use client";
-import { MouseTracer } from "@/components/MouseTracer";
 import MDXComponents from "@/components/ui/md";
 import { MDXProvider } from "@mdx-js/react";
 import { ReactNode } from "react";
@@ -15,7 +14,6 @@ export default function App({ children }: { children: ReactNode }) {
           <MDXProvider components={MDXComponents}>
             <AppBar />
             {children}
-            <MouseTracer />
           </MDXProvider>
         </main>
         <Footer />

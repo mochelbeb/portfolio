@@ -43,12 +43,30 @@ export default async function Page({ params }: Props) {
 
   return (
     <ScrollProgress>
-      <article className="max-w-3xl mx-3 md:mx-auto bg-zinc-900 p-4 md:p-10 mt-8 mb-4 flex flex-col gap-3 text-lg">
+      <article className="max-w-4xl mx-3 md:mx-auto p-4 md:p-10 mt-8 mb-4 flex flex-col gap-3 text-lg">
         <h1 className="text-4xl sm:text-5xl font-bold">{matter.title}</h1>
-        <time dateTime={matter.publishedAt.toDateString()}>
-          {dayjs(matter.publishedAt).format("MMMM DD[th], YYYY")}
-        </time>
-        <ul className="list-none flex flex-wrap justify-end  mt-auto pt-2 gap-1  w-full">
+        <p>
+          <time
+            className="text-base"
+            title={`Published at ${dayjs(matter.publishedAt).format(
+              "YYYY-MM-DD",
+            )}`}
+            dateTime={dayjs(matter.publishedAt).format("YYYY-MM-DD")}
+          >
+            {dayjs(matter.publishedAt).format("MMMM DD[th], YYYY")}
+          </time>
+          {matter.updatedAt && (
+            <time
+              className="text-muted-foreground text-sm"
+              dateTime={dayjs(matter.updatedAt).format("YYYY-MM-DD")}
+            >
+              {dayjs(matter.updatedAt).format(
+                " ([Last updated at] MMMM DD[th], YYYY)",
+              )}
+            </time>
+          )}
+        </p>
+        <ul className="list-none flex flex-wrap justify-end pt-2 gap-1  w-full">
           {matter.tags.map((tag) => (
             <li key={tag}>
               <Badge
@@ -66,7 +84,7 @@ export default async function Page({ params }: Props) {
           </p>
         )}
         {(!matter.draft || process.env.NODE_ENV === "development") && (
-          <div className="max-w-full md:prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground prose-ul:ml-0">
+          <div className="max-w-full md:prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground prose-a:visited:text-purple-200 prose-ul:ml-0">
             <MDXRemote {...post} />
           </div>
         )}

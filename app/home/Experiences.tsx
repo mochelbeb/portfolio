@@ -52,8 +52,8 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
                         : { height: 0, width: 0 }
                     }
                     transition={{
-                      delay: Math.max(2.1 * i - 0.6, 0),
-                      duration: 0.6,
+                      delay: Math.max(1.5 * i - 0.45, 0),
+                      duration: 0.45,
                     }}
                     className="bg-foreground rounded-full"
                   />
@@ -68,7 +68,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
             <motion.div
               initial={{ flex: 0 }}
               animate={isInView ? { flex: 1 } : { flex: 0 }}
-              transition={{ delay: 2.1 * i, duration: 2.1 }}
+              transition={{ delay: 1.5 * i, duration: 1.5 }}
               className={cn(
                 "flex-1 w-1 bg-foreground/60",
                 i === arr.length - 1 && "bg-transparent pb-3",
@@ -78,7 +78,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: Math.max(2.1 * i - 0.6, 0), duration: 0.6 }}
+            transition={{ delay: Math.max(1.5 * i - 0.45, 0), duration: 0.45 }}
             className={cn(
               "flex flex-col gap-1 pb-20 sm:pb-5 max-w-[90vw] col-span-10 sm:col-span-5",
               i % 2 != 0 && "sm:order-1",

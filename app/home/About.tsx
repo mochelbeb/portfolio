@@ -1,19 +1,24 @@
 "use client";
 import { Link } from "@/components/ui/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FC } from "react";
+const MotionImage = motion(Image);
 export type AboutProps = {};
 export const About: FC<AboutProps> = ({}) => {
   return (
     <section className="mx-10">
       <p className="flex-1 py-3 text-2xl">
-        <motion.img
+        <MotionImage
           transition={{ type: "tween" }}
           src="/pfp.jpg"
           initial={{ scale: 1, x: 0, y: 0 }}
           whileFocus={{ scale: 1.5, x: -100, y: 50 }}
           whileTap={{ scale: 1.5, x: -100, y: 50 }}
           className="float-right mt-2 mx-4 aspect-square  max-w-xs w-[30%] rounded-lg cursor-pointer"
+          alt="Islam's Profile Picture"
+          width={350}
+          height={350}
         />
         My journey into the world of web development began at the start of 2021
         when I embarked on The Odin {`Project's `}

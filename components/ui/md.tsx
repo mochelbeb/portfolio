@@ -28,10 +28,13 @@ const UL = (p: React.JSX.IntrinsicElements["ul"]) => (
   <ul className="ml-6 my-3 list-disc" {...p} />
 );
 
-const Divider = () => (
-  <hr className="my-6 block border-b border-t-0 border-border dark:border-border-dark" />
+const Divider = (hr: React.JSX.IntrinsicElements["hr"]) => (
+  <hr
+    className="my-6 block border-b border-t-0 border-border dark:border-border-dark"
+    {...hr}
+  />
 );
-
+const A = (a: React.JSX.IntrinsicElements["a"]) => <a target="_blank" {...a} />;
 const Blockquote = ({
   children,
   ...props
@@ -189,6 +192,7 @@ const MDXComponents = {
   h2: H2,
   h3: H3,
   h4: H4,
+  a: A,
   hr: Divider,
   code: Code,
   pre: CodeBlock,

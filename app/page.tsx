@@ -1,3 +1,4 @@
+import { MouseTracer } from "@/components/MouseTracer";
 import { Metadata } from "next";
 import { About } from "./home/About";
 import { Experiences } from "./home/Experiences";
@@ -9,7 +10,6 @@ export const metadata: Metadata = {
   title: "Islam Naasani",
   description: "Front-end Developer",
   icons: ["/favicon.ico"],
-  
 };
 
 export default function Page() {
@@ -22,6 +22,7 @@ export default function Page() {
         <Projects />
         <Skills />
       </div>
+      <MouseTracer />
     </>
   );
 }

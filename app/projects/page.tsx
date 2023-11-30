@@ -30,7 +30,7 @@ export default async function Page() {
         Projects I&apos;ve worked on, either for work, university or personal.
       </p>
       <div className="flex flex-col gap-3 max-w-xl mx-auto p-8">
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <Card key={project.slug} className="bg-card/70">
             <Link
               href={`/projects/${project.slug}`}
@@ -42,6 +42,8 @@ export default async function Page() {
                   src={project.smallCover}
                   className="object-contain"
                   fill
+                  priority={i === 0}
+                  sizes="(max-width: 360px) 100vw, 50vw"
                   alt="project logo"
                 />
               </div>

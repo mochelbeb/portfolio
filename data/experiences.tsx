@@ -77,7 +77,7 @@ export const EXPERIENCES: Experience[] = [
         </p>
         <p className="py-1">
           {`The course also equipped me with a lot of soft skills like problem solving,
-             how to find solutions (googling) and a better developer mindset overall `}
+             how to find solutions (googling) and a better developer mindset overall.`}
         </p>
         <p>
           {`I've built many projects as a part of this course such as a `}

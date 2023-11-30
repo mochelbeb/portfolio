@@ -55,11 +55,11 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
       <div
         ref={ref}
         className={cn(
-          "absolute rounded-full bg-gradient-to-r from-red-600 to-purple-700",
+          "absolute rounded-full brightness-50 bg-gradient-to-r from-red-600 to-purple-700",
           classes.animate,
         )}
       />
-      <div className="absolute inset-0 z-10 brightness-[0.5] backdrop-blur-[125px]"></div>
+      <div className="absolute inset-0 z-10 backdrop-blur-[125px]"></div>
     </div>
   );
 };
