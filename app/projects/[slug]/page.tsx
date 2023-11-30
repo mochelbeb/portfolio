@@ -2,9 +2,10 @@ import { Badge } from "@/components/ui/badge";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath } from "@/utils/utils";
+import { projectMatterSchema } from "@/validation/project";
+import { existsSync } from "fs";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
-import { projectMatterSchema } from "../page";
 type Props = {
   params: { slug: string };
 };
@@ -22,19 +23,14 @@ export async function generateMetadata(
   };
 }
 export default async function Page({ params }: Props) {
-  let error: any = null;
-  const project = await readMdFile(
-    getPublicPath(`md/projects/${params.slug}.md`),
-  ).catch((e) => {
-    console.error(e);
-    error = e;
-  });
+  const file = getPublicPath(`md/projects/${params.slug}.md`);
 
-  if (error?.code === "ENOENT")
+  if (!existsSync(file))
     return (
       <p className="text-center w-full mt-20 text-4xl">Project not Found</p>
     );
-  if (!project) throw error;
+
+  const project = await readMdFile(getPublicPath(file));
 
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (

@@ -51,7 +51,7 @@ export const MouseTracer: FC<MouseTracerProps> = ({}) => {
     setTimeout(() => setIsTrackingActive(true), 6000);
   }, []);
   return (
-    <div className="fixed inset-0 -z-10 ">
+    <div className="fixed inset-0 -z-10">
       <div
         ref={ref}
         className={cn(

@@ -1,11 +1,12 @@
+import { NewsletterForm } from "@/components/NewsletterForm";
 import { cn } from "@/lib/utils";
-import { Github, Linkedin, Mail, Send } from "lucide-react";
+import { Github, Linkedin, Mail, Send, Twitter } from "lucide-react";
 import Link from "next/link";
 import { ComponentPropsWithoutRef, FC } from "react";
 export type FooterProps = {};
 export const Footer: FC<FooterProps> = ({}) => {
   return (
-    <footer className="[&a]:hover:underline bg-background/70 mt-28 p-20 gap-10 flex flex-col md:flex-row justify-center sm:justify-between text-xl ">
+    <footer className="p-5 md:p-20 grid grid-cols-1 lg:grid-cols-3 justify-center gap-4 lg:gap-0 text-xl">
       <div className="flex flex-col gap-4">
         <h5 className="text-3xl">
           <Link href="/" className="hover:underline">
@@ -30,8 +31,8 @@ export const Footer: FC<FooterProps> = ({}) => {
           </li>
         </ul>
       </div>
-      <div>
-        <div className="flex flex-row items-start justify-center gap-2 lg:mt-0 text-xl">
+      <div className="order-1 md:order-none">
+        <div className="flex flex-wrap flex-row items-start justify-center gap-2 lg:mt-0 text-xl">
           <FooterLink
             href={"https://github.com/I-3B"}
             gradientProps={{ className: "from-purple-800 to-purple-600" }}
@@ -49,6 +50,12 @@ export const Footer: FC<FooterProps> = ({}) => {
             gradientProps={{ className: "from-red-700 to-orange-500" }}
           >
             <Mail aria-label="Email" />
+          </FooterLink>
+          <FooterLink
+            gradientProps={{ className: "from-blue-300 to-blue-600" }}
+            href="https://twitter.com/i_3b___"
+          >
+            <Twitter aria-label="Twitter" />
           </FooterLink>
           <FooterLink
             href={"https://t.me/islam_naasani"}
@@ -73,7 +80,7 @@ export const Footer: FC<FooterProps> = ({}) => {
           </FooterLink>
         </div>
       </div>
-      <div />
+      <NewsletterForm />
     </footer>
   );
 };

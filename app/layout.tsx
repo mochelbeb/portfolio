@@ -3,7 +3,7 @@ import { MouseTracer } from "@/components/MouseTracer";
 import MDXComponents from "@/components/ui/md";
 import { MDXProvider } from "@mdx-js/react";
 import { ReactNode } from "react";
-import { Footer } from "./Footer";
+import { Footer } from "../components/Footer";
 import "./globals.css";
 import AppBar from "./layout/AppBar";
 

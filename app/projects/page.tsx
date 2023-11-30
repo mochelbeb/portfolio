@@ -2,24 +2,15 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath } from "@/utils/utils";
+import { projectMatterSchema } from "@/validation/project";
 import { readdirSync } from "fs";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { z } from "zod";
 
 export const metadata: Metadata = {
   title: "Projects | Islam Naasani",
 };
-export const projectMatterSchema = z.object({
-  title: z.string(),
-  skills: z.string().transform((skills) => skills.split(",")),
-  summary: z.string(),
-  featured: z.boolean().optional(),
-  smallCover: z.string(),
-  largeCover: z.string(),
-  rank: z.number(),
-});
 export default async function Page() {
   const files = readdirSync(getPublicPath("md/projects"), "utf8");
   const projects = (

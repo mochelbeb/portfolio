@@ -7,8 +7,8 @@ import Link from "next/link";
 import { FC } from "react";
 
 import { getPublicPath } from "@/utils/utils";
+import { projectMatterSchema } from "@/validation/project";
 import { ArrowRight } from "lucide-react";
-import { projectMatterSchema } from "../projects/page";
 
 export type ProjectsProps = {};
 export const Projects: FC<ProjectsProps> = async ({}) => {
