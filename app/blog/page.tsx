@@ -25,8 +25,8 @@ export default async function Page() {
     .sort((a, b) => (a.publishedAt > b.publishedAt ? 1 : -1));
   return (
     <>
-      <div className="text-3xl flex flex-col items-center mt-[10%]">
-        <h2 className="text-7xl mb-20">Blog</h2>
+      <div className="text-2xl sm:text-3xl mx-12 flex flex-col items-center mt-32 my-20">
+        <h2 className="text-5xl sm:text-7xl mb-20">Blog</h2>
         <ol className="list-disc">
           {parsed.map((post) => (
             <li key={post.slug}>
