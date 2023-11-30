@@ -24,13 +24,13 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({}) => {
       },
     )
       .then((res) => {
+        setState("active");
         if (res.status !== 200) setState("error");
         return res.json();
       })
       .catch(() => {
         setState("error");
       });
-    setState("active");
     setSubscriptionState(res.subscription.state);
   };
 
