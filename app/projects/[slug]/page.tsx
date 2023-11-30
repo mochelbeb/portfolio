@@ -30,7 +30,7 @@ export default async function Page({ params }: Props) {
       <p className="text-center w-full mt-20 text-4xl">Project not Found</p>
     );
 
-  const project = await readMdFile(getPublicPath(file));
+  const project = await readMdFile(file);
 
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (
