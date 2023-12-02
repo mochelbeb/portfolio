@@ -6,4 +6,5 @@ export const blogMatterSchema = z.object({
   summary: z.string(),
   draft: z.boolean().optional(),
   publishedAt: z.date(),
+  updatedAt: z.date().optional(),
 });

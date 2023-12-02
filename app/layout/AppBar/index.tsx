@@ -102,7 +102,7 @@ export const AppBar = ({}: AppBarProps) => {
   return (
     <motion.nav
       ref={ref}
-      className="pointer-events-none fixed z-50 flex w-fit justify-center gap-2 rounded-3xl bg-background/80 p-4 opacity-0"
+      className="pointer-events-none fixed z-50 flex w-fit justify-center gap-2 rounded-3xl bg-card/80 p-4 opacity-0"
       drag
       style={navVariants[storedOrigin]}
       draggable

@@ -1,3 +1,4 @@
+import { Link } from "@/components/ui/link";
 import { ReactNode } from "react";
 
 export type Experience = {
@@ -13,9 +14,9 @@ export const EXPERIENCES: Experience[] = [
   {
     title: "CS Student",
     company: (
-      <a target="_blank" href="https://www.alepuniv.edu.sy/">
+      <Link target="_blank" href="https://www.alepuniv.edu.sy/">
         University Of Aleppo
-      </a>
+      </Link>
     ),
     location: "Aleppo, Syria",
     from: "2019-9",
@@ -33,7 +34,9 @@ export const EXPERIENCES: Experience[] = [
           {
             "as I took more software engineering courses I've done my 4th year project: "
           }
-          <a href="https://github.com/i-3b/uBay">uBay</a>
+          <Link target="_blank" href="https://github.com/i-3b/uBay">
+            uBay
+          </Link>
           {` which is a social media platform for selling and buying second-hand items.`}
         </p>
       </>
@@ -42,9 +45,9 @@ export const EXPERIENCES: Experience[] = [
   {
     title: "Full Stack JavaScript Course (MERN stack)",
     company: (
-      <a target="_blank" href="https://www.theodinproject.com">
+      <Link target="_blank" href="https://www.theodinproject.com">
         The Odin Project
-      </a>
+      </Link>
     ),
     from: "2021/01",
     to: "2022/08",
@@ -56,25 +59,40 @@ export const EXPERIENCES: Experience[] = [
         </p>
         <p className="py-1">
           {`I've`} took{" "}
-          <a href="https://www.theodinproject.com/paths/foundations/courses/foundations">
+          <Link
+            target="_blank"
+            href="https://www.theodinproject.com/paths/foundations/courses/foundations"
+          >
             the Foundation
-          </a>{" "}
+          </Link>{" "}
           and{" "}
-          <a href="https://www.theodinproject.com/paths/full-stack-javascript">
+          <Link
+            target="_blank"
+            href="https://www.theodinproject.com/paths/full-stack-javascript"
+          >
             the Full Stack JavaScript (MERN)
-          </a>
+          </Link>
           courses, covering a large amount of skills such as: JavaScript, Git,
           React, Express, MongoDB, and TypeScript.
         </p>
         <p className="py-1">
           {`The course also equipped me with a lot of soft skills like problem solving,
-             how to find solutions (googling) and a better developer mindset overall `}
+             how to find solutions (googling) and a better developer mindset overall.`}
         </p>
         <p>
           {`I've built many projects as a part of this course such as a `}
-          <a href="https://github.com/I-3B/PurpleBook-API">Facebook clone</a>, a
-          <a href="https://github.com/I-3B/blog-API"> personal blog</a> and a{" "}
-          <a href="https://github.com/I-3B/members-only">chatroom</a>
+          <Link target="_blank" href="https://github.com/I-3B/PurpleBook-API">
+            Facebook clone
+          </Link>
+          , a
+          <Link target="_blank" href="https://github.com/I-3B/blog-API">
+            {" "}
+            personal blog
+          </Link>{" "}
+          and a{" "}
+          <Link target="_blank" href="https://github.com/I-3B/members-only">
+            chatroom
+          </Link>
         </p>
       </>
     ),
@@ -82,9 +100,9 @@ export const EXPERIENCES: Experience[] = [
   {
     title: "Front-end Developer",
     company: (
-      <a target="_blank" href="http://www.ulutech-sy.com/">
+      <Link target="_blank" href="http://www.ulutech-sy.com/">
         Ulutech
-      </a>
+      </Link>
     ),
     location: "Aleppo, Syria",
     from: "2022-10",

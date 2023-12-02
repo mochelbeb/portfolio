@@ -41,6 +41,8 @@ export const Projects: FC<ProjectsProps> = async ({}) => {
                   className="object-contain"
                   fill
                   alt="project logo"
+                  priority
+                  sizes="(max-width: 360px) 100vw, (max-width: 1000px) 50vw, 30vw"
                 />
               </div>
               <p className="text-lg">{project.summary}</p>
@@ -57,12 +59,12 @@ export const Projects: FC<ProjectsProps> = async ({}) => {
           </Card>
         ))}
       </div>
-      <a
+      <Link
         href="/projects"
         className="mx-auto py-2 px-4 rounded-lg bg-card hover:bg-accent"
       >
         View All Projects <ArrowRight className="inline-block" />
-      </a>
+      </Link>
     </section>
   );
 };

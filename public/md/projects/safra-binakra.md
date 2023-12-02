@@ -1,7 +1,7 @@
 ---
 title: Safra Binakra
 summary: A platform that aims to ease the way people book for trips between cities.
-smallCover: /media/projects/safra-binakra/logo.svg
+smallCover: /media/projects/safra-binakra/cover.png
 largeCover: /media/projects/safra-binakra/home-desktop.png
 skills: React,TypeScript,Materia-UI,React Query
 featured: true
@@ -48,7 +48,7 @@ The main objective of the platform is to centralize the management of operations
 ![Bus models](/media/projects/safra-binakra/dash-bus-model.png)
 ![Bus model form](/media/projects/safra-binakra/dash-bus-model-create.png)
 ![Customers table](/media/projects/safra-binakra/dash-customers.png)
-![Admin form](/media/projects/safra-binakra/dash-admin-create.png)
+![Admin form](/media/projects/safra-binakra/dash-create-admin.png)
 ![Owners table](/media/projects/safra-binakra/dash-owners.png)
 ![Policy rich editor](/media/projects/safra-binakra/dash-policy.png)
 ![Trips table](/media/projects/safra-binakra/dash-trips.png)

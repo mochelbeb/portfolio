@@ -1,7 +1,7 @@
 ---
 title: uBay
 summary: A social media platform for selling and buying second-hand items.
-smallCover: /media/projects/ubay/logo.svg
+smallCover: /media/projects/ubay/cover.png
 largeCover: /media/projects/ubay/home.jpg
 skills: React,TypeScript,Materia-UI,React Query
 featured: true
@@ -38,6 +38,8 @@ I've built most of the user application and dashboard.
 
 - Statistics page built with [nivo](https://nivo.rocks/)
 - Tables for viewing and editing all the entities in the platform.
+
+#### Gallery
 
 <div className="grid gap-1 [&_img]:m-0">![Statistics](/media/projects/ubay/statistics.png)
 ![Users table](/media/projects/ubay/users.jpg)</div>

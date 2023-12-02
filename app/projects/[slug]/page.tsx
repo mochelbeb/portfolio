@@ -30,7 +30,7 @@ export default async function Page({ params }: Props) {
       <p className="text-center w-full mt-20 text-4xl">Project not Found</p>
     );
 
-  const project = await readMdFile(getPublicPath(file));
+  const project = await readMdFile(file);
 
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (
@@ -47,15 +47,15 @@ export default async function Page({ params }: Props) {
         ))}
       </ul>
       <Image
-        width={1000}
-        height={1000}
+        width={720}
+        height={480}
         priority
         className="rounded-md w-full mx-auto"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw"
+        sizes="(max-width: 768px) 100vw, 70vw"
         src={matter.largeCover}
         alt="project's home page"
       />
-      <div className="bg-zinc-900 p-10 max-w-full prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground">
+      <div className="p-10 max-w-full prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground">
         <MDXRemote {...project} />
       </div>
     </article>
