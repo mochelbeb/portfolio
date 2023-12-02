@@ -87,7 +87,7 @@ export default async function Page({ params }: Props) {
           </p>
         )}
         {(!matter.draft || process.env.NODE_ENV === "development") && (
-          <div className="prose-quoteless prose max-w-full dark:prose-invert md:prose-lg prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-img:rounded-sm sm:prose-h2:text-4xl">
+          <div className="prose prose-quoteless max-w-full dark:prose-invert md:prose-lg prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-img:rounded-sm sm:prose-h2:text-4xl">
             <MDXRemote {...post} />
           </div>
         )}

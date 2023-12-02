@@ -7,12 +7,12 @@ export type HeaderProps = {};
 export const Header: FC<HeaderProps> = ({}) => {
   return (
     <section className="min-h-[100vh] pt-[30vh] font-[cursive]">
-      <motion.header className="flex flex-col gap-1 items-center text-center ">
+      <motion.header className="flex flex-col items-center gap-1 text-center ">
         <motion.h1
           initial={{ y: 0, opacity: 1 }}
           whileInView={{ y: [+20, 0], opacity: [0.3, 1] }}
           transition={{ type: "spring" }}
-          className="w-fit text-5xl md:text-8xl select-none cursor-grab active:cursor-grabbing"
+          className="w-fit cursor-grab select-none text-5xl active:cursor-grabbing md:text-8xl"
           drag
           dragMomentum
           dragSnapToOrigin
@@ -23,7 +23,7 @@ export const Header: FC<HeaderProps> = ({}) => {
           initial={{ y: 0, opacity: 1 }}
           whileInView={{ y: [20, 0], opacity: [0.3, 1] }}
           transition={{ type: "spring" }}
-          className="w-fit pt-1 text-2xl text-yellow-50 md:pt-5 md:text-5xl select-none"
+          className="w-fit select-none pt-1 text-2xl text-yellow-50 md:pt-5 md:text-5xl"
         >
           Front-end Developer
         </motion.h2>

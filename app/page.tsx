@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <div className="px-2 md:px-10 flex flex-col gap-52">
+      <div className="flex flex-col gap-52 px-2 md:px-10">
         <Header />
         <About />
         <Experiences />

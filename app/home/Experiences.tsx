@@ -26,7 +26,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
   });
   return (
     <section className="flex flex-col justify-center" ref={ref}>
-      <h2 className="text-5xl mb-10">Career</h2>
+      <h2 className="mb-10 text-5xl">Career</h2>
       {[...EXPERIENCES].reverse().map((exp, i, arr) => (
         <motion.article key={i} className="grid grid-cols-11">
           <div
@@ -38,7 +38,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
           />
           <div
             className={cn(
-              "min-h-full flex flex-col items-center w-3 justify-self-center",
+              "flex min-h-full w-3 flex-col items-center justify-self-center",
             )}
           >
             <TooltipProvider>
@@ -55,11 +55,11 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
                       delay: Math.max(1.5 * i - 0.45, 0),
                       duration: 0.45,
                     }}
-                    className="bg-foreground rounded-full"
+                    className="rounded-full bg-foreground"
                   />
                 </TooltipTrigger>
                 <TooltipContent>
-                  <motion.div className="bg-background/70 rounded-md p-2 animate-bounce">
+                  <motion.div className="animate-bounce rounded-md bg-background/70 p-2">
                     {dayjs(exp.from).format("YYYY/MM/DD")}
                   </motion.div>
                 </TooltipContent>
@@ -70,7 +70,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
               animate={isInView ? { flex: 1 } : { flex: 0 }}
               transition={{ delay: 1.5 * i, duration: 1.5 }}
               className={cn(
-                "flex-1 w-1 bg-foreground/60",
+                "w-1 flex-1 bg-foreground/60",
                 i === arr.length - 1 && "bg-transparent pb-3",
               )}
             />
@@ -80,18 +80,18 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: Math.max(1.5 * i - 0.45, 0), duration: 0.45 }}
             className={cn(
-              "flex flex-col gap-1 pb-20 sm:pb-5 max-w-[90vw] col-span-10 sm:col-span-5",
+              "col-span-10 flex max-w-[90vw] flex-col gap-1 pb-20 sm:col-span-5 sm:pb-5",
               i % 2 != 0 && "sm:order-1",
               i % 2 == 0 && "sm:-order-1",
             )}
           >
-            <h6 className="text-xl font-bold -mt-2">{exp.title}</h6>
+            <h6 className="-mt-2 text-xl font-bold">{exp.title}</h6>
             <p className="ps-2 text-lg">
               {exp.company}
               {exp.location && " • "}
               <span className="text-secondary-foreground">{exp.location}</span>
             </p>
-            <p className="text-secondary-foreground ps-2 text-lg">
+            <p className="ps-2 text-lg text-secondary-foreground">
               <time dateTime={dayjs(exp.from).toISOString()}>
                 {dayjs(exp.from).format("MMM YYYY")}
               </time>

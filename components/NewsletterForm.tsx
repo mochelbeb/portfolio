@@ -40,7 +40,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({}) => {
         <h6 className="-ms-1 text-2xl">Subscribe to my Newsletter</h6>
         <Input required placeholder="First Name" name="first_name" />
         <Input required type="email" placeholder="Your Email" name="email" />
-        <div className="flex gap-1 justify-between">
+        <div className="flex justify-between gap-1">
           <p
             className={cn(
               "ps-2 pt-2 text-lg",
@@ -57,7 +57,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({}) => {
           <Button type="submit">
             Subscribe{" "}
             {state === "loading" && (
-              <Loader2Icon className="animate-spin ms-1" />
+              <Loader2Icon className="ms-1 animate-spin" />
             )}
           </Button>
         </div>

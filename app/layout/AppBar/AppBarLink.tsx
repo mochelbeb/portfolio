@@ -41,7 +41,7 @@ export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
         animate={origin}
         variants={linkVariants}
         transition={{ type: "spring" }}
-        className="flex flex-col justify-center items-center"
+        className="flex flex-col items-center justify-center"
       >
         <motion.span
           style={{

@@ -25,19 +25,19 @@ export default async function Page() {
     .sort((a, b) => a.rank - b.rank);
   return (
     <>
-      <h1 className="text-5xl pt-32 text-center">Projects</h1>
-      <p className="text-center text-lg p-1">
+      <h1 className="pt-32 text-center text-5xl">Projects</h1>
+      <p className="p-1 text-center text-lg">
         Projects I&apos;ve worked on, either for work, university or personal.
       </p>
-      <div className="flex flex-col gap-3 max-w-xl mx-auto p-8">
+      <div className="mx-auto flex max-w-xl flex-col gap-3 p-8">
         {projects.map((project, i) => (
           <Card key={project.slug} className="bg-card/70">
             <Link
               href={`/projects/${project.slug}`}
-              className="p-5 flex flex-col gap-1"
+              className="flex flex-col gap-1 p-5"
             >
-              <h3 className="font-bold text-2xl">{project.title}</h3>
-              <div className="relative h-60 my-2">
+              <h3 className="text-2xl font-bold">{project.title}</h3>
+              <div className="relative my-2 h-60">
                 <Image
                   src={project.smallCover}
                   className="object-contain"
@@ -48,7 +48,7 @@ export default async function Page() {
                 />
               </div>
               <p className="text-lg">{project.summary}</p>
-              <ul className="list-none flex flex-wrap justify-end  mt-auto pt-2 gap-1  w-full">
+              <ul className="mt-auto flex w-full list-none  flex-wrap justify-end gap-1  pt-2">
                 {project.skills.map((skill) => (
                   <li key={skill}>
                     <Badge variant="outline" className="bg-muted">

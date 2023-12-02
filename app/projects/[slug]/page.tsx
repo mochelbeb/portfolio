@@ -27,17 +27,17 @@ export default async function Page({ params }: Props) {
 
   if (!existsSync(file))
     return (
-      <p className="text-center w-full mt-20 text-4xl">Project not Found</p>
+      <p className="mt-20 w-full text-center text-4xl">Project not Found</p>
     );
 
   const project = await readMdFile(file);
 
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (
-    <article className="max-w-3xl mx-auto px-4 mt-4 sm:mt-20 flex flex-col gap-3 text-lg">
-      <h1 className="text-4xl sm:text-5xl font-bold">{matter.title}</h1>
+    <article className="mx-auto mt-4 flex max-w-3xl flex-col gap-3 px-4 text-lg sm:mt-20">
+      <h1 className="text-4xl font-bold sm:text-5xl">{matter.title}</h1>
       <p>{matter.summary}</p>
-      <ul className="list-none flex flex-wrap justify-end  mt-auto pt-2 gap-1  w-full">
+      <ul className="mt-auto flex w-full list-none  flex-wrap justify-end gap-1  pt-2">
         {matter.skills.map((skill) => (
           <li key={skill}>
             <Badge variant="outline" className="bg-muted text-sm sm:text-lg">
@@ -50,12 +50,12 @@ export default async function Page({ params }: Props) {
         width={720}
         height={480}
         priority
-        className="rounded-md w-full mx-auto"
+        className="mx-auto w-full rounded-md"
         sizes="(max-width: 768px) 100vw, 70vw"
         src={matter.largeCover}
         alt="project's home page"
       />
-      <div className="p-10 max-w-full prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground">
+      <div className="prose prose-lg max-w-full p-10 dark:prose-invert prose-h2:text-3xl prose-p:text-foreground prose-img:rounded-sm sm:prose-h2:text-4xl">
         <MDXRemote {...project} />
       </div>
     </article>
