@@ -1,6 +1,7 @@
 "use client";
 import MDXComponents from "@/components/ui/md";
 import { MDXProvider } from "@mdx-js/react";
+import { Analytics } from "@vercel/analytics/react";
 import { ReactNode } from "react";
 import { Footer } from "../components/Footer";
 import "./globals.css";
@@ -17,6 +18,7 @@ export default function App({ children }: { children: ReactNode }) {
           </MDXProvider>
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
