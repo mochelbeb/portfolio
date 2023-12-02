@@ -6,7 +6,7 @@ module.exports = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "./public/md/**/*.md",
+    "./public/**/*.mdx",
   ],
   theme: {
     container: {
@@ -17,6 +17,16 @@ module.exports = {
       },
     },
     extend: {
+      typography: {
+        quoteless: {
+          css: {
+            "blockquote p:first-of-type::before": { content: "none" },
+            "blockquote p:first-of-type::after": { content: "none" },
+            "code::before": { content: "none" },
+            "code::after": { content: "none" },
+          },
+        },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

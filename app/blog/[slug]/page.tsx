@@ -11,13 +11,15 @@ import { serialize } from "next-mdx-remote/serialize";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
+//@ts-expect-error
+import codesandbox from "remark-codesandbox";
 import "../../md-code.css";
 type Props = {
   params: { slug: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const frontmatter = (
-    await readMdFile(getPublicPath(`md/blog/${params.slug}.md`)).catch((e) =>
+    await readMdFile(getPublicPath(`md/blog/${params.slug}.mdx`)).catch((e) =>
       console.error(e),
     )
   )?.frontmatter;
@@ -27,15 +29,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 export default async function Page({ params }: Props) {
-  const file = getPublicPath(`md/blog/${params.slug}.md`);
+  const file = getPublicPath(`md/blog/${params.slug}.mdx`);
   if (!existsSync(file))
-    return <p className="text-center w-full mt-20 text-4xl">Post not Found</p>;
+    return <p className="mt-20 w-full text-center text-4xl">Post not Found</p>;
 
   const fileContents = readFileSync(file, "utf8");
   const post = await serialize(fileContents, {
     parseFrontmatter: true,
     mdxOptions: {
       rehypePlugins: [rehypeCodeTitles, rehypePrism, rehypeSlug],
+      remarkPlugins: [[codesandbox, { mode: "button" }]],
     },
   });
 
@@ -43,8 +46,8 @@ export default async function Page({ params }: Props) {
 
   return (
     <ScrollProgress>
-      <article className="max-w-4xl mx-3 md:mx-auto p-4 md:p-10 mt-8 mb-4 flex flex-col gap-3 text-lg">
-        <h1 className="text-4xl sm:text-5xl font-bold">{matter.title}</h1>
+      <article className="mx-3 mb-4 mt-8 flex max-w-4xl flex-col gap-3 p-4 text-lg md:mx-auto md:p-10">
+        <h1 className="text-4xl font-bold sm:text-5xl">{matter.title}</h1>
         <p>
           <time
             className="text-base"
@@ -57,7 +60,7 @@ export default async function Page({ params }: Props) {
           </time>
           {matter.updatedAt && (
             <time
-              className="text-muted-foreground text-sm"
+              className="text-sm text-muted-foreground"
               dateTime={dayjs(matter.updatedAt).format("YYYY-MM-DD")}
             >
               {dayjs(matter.updatedAt).format(
@@ -66,12 +69,12 @@ export default async function Page({ params }: Props) {
             </time>
           )}
         </p>
-        <ul className="list-none flex flex-wrap justify-end pt-2 gap-1  w-full">
+        <ul className="flex w-full list-none flex-wrap justify-end gap-1  pt-2">
           {matter.tags.map((tag) => (
             <li key={tag}>
               <Badge
                 variant="outline"
-                className="capitalize bg-muted text-sm sm:text-lg"
+                className="bg-muted text-sm capitalize sm:text-lg"
               >
                 {tag}
               </Badge>
@@ -79,12 +82,12 @@ export default async function Page({ params }: Props) {
           ))}
         </ul>
         {matter.draft && (
-          <p className="text-yellow-300 text-3xl text-center">
+          <p className="text-center text-3xl text-yellow-300">
             The post is currently a draft
           </p>
         )}
         {(!matter.draft || process.env.NODE_ENV === "development") && (
-          <div className="max-w-full md:prose-lg prose prose-h2:text-3xl sm:prose-h2:text-4xl prose-img:rounded-sm dark:prose-invert prose-p:text-foreground prose-a:visited:text-purple-200 prose-ul:ml-0">
+          <div className="prose-quoteless prose max-w-full dark:prose-invert md:prose-lg prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-img:rounded-sm sm:prose-h2:text-4xl">
             <MDXRemote {...post} />
           </div>
         )}

@@ -14,7 +14,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const title = (
-    await readMdFile(getPublicPath(`md/projects/${params.slug}.md`)).catch(
+    await readMdFile(getPublicPath(`md/projects/${params.slug}.mdx`)).catch(
       (e) => console.error(e),
     )
   )?.frontmatter.title;
@@ -23,7 +23,7 @@ export async function generateMetadata(
   };
 }
 export default async function Page({ params }: Props) {
-  const file = getPublicPath(`md/projects/${params.slug}.md`);
+  const file = getPublicPath(`md/projects/${params.slug}.mdx`);
 
   if (!existsSync(file))
     return (

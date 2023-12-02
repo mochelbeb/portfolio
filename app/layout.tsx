@@ -10,7 +10,7 @@ import AppBar from "./layout/AppBar";
 export default function App({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className="dark bg-background flex flex-col h-full min-h-screen w-full overflow-y-auto overflow-x-hidden">
+      <body className="dark flex h-full min-h-screen w-full flex-col overflow-y-auto overflow-x-hidden bg-background">
         <main className="flex-1">
           <MDXProvider components={MDXComponents}>
             <AppBar />

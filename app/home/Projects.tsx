@@ -26,27 +26,26 @@ export const Projects: FC<ProjectsProps> = async ({}) => {
     .sort((a, b) => a.rank - b.rank);
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="text-4xl my-2">Projects</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 justify-center">
+      <h2 className="my-2 text-4xl">Projects</h2>
+      <div className="grid grid-cols-1 justify-center gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {parsed.map((project, index) => (
           <Card key={index} className="overflow-hidden">
             <Link
               href={`/projects/${project.slug}`}
-              className="p-5 bg-card/70 flex flex-col gap-1"
+              className="flex flex-col gap-1 bg-card/70 p-5"
             >
-              <h3 className="font-bold text-2xl">{project.title}</h3>
-              <div className="relative h-60 my-2">
+              <h3 className="text-2xl font-bold">{project.title}</h3>
+              <div className="relative my-2 h-60">
                 <Image
                   src={project.smallCover}
                   className="object-contain"
                   fill
                   alt="project logo"
-                  priority
                   sizes="(max-width: 360px) 100vw, (max-width: 1000px) 50vw, 30vw"
                 />
               </div>
               <p className="text-lg">{project.summary}</p>
-              <ul className="list-none flex flex-wrap justify-end  mt-auto pt-2 gap-1  w-full">
+              <ul className="mt-auto flex w-full list-none  flex-wrap justify-end gap-1  pt-2">
                 {project.skills.map((skill) => (
                   <li key={skill}>
                     <Badge variant="outline" className="bg-muted">
@@ -61,7 +60,7 @@ export const Projects: FC<ProjectsProps> = async ({}) => {
       </div>
       <Link
         href="/projects"
-        className="mx-auto py-2 px-4 rounded-lg bg-card hover:bg-accent"
+        className="mx-auto rounded-lg bg-card px-4 py-2 hover:bg-accent"
       >
         View All Projects <ArrowRight className="inline-block" />
       </Link>

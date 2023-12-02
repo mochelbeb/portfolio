@@ -7,6 +7,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Blog | Islam Naasani",
+  description:
+    "My personal Blog, I write about problems I've faced or new things I've learned.",
 };
 export default async function Page() {
   const files = readdirSync(getPublicPath("md/blog"), "utf8");
@@ -25,8 +27,8 @@ export default async function Page() {
     .sort((a, b) => (a.publishedAt > b.publishedAt ? 1 : -1));
   return (
     <>
-      <div className="text-2xl sm:text-3xl mx-12 flex flex-col items-center mt-32 my-20">
-        <h2 className="text-5xl sm:text-7xl mb-20">Blog</h2>
+      <div className="mx-12 my-20 mt-32 flex flex-col items-center text-2xl sm:text-3xl">
+        <h2 className="mb-20 text-5xl sm:text-7xl">Blog</h2>
         <ol className="list-disc">
           {parsed.map((post) => (
             <li key={post.slug}>

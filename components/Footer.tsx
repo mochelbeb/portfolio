@@ -6,7 +6,7 @@ import { ComponentPropsWithoutRef, FC } from "react";
 export type FooterProps = {};
 export const Footer: FC<FooterProps> = ({}) => {
   return (
-    <footer className="p-5 md:p-20 grid grid-cols-1 lg:grid-cols-3 justify-center gap-4 lg:gap-0 text-xl">
+    <footer className="grid grid-cols-1 justify-center gap-4 p-5 text-xl md:p-20 lg:grid-cols-3 lg:gap-0">
       <div className="flex flex-col gap-4">
         <h5 className="text-3xl">
           <Link href="/" className="hover:underline">
@@ -32,7 +32,7 @@ export const Footer: FC<FooterProps> = ({}) => {
         </ul>
       </div>
       <div className="order-1 md:order-none">
-        <div className="flex flex-wrap flex-row items-start justify-center gap-2 lg:mt-0 text-xl">
+        <div className="flex flex-row flex-wrap items-start justify-center gap-2 text-xl lg:mt-0">
           <FooterLink
             href={"https://github.com/I-3B"}
             gradientProps={{ className: "from-purple-800 to-purple-600" }}
@@ -40,7 +40,7 @@ export const Footer: FC<FooterProps> = ({}) => {
             <Github aria-label="GitHub" />
           </FooterLink>
           <FooterLink
-            gradientProps={{ className: "from-blue-400 to-blue-600" }}
+            gradientProps={{ className: "from-blue-900 to-blue-600" }}
             href={"https://www.linkedin.com/in/islam-nassani-994a32194"}
           >
             <Linkedin aria-label="LinkedIn" />
@@ -59,9 +59,9 @@ export const Footer: FC<FooterProps> = ({}) => {
           </FooterLink>
           <FooterLink
             href={"https://t.me/islam_naasani"}
-            gradientProps={{ className: "from-purple-800 to-blue-500" }}
+            gradientProps={{ className: "from-purple-800 to-blue-600" }}
           >
-            <Send aria-label="Telegram" className="pt-[2px] pr-1" />
+            <Send aria-label="Telegram" className="pr-1 pt-[2px]" />
           </FooterLink>
           <FooterLink
             href={"https://stackoverflow.com/users/14283533/i3b"}
@@ -95,15 +95,15 @@ export const FooterLink: FC<FooterLinkProps> = ({
   return (
     <Link
       {...props}
-      className="border-2 relative border-foreground rounded-full w-14 h-14 overflow-hidden [&:hover>.gradient]:bg-gradient-to-l [&:hover>.gradient]:opacity-100"
+      className="relative h-10 w-10 overflow-hidden rounded-sm [&:hover>.gradient]:bg-gradient-to-l [&:hover>.gradient]:opacity-100"
     >
       <div
         className={cn(
-          "gradient absolute -inset-1 animate-[spin_5s_ease-in-out_infinite] blur-sm opacity-0 transition-opacity",
+          "gradient absolute -inset-3 animate-[spin_5s_ease-in-out_infinite] opacity-0 blur-sm transition-opacity",
           gradientProps.className,
         )}
       />
-      <div className="absolute inset-0 z-10 flex [&>svg]:w-full [&>svg]:h-full m-2">
+      <div className="absolute inset-0 z-10 m-1.5 flex [&>svg]:h-full [&>svg]:w-full">
         {props.children}
       </div>
     </Link>
