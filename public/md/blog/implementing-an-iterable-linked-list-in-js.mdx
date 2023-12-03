@@ -1,0 +1,234 @@
+---
+title: Implementing an iterable linked list in JavaScript
+summary: Did you know that you can create your own iterable objects (can be used in a for...of loop) in JavaScript?
+tags: JavaScript,Data Structure
+publishedAt: 2023-12-03
+---
+
+**In this post we are going to build a linked list in JavaScript that is iterable, which means it can be used in a `for...of` or by anything that takes an iterable**
+
+{/* START doctoc generated TOC please keep comment here to allow auto update */}
+{/* DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE */}
+**Table of Contents** {/* generated with [DocToc](https://github.com/thlorenz/doctoc) */}
+
+- [Iterable](#iterable)
+- [Iterator](#iterator)
+- [Implementing the linked list](#implementing-the-linked-list)
+- [Making the linked list iterable](#making-the-linked-list-iterable)
+- [Conclusion](#conclusion)
+  - [Reference](#reference)
+
+{/* END doctoc generated TOC please keep comment here to allow auto update */}
+
+## Iterable
+
+To start off, what does iterable mean exactly?
+from [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol):
+
+> The iterable protocol allows JavaScript objects to define or customize their iteration behavior, such as what values are looped over in a `for...of` construct.
+
+Meaning anything that can be used by [APIs that accepts iterables](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#built-in_apis_accepting_iterables), e.g., `Array.from()` or [syntaxes that expects iterables](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#syntaxes_expecting_iterables), e.g. `for...of`
+
+So `Array` is an iterable, so is `Map`, you can find all the [built-in iterables here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#built-in_iterables).
+
+What makes a type or an object iterable? again from MDN:
+
+> In order to be iterable, an object must implement the `@@iterator` method, meaning that the object (or one of the objects up its prototype chain) must have a property with a `@@iterator` key which is available via constant `Symbol.iterator`
+
+So any object that have `[Symbol.iterator]` method implemented can be called iterable, cool!
+
+## Iterator
+
+Okay, we need a method named `[Symbol.iterator]` in our object to be iterable, but what should this method contain? it must return an object that implements a `next()` method that also return an object that implements the `IteratorResult` interface:
+
+```ts
+interface IteratorResult {
+  done?: boolean;
+  value?: any;
+}
+```
+
+Now that's a lot to take in, let's take a break and start implementing our linked list before making it iterable.
+
+## Implementing the linked list
+
+If you are not familiar with the term, linked list is a data structure that do the same things as arrays, storing a series of values, the difference is, instead of storing the elements in contiguous locations (a[0], a[1], ...) they are stored in different locations and each element (node) point to the address of the next element.
+
+this is a very basic implementation of a linked list:
+
+```js showLineNumbers
+class Node {
+  next = null;
+  constructor(value) {
+    this.value = value;
+  }
+}
+
+class LinkedList {
+  head = null;
+  last = null;
+  add(value) {
+    var node = new Node(value);
+    if (this.head == null) {
+      this.head = node;
+      this.last = node;
+    } else {
+      this.last.next = node;
+      this.last = this.last.next;
+    }
+  }
+}
+
+const list = new LinkedList();
+list.add(1);
+list.add(2);
+list.add(3);
+list.add(4);
+// list currently have 4 elements: 1 -> 2 -> 3 -> 4
+```
+
+Of course there is more methods in a linked list (find, remove...), you can read more about linked lists here: [Understanding the basics of Linked List](https://www.geeksforgeeks.org/what-is-linked-list/)
+
+## Making the linked list iterable
+
+Now, how to make our list iterable? let's first add the `[Symbol.iterator]` method:
+
+```js {14-17} showLineNumbers
+class LinkedList {
+  head = null;
+  last = null;
+  add(value) {
+    var node = new Node(value);
+    if (this.head == null) {
+      this.head = node;
+      this.last = node;
+    } else {
+      this.last.next = node;
+      this.last = this.last.next;
+    }
+  }
+  [Symbol.iterator]() {
+    // to implement
+  }
+}
+```
+
+This syntax may seem weird but you have probably already used it before:
+
+```js
+let variable = "key";
+const x = {
+  [variable]: "value",
+};
+console.log(x.key);
+// value
+```
+
+The method should be an iterator, so it needs to return an object that have a `next()` method which in turn should return an object that follows the `IteratorResult` interface:
+
+```js
+[Symbol.iterator]() {
+
+  return {
+    next: () => {
+      return { done: undefined, value: undefined }
+    },
+  };
+}
+```
+
+Now we will add the logic: advance in the list and return the current node value until the current node becomes `null` then we will return `done: true`
+
+```js
+[Symbol.iterator]() {
+  let current = this.head;
+  return {
+    next: () => {
+      if (current != null) {
+        let currentValue = current.value;
+        current = current.next;
+        return {
+          value: currentValue,
+          done: false,
+        };
+      } else {
+        return { value: undefined, done: true };
+      }
+    },
+  };
+}
+```
+
+And now we have an iterable linked list!
+
+full implementation, you can also play with it in the sandbox:
+
+```js showLineNumbers codesandbox=new?hidenavigation=1
+class Node {
+  next = null;
+  constructor(value) {
+    this.value = value;
+  }
+}
+
+class LinkedList {
+  head = null;
+  last = null;
+  add(value) {
+    var node = new Node(value);
+    if (this.head == null) {
+      this.head = node;
+      this.last = node;
+    } else {
+      this.last.next = node;
+      this.last = this.last.next;
+    }
+  }
+  [Symbol.iterator]() {
+    let current = this.head;
+    return {
+      next: () => {
+        if (current != null) {
+          let currentValue = current.value;
+          current = current.next;
+          return {
+            value: currentValue,
+            done: false,
+          };
+        } else {
+          return { value: undefined, done: true };
+        }
+      },
+    };
+  }
+}
+
+const list = new LinkedList();
+list.add(1);
+list.add(2);
+list.add(3);
+list.add(4);
+
+console.log(...list);
+// 1 2 3 4
+
+console.log(Array.from(list));
+// [1, 2, 3, 4]
+
+for (const element of list) {
+  console.log(element);
+}
+// 1
+// 2
+// 3
+// 4
+```
+
+## Conclusion
+
+We've seen how iteration protocols aren't something built-in or a syntax from the language, but are just that, protocols, hence we can benefit from them by implementing them in data structures and classes written by us, as we've achieved by modifying the `LinkedList` class to be able to work with APIs and syntaxes that take iterables (`for...of`).
+
+### Reference
+
+- [Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+- [Understanding the basics of Linked List](https://www.geeksforgeeks.org/what-is-linked-list/)
