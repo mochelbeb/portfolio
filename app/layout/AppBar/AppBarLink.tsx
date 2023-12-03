@@ -31,7 +31,7 @@ export const AppBarLink: FC<LinkProps> = ({ item, origin, isDragging }) => {
     <Link
       href={item.href}
       className={cn(
-        "pointer-events-auto border-y-2 border-solid border-transparent",
+        "pointer-events-auto flex justify-center border-y-2 border-solid border-transparent text-center",
         (origin === "right" || origin === "left") && "py-1.5",
         isDragging && "pointer-events-none",
       )}

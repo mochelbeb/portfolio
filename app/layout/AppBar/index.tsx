@@ -30,13 +30,15 @@ export const AppBar = ({}: AppBarProps) => {
   const handleOriginChange = (_: Event, info: PanInfo) => {
     if (!info) return;
     const y = info.point.y - window.scrollY;
-    if (info.point.x < screenRect.width / 4) {
-      animationControls.start("draggingVertical");
-      setOrigin("left");
-    } else if (info.point.x > (3 * screenRect.width) / 4) {
-      animationControls.start("draggingVertical");
-      setOrigin("right");
-    } else if (y < screenRect.height / 2) {
+    // FIXME text flowing out
+    // if (info.point.x < screenRect.width / 4) {
+    //   animationControls.start("draggingVertical");
+    //   setOrigin("left");
+    // } else if (info.point.x > (3 * screenRect.width) / 4) {
+    //   animationControls.start("draggingVertical");
+    //   setOrigin("right");
+    // } else
+    if (y < screenRect.height / 2) {
       animationControls.start("draggingHorizontal");
       setOrigin("top");
     } else if (y > screenRect.height / 2) {
@@ -102,7 +104,7 @@ export const AppBar = ({}: AppBarProps) => {
   return (
     <motion.nav
       ref={ref}
-      className="pointer-events-none fixed z-50 flex w-fit justify-center gap-2 rounded-3xl bg-card/80 p-4 opacity-0"
+      className="pointer-events-none fixed z-50 flex w-fit justify-center gap-2 rounded-3xl bg-card p-4 opacity-0"
       drag
       style={navVariants[storedOrigin]}
       draggable

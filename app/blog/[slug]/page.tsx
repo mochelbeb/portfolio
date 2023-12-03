@@ -46,7 +46,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <ScrollProgress>
-      <article className="mx-3 mb-4 mt-8 flex max-w-4xl flex-col gap-3 p-4 text-lg md:mx-auto md:p-10">
+      <article className="mx-3 mb-4 mt-20 flex max-w-4xl flex-col gap-3 p-4 text-lg md:mx-auto md:p-10">
         <h1 className="text-4xl font-bold sm:text-5xl">{matter.title}</h1>
         <p>
           <time
@@ -56,7 +56,7 @@ export default async function Page({ params }: Props) {
             )}`}
             dateTime={dayjs(matter.publishedAt).format("YYYY-MM-DD")}
           >
-            {dayjs(matter.publishedAt).format("MMMM DD[th], YYYY")}
+            {dayjs(matter.publishedAt).format("MMM DD[th], YYYY")}
           </time>
           {matter.updatedAt && (
             <time
@@ -64,7 +64,7 @@ export default async function Page({ params }: Props) {
               dateTime={dayjs(matter.updatedAt).format("YYYY-MM-DD")}
             >
               {dayjs(matter.updatedAt).format(
-                " ([Last updated at] MMMM DD[th], YYYY)",
+                " ([Last updated at] MMM DD[th], YYYY)",
               )}
             </time>
           )}
