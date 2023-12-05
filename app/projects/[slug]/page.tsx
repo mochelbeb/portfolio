@@ -16,7 +16,7 @@ type Props = {
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const file = lookupPublicFile(
-    getPublicPath(`projects/${params.slug}`),
+    getPublicPath(`content/projects/${params.slug}`),
     "mdx",
   );
   if (!file) {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function Page({ params }: Props) {
   const file = lookupPublicFile(
-    getPublicPath(`projects/${params.slug}`),
+    getPublicPath(`content/projects/${params.slug}`),
     "mdx",
   );
 
@@ -46,19 +46,21 @@ export default async function Page({ params }: Props) {
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (
     <PageViewIncrementor>
-      <article className="mx-auto mt-4 flex max-w-3xl flex-col gap-3 px-4 text-lg sm:mt-20">
+      <article className="mx-auto mt-20 flex max-w-3xl flex-col gap-3 px-4 text-lg sm:mt-20">
         <h1 className="text-4xl font-bold sm:text-5xl">{matter.title}</h1>
         <p>{matter.summary}</p>
         <div className="flex flex-wrap items-end justify-between gap-2">
-          {Boolean(pageHits) && (
-            <p
-              title="Page hits"
-              className="flex justify-center gap-1 text-xs sm:text-base"
-            >
-              <span>{numberFormat(pageHits)}</span>
-              <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
-            </p>
-          )}
+          <p
+            title="Page hits"
+            className="flex justify-center gap-1 text-xs sm:text-base"
+          >
+            {Boolean(pageHits) && (
+              <>
+                <span>{numberFormat(pageHits)}</span>
+                <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
+              </>
+            )}
+          </p>
           <ul className="mt-auto flex list-none  flex-wrap justify-end gap-1  pt-2">
             {matter.skills.map((skill) => (
               <li key={skill}>
@@ -81,7 +83,7 @@ export default async function Page({ params }: Props) {
           src={matter.largeCover}
           alt="project's home page"
         />
-        <div className="prose prose-lg max-w-full p-10 dark:prose-invert prose-h2:text-3xl prose-p:text-foreground prose-img:rounded-sm sm:prose-h2:text-4xl">
+        <div className="prose prose-quoteless mt-4 max-w-full dark:prose-invert md:prose-lg prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-img:rounded-sm sm:prose-h2:text-4xl">
           <MDXRemote {...project} />
         </div>
       </article>

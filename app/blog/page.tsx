@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     "My personal Blog, I write about problems I've faced or new things I've learned.",
 };
 export default async function Page() {
-  const files = readdirSync(getPublicPath("blog"), "utf8");
+  const files = readdirSync(getPublicPath("content/blog"), "utf8");
   const parsed = (
     await Promise.all(
       files.map((file) =>
         readMdFile(
           lookupPublicFile(
-            getPublicPath(`blog/${file.split(".")[0]}`),
+            getPublicPath(`content/blog/${file.split(".")[0]}`),
             "mdx",
           ) ?? "",
         ),

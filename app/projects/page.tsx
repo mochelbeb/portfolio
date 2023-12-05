@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Projects | Islam Naasani",
 };
 export default async function Page() {
-  const publicPath = getPublicPath("projects");
+  const publicPath = getPublicPath("content/projects");
   const files = readdirSync(publicPath, "utf8");
   console.log(files);
 
@@ -36,7 +36,7 @@ export default async function Page() {
       <p className="p-1 text-center text-lg">
         Projects I&apos;ve worked on, either for work, university or personal.
       </p>
-      <div className="mx-auto flex max-w-xl flex-col gap-3 p-8">
+      <div className="mx-auto flex max-w-xl flex-col gap-3 p-3 sm:p-8">
         {projects.map((project, i) => (
           <Card key={project.slug} className="bg-card/70">
             <Link

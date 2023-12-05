@@ -12,13 +12,13 @@ import { ArrowRight } from "lucide-react";
 
 export type ProjectsProps = {};
 export const Projects: FC<ProjectsProps> = async ({}) => {
-  const files = readdirSync(getPublicPath("projects"), "utf8");
+  const files = readdirSync(getPublicPath("content/projects"), "utf8");
   const parsed = (
     await Promise.all(
       files.map((file) =>
         readMdFile(
           lookupPublicFile(
-            getPublicPath(`projects/${file.split(".")[0]}`),
+            getPublicPath(`content/projects/${file.split(".")[0]}`),
             "mdx",
           ) ?? "",
         ),

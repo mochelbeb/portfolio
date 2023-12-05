@@ -27,7 +27,7 @@ const numberFormat = new Intl.NumberFormat("en", { notation: "standard" })
   .format;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const frontmatter = (
-    await readMdFile(getPublicPath(`blog/${params.slug}.mdx`)).catch((e) =>
+    await readMdFile(getPublicPath(`content/blog/${params.slug}.mdx`)).catch((e) =>
       console.error(e),
     )
   )?.frontmatter;
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 export default async function Page({ params }: Props) {
-  const file = lookupPublicFile(getPublicPath(`blog/${params.slug}`), "mdx");
+  const file = lookupPublicFile(getPublicPath(`content/blog/${params.slug}`), "mdx");
   if (!file)
     return <p className="mt-20 w-full text-center text-4xl">Post not Found</p>;
 
