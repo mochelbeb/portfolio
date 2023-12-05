@@ -6,16 +6,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 
-import { getPublicPath } from "@/utils/utils";
+import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { projectMatterSchema } from "@/validation/project";
 import { ArrowRight } from "lucide-react";
 
 export type ProjectsProps = {};
 export const Projects: FC<ProjectsProps> = async ({}) => {
-  const files = readdirSync(getPublicPath("md/projects"), "utf8");
+  const files = readdirSync(getPublicPath("projects"), "utf8");
   const parsed = (
     await Promise.all(
-      files.map((file) => readMdFile(getPublicPath(`md/projects/${file}`))),
+      files.map((file) =>
+        readMdFile(
+          lookupPublicFile(
+            getPublicPath(`projects/${file.split(".")[0]}`),
+            "mdx",
+          ) ?? "",
+        ),
+      ),
     )
   )
     .map((md, i) => ({
