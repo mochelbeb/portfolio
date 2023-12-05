@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { readMdFile } from "@/utils/md";
-import { getPublicPath } from "@/utils/utils";
+import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { projectMatterSchema } from "@/validation/project";
 import { readdirSync } from "fs";
 import { Metadata } from "next";
@@ -12,10 +12,17 @@ export const metadata: Metadata = {
   title: "Projects | Islam Naasani",
 };
 export default async function Page() {
-  const files = readdirSync(getPublicPath("md/projects"), "utf8");
+  const publicPath = getPublicPath("projects");
+  const files = readdirSync(publicPath, "utf8");
+  console.log(files);
+
   const projects = (
     await Promise.all(
-      files.map((file) => readMdFile(getPublicPath(`md/projects/${file}`))),
+      files.map((file) =>
+        readMdFile(
+          lookupPublicFile(`${publicPath}/${file.split(".")[0]}`, "mdx") ?? "",
+        ),
+      ),
     )
   )
     .map((md, i) => ({
