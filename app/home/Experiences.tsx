@@ -109,6 +109,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
                   {humanizeDuration(dayjs(exp.to ?? dayjs()).diff(exp.from), {
                     units: ["y", "mo"],
                     maxDecimalPoints: 0,
+                    round: true,
                   })}
                 </>
               )}
