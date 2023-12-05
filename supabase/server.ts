@@ -19,5 +19,5 @@ export const createServerSupabase = () => {
 export async function getPageHits(path: string) {
   const supabase = createServerSupabase();
   return (await supabase.from("page_hits").select().eq("path", path)).data?.[0]
-    .hits as number;
+    ?.hits as number;
 }
