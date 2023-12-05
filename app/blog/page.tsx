@@ -1,5 +1,5 @@
 import { readMdFile } from "@/utils/md";
-import { getPublicPath } from "@/utils/utils";
+import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { blogMatterSchema } from "@/validation/blog";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -13,10 +13,17 @@ export const metadata: Metadata = {
     "My personal Blog, I write about problems I've faced or new things I've learned.",
 };
 export default async function Page() {
-  const files = readdirSync(getPublicPath("md/blog"), "utf8");
+  const files = readdirSync(getPublicPath("blog"), "utf8");
   const parsed = (
     await Promise.all(
-      files.map((file) => readMdFile(getPublicPath(`md/blog/${file}`))),
+      files.map((file) =>
+        readMdFile(
+          lookupPublicFile(
+            getPublicPath(`blog/${file.split(".")[0]}`),
+            "mdx",
+          ) ?? "",
+        ),
+      ),
     )
   )
     .map((md, i) => ({

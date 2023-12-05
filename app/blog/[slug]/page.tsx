@@ -4,11 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { getPageHits } from "@/supabase/server";
 import { readMdFile } from "@/utils/md";
-import { getPublicPath } from "@/utils/utils";
+import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { blogMatterSchema } from "@/validation/blog";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import { existsSync, readFileSync } from "fs";
+import { readFileSync } from "fs";
 import { Eye } from "lucide-react";
 import { Metadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
@@ -27,7 +27,7 @@ const numberFormat = new Intl.NumberFormat("en", { notation: "standard" })
   .format;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const frontmatter = (
-    await readMdFile(getPublicPath(`md/blog/${params.slug}.mdx`)).catch((e) =>
+    await readMdFile(getPublicPath(`blog/${params.slug}.mdx`)).catch((e) =>
       console.error(e),
     )
   )?.frontmatter;
@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 export default async function Page({ params }: Props) {
-  const file = getPublicPath(`md/blog/${params.slug}.mdx`);
-  if (!existsSync(file))
+  const file = lookupPublicFile(getPublicPath(`blog/${params.slug}`), "mdx");
+  if (!file)
     return <p className="mt-20 w-full text-center text-4xl">Post not Found</p>;
 
   const fileContents = readFileSync(file, "utf8");
