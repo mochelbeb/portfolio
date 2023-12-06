@@ -1,11 +1,13 @@
 ---
 title: Implementing an iterable linked list in JavaScript
-summary: Did you know that you can create your own iterable objects (can be used in a for...of loop) in JavaScript?
-tags: JavaScript,Data Structure
+summary: Did you know that you can create your own iterable objects (can be used with spread operator (...)) in JavaScript?
+tags: JavaScript,Iteration
 publishedAt: 2023-12-03
 ---
 
-**In this post we are going to build a linked list in JavaScript that is iterable, which means it can be used in a `for...of` or by anything that takes an iterable**
+**In this post we are going to build a linked list in JavaScript that is iterable, which means it can be used in a `for...of` or with the spread operator (...) or by anything that takes an iterable**
+
+<hr />
 
 {/* START doctoc generated TOC please keep comment here to allow auto update */}
 {/* DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE */}
@@ -31,7 +33,7 @@ Meaning anything that can be used by [APIs that accepts iterables](https://devel
 
 So `Array` is an iterable, so is `Map`, you can find all the [built-in iterables here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#built-in_iterables).
 
-What makes a type or an object iterable? again from MDN:
+But what makes an object iterable? again from MDN:
 
 > In order to be iterable, an object must implement the `@@iterator` method, meaning that the object (or one of the objects up its prototype chain) must have a property with a `@@iterator` key which is available via constant `Symbol.iterator`
 
@@ -52,9 +54,9 @@ Now that's a lot to take in, let's take a break and start implementing our linke
 
 ## Implementing the linked list
 
-If you are not familiar with the term, linked list is a data structure that do the same things as arrays, storing a series of values, the difference is, instead of storing the elements in contiguous locations (a[0], a[1], ...) they are stored in different locations and each element (node) point to the address of the next element.
+If you aren't familiar with the term, linked list is a data structure that do the same things as arrays——storing a series of values——the difference is, instead of storing the elements in contiguous locations (a[0], a[1], ...) they are stored in different locations and each element (node) point to the address of the next element.
 
-this is a very basic implementation of a linked list:
+This is a very basic implementation of a linked list:
 
 ```js showLineNumbers
 class Node {
@@ -232,3 +234,5 @@ We've seen how iteration protocols aren't something built-in or a syntax from th
 
 - [Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 - [Understanding the basics of Linked List](https://www.geeksforgeeks.org/what-is-linked-list/)
+
+<hr />
