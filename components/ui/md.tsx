@@ -17,13 +17,13 @@ const Strong = (strong: React.JSX.IntrinsicElements["strong"]) => (
 );
 
 const OL = (p: React.JSX.IntrinsicElements["ol"]) => (
-  <ol className="my-3 ml-6 list-decimal" {...p} />
+  <ol className="list-decimal" {...p} />
 );
 const LI = (p: React.JSX.IntrinsicElements["li"]) => (
-  <li className="mb-1 leading-relaxed" {...p} />
+  <li className="leading-relaxed" {...p} />
 );
 const UL = (p: React.JSX.IntrinsicElements["ul"]) => (
-  <ul className="my-3 ml-6 list-disc" {...p} />
+  <ul className="list-disc" {...p} />
 );
 
 const Divider = (hr: React.JSX.IntrinsicElements["hr"]) => (
@@ -39,7 +39,7 @@ const Blockquote = ({
 }: JSX.IntrinsicElements["blockquote"]) => {
   return (
     <blockquote
-      className="shadow-inner-border relative flex border-l-purple-900 px-8 py-1 leading-6"
+      className="shadow-inner-border relative flex border-l-violet-900 px-4 py-1 leading-6"
       {...props}
     >
       <span className="relative block">{children}</span>
