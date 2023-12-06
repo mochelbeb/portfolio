@@ -14,8 +14,6 @@ export const metadata: Metadata = {
 export default async function Page() {
   const publicPath = getPublicPath("content/projects");
   const files = readdirSync(publicPath, "utf8");
-  console.log(files);
-
   const projects = (
     await Promise.all(
       files.map((file) =>

@@ -1,13 +1,15 @@
+import { PageHits } from "@/components/PageHits";
 import { PageViewIncrementor } from "@/components/PageViewIncrementor";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { MDXRemote } from "@/lib/MDXRemote";
-import { getPageHits } from "@/supabase/server";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { projectMatterSchema } from "@/validation/project";
 import { Eye } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
+import { Suspense } from "react";
 
 const numberFormat = new Intl.NumberFormat("en", { notation: "standard" })
   .format;
@@ -38,10 +40,7 @@ export default async function Page({ params }: Props) {
       <p className="mt-20 w-full text-center text-4xl">Project not Found</p>
     );
 
-  const [project, pageHits] = await Promise.all([
-    readMdFile(file),
-    getPageHits(`/projects/${params.slug}`),
-  ]);
+  const project = await readMdFile(file);
 
   const matter = projectMatterSchema.parse(project.frontmatter);
   return (
@@ -54,12 +53,11 @@ export default async function Page({ params }: Props) {
             title="Page hits"
             className="flex justify-center gap-1 text-xs sm:text-base"
           >
-            {Boolean(pageHits) && (
-              <>
-                <span>{numberFormat(pageHits)}</span>
-                <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
-              </>
-            )}
+            <Suspense fallback={<Skeleton className="my-auto h-4 w-8" />}>
+              <PageHits page={`/projects/${params.slug}`} />
+            </Suspense>
+
+            <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
           </p>
           <ul className="mt-auto flex list-none  flex-wrap justify-end gap-1  pt-2">
             {matter.skills.map((skill) => (

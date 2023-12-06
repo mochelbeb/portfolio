@@ -1,8 +1,9 @@
+import { PageHits } from "@/components/PageHits";
 import { PageViewIncrementor } from "@/components/PageViewIncrementor";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { MDXRemote } from "@/lib/MDXRemote";
-import { getPageHits } from "@/supabase/server";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { blogMatterSchema } from "@/validation/blog";
@@ -12,6 +13,7 @@ import { readFileSync } from "fs";
 import { Eye } from "lucide-react";
 import { Metadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import { Suspense } from "react";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
@@ -23,12 +25,10 @@ dayjs.extend(advancedFormat);
 type Props = {
   params: { slug: string };
 };
-const numberFormat = new Intl.NumberFormat("en", { notation: "standard" })
-  .format;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const frontmatter = (
-    await readMdFile(getPublicPath(`content/blog/${params.slug}.mdx`)).catch((e) =>
-      console.error(e),
+    await readMdFile(getPublicPath(`content/blog/${params.slug}.mdx`)).catch(
+      (e) => console.error(e),
     )
   )?.frontmatter;
   return {
@@ -37,21 +37,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 export default async function Page({ params }: Props) {
-  const file = lookupPublicFile(getPublicPath(`content/blog/${params.slug}`), "mdx");
+  const file = lookupPublicFile(
+    getPublicPath(`content/blog/${params.slug}`),
+    "mdx",
+  );
   if (!file)
     return <p className="mt-20 w-full text-center text-4xl">Post not Found</p>;
 
   const fileContents = readFileSync(file, "utf8");
-  const [post, pageHits] = await Promise.all([
-    serialize(fileContents, {
-      parseFrontmatter: true,
-      mdxOptions: {
-        rehypePlugins: [rehypeCodeTitles, rehypePrism, rehypeSlug],
-        remarkPlugins: [[codesandbox, { mode: "button" }]],
-      },
-    }),
-    getPageHits(`/blog/${params.slug}`),
-  ]);
+  const post = await serialize(fileContents, {
+    parseFrontmatter: true,
+    mdxOptions: {
+      rehypePlugins: [rehypeCodeTitles, rehypePrism, rehypeSlug],
+      remarkPlugins: [[codesandbox, { mode: "button" }]],
+    },
+  });
 
   const matter = blogMatterSchema.parse(post.frontmatter);
   return (
@@ -83,15 +83,15 @@ export default async function Page({ params }: Props) {
                 </time>
               )}
             </div>
-            {Boolean(pageHits) && (
-              <p
-                title="Page hits"
-                className="flex justify-center gap-1 text-xs sm:text-base"
-              >
-                <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
-                <span>{numberFormat(pageHits)}</span>
-              </p>
-            )}
+            <p
+              title="Page hits"
+              className="flex items-center justify-center gap-1 text-xs sm:text-base"
+            >
+              <Eye className="mb-auto h-4 w-4 sm:h-5 sm:w-5" />
+              <Suspense fallback={<Skeleton className="my-auto h-4 w-10" />}>
+                <PageHits page={`/blog/${params.slug}`} />
+              </Suspense>
+            </p>
           </div>
           <ul className="flex w-full list-none flex-wrap justify-end gap-1  pt-2">
             {matter.tags.map((tag) => (
