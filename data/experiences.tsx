@@ -113,7 +113,7 @@ export const EXPERIENCES: Experience[] = [
           I have had the opportunity to work with a great team on a huge
           project, which was a food delivery service called HumyApp it has been
           uploaded to the store and currently has over 10k users. I worked in
-          the front-end team building the admin dashboard.
+          the front-end team were we built the admin dashboard.
         </p>
         <p className="pt-1">
           Our work was mainly crafting complex forms and CRUD operations to
@@ -129,16 +129,16 @@ export const EXPERIENCES: Experience[] = [
     company: "CLICK Online",
     location: "Aleppo, Syria",
     from: "2022-12",
-    to: null,
+    to: "2023-12",
     description: (
       <>
         <p>
           {`CLICK Online is a product startup, I worked in the development team on two products.
            One is Safra Binakra which is a centralized platform for inland traveling,
-            I built the web version of the user app, which was a mobile-first PWA, and a dashboard for managing the platform.`}
+            I built the web version of the user application, which was a mobile-first PWA, and a dashboard for managing the platform.`}
         </p>
         <p className="pt-1">
-          {`The second is still underdevelopment, where I’m also building a web-version app
+          {`The second product is a management system for a university in Syria, which is still under development, where I also built a web-version app
            and a dashboard with role-based authorization system.`}
         </p>
       </>
