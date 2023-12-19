@@ -6,7 +6,7 @@ import { FC } from "react";
 export type HeaderProps = {};
 export const Header: FC<HeaderProps> = ({}) => {
   return (
-    <section className="min-h-[100vh] pt-[30vh] font-[cursive]">
+    <section className="min-h-[80vh] pt-[30vh] font-[cursive]">
       <motion.header className="flex flex-col items-center gap-1 text-center ">
         <motion.h1
           initial={{ y: 0, opacity: 1 }}
