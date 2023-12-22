@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { blogMatterSchema } from "@/validation/blog";
@@ -53,12 +54,26 @@ export default async function Page() {
                   {post.title}
                   {post.draft && " (draft)"}
                 </h2>
-                <time
-                  className="text-sm text-gray-300"
-                  dateTime={dayjs(post.publishedAt).format("YYYY-MM-DD")}
-                >
-                  {dayjs(post.publishedAt).format("MMM Do, YYYY")}
-                </time>
+                <div className="flex items-center gap-2 text-gray-300">
+                  <time
+                    className="text-sm"
+                    dateTime={dayjs(post.publishedAt).format("YYYY-MM-DD")}
+                  >
+                    {dayjs(post.publishedAt).format("MMM Do, YYYY")}
+                  </time>
+                  <span className="text-gray-400">•</span>
+                  <ul className="flex items-center gap-0.5">
+                    {post.tags.slice(0, 3).map((tag, i) => (
+                      <li key={tag}>
+                        <Badge variant="secondary" className="capitalize">
+                          {post.tags.length > 3 && i == 2
+                            ? `+${post.tags.length - 2}`
+                            : tag}
+                        </Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <p className="mt-2">{post.summary}</p>
               </Link>
             </li>
