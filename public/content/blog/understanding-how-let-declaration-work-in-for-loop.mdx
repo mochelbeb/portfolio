@@ -1,0 +1,106 @@
+---
+title: Understanding how let declaration work in for loop
+summary: You may have come across on a two code snippets comparing let and var declaration in for loops and the weird behavior of var... but is it really weird?
+tags: JavaScript,closure
+publishedAt: 2023-12-30
+---
+
+{/* START doctoc generated TOC please keep comment here to allow auto update */}
+{/* DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE */}
+**Table of Contents** {/* generated with [DocToc](https://github.com/thlorenz/doctoc) */}
+
+- [The Problem](#the-problem)
+- [A Deeper Look](#a-deeper-look)
+- [How let declaration works in loops](#how-let-declaration-works-in-loops)
+- [Wrapping Up](#wrapping-up)
+
+{/* END doctoc generated TOC please keep comment here to allow auto update */}
+
+## The Problem
+
+To start of, you probably come across this before:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), i * 100);
+}
+// 0
+// 1
+// 2
+```
+
+```js
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), i * 100);
+}
+// 3
+// 3
+// 3
+```
+
+And you may just thought that this was some of the quirks of `var` and why you should only use `let`, but what is actually happening here?
+
+## A Deeper Look
+
+While the code above is asynchronous, this issue isn't related to that, we can recreate it it in plain functions:
+
+```js
+let logs = [];
+for (var i = 0; i < 3; i++) {
+  logs[i] = () => console.log(i);
+}
+logs[0](); // 3
+logs[1](); // 3
+logs[2](); // 3
+```
+
+It's all about closure and how `let` and `var` behave inside `for`.
+
+Before continuing, a quick refresh of closure from [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures):
+
+> A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
+
+if closure is a new concept to you please read the previous [documentation page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) before continuing this post.
+
+Now back to our example, it looks like `let` behavior above is intuitive and expected at first look but it's actually the one behaving against what should happen from a closure perspective, because according to how closure works, all those functions (seems to) reference the same variable `i` (closure is a live link, not a snapshot of variables) which means that after finishing all the iterations `i` value is `3`, and it would make sense for each call after that to also log `3`, but that's not the case. To prove that, we are going to declare `i` outside the `for`:
+
+```js
+let i;
+for (i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), i * 100);
+}
+// 3
+// 3
+// 3
+```
+
+Hmmm... seems like this is related to the scope of `i`.
+
+## How let declaration works in loops
+
+At first glance, `i` in `for(let i = 0;...)` seems to be in an outer scope, not in the scope of the loop, but it's actually in the scope of the loop, it make sense to think about how `for` work like this:
+
+```js
+{
+  // a fictional variable for illustration
+  let $$i = 0;
+  for (; /* nothing */ $$i < 3; $$i++) {
+    // here's our actual loop `i`!
+    let i = $$i;
+    setTimeout(() => console.log(i), i * 100);
+  }
+  // 0
+  // 1
+  // 2
+}
+```
+
+Because `let` is block-scoped and it's in the scope of `for`, the variable `i` gets a new binding for each iteration, making it behave intuitively rather than what would you think would happen if you thought about `i` having only one binding.
+
+In contrast, `var` is function-scoped and using it inside `for` would still place it in the outer scope (global scope in the example), or placing `let` declaration outside of the `for` body, in both cases, we only get one binding and it is to be expected to get the last value of `i`, as variables from closure are a live link of their values, not a snapshot in time.
+
+## Wrapping Up
+
+While I don't think this gotcha would really cause any problems normally, as this what would you expect to happen when using `for` loops (in every iteration, `i` hold the same value (same binding) regardless of when it's executed) and nobody uses `var` anymore, not for loops at least, I still think it's good to understand how `let` work in and outside `for`, maybe for some reason you had to declare `i` outside of the `for` loop and got stuck on why it' holding the last `i` value.
+
+This post relied heavily on the incredible book: [**You Don't Know JS Yet: Scope & Closures** by **Kyle Simpson**](https://www.goodreads.com/book/show/52764087-you-don-t-know-js-yet), the book goes really deep into scope and closure, what are they, common pitfalls and how to benefit from them.
