@@ -6,16 +6,23 @@ import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { projectMatterSchema } from "@/validation/project";
+import { readdirSync } from "fs";
 import { Eye } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
+import path from "path";
 import { Suspense } from "react";
 
-const numberFormat = new Intl.NumberFormat("en", { notation: "standard" })
-  .format;
 type Props = {
   params: { slug: string };
 };
+export function generateStaticParams(): Props["params"][] {
+  const filesNames = readdirSync(getPublicPath("content/projects"), "utf8");
+  const slugs = filesNames.map((fileName) => ({
+    slug: path.parse(fileName).name,
+  }));
+  return slugs;
+}
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const file = lookupPublicFile(
     getPublicPath(`content/projects/${params.slug}`),

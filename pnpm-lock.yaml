@@ -110,8 +110,8 @@ devDependencies:
     specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.30)
   doctoc-mdx:
-    specifier: ^2.2.1
-    version: 2.2.1
+    specifier: ^2.2.2
+    version: 2.2.2
   husky:
     specifier: ^8.0.3
     version: 8.0.3
@@ -1955,8 +1955,8 @@ packages:
   /dlv@1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
 
-  /doctoc-mdx@2.2.1:
-    resolution: {integrity: sha512-U/Nb2m0tkCMEaGRpo5csb1NG2DM9a1017s6ra/LSbq0I218DXeiBfs3x40GWmzrtQv2rWYr+YL94mAdkjbEaMw==}
+  /doctoc-mdx@2.2.2:
+    resolution: {integrity: sha512-Hd25+UFqUWr7WHSwwxa95Pe+Op7EgO/eYAtqeiSfZNXbCB94oJwn+ugnzg9bHDQHQ8/2nwOlVRLJA64DskEy5Q==}
     hasBin: true
     dependencies:
       '@textlint/markdown-to-ast': 12.6.1

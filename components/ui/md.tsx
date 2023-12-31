@@ -112,7 +112,7 @@ const H2 = ({ className, ...props }: ComponentPropsWithoutRef<"h2">) => (
   <Heading
     as={"h2"}
     className={cn(
-      "font-display dark:text-primary-dark my-6 text-3xl font-bold leading-10 text-primary",
+      "font-display dark:text-primary-dark text-3xl font-bold leading-10 text-primary",
       className,
     )}
     {...props}

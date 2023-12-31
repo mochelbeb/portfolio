@@ -9,10 +9,11 @@ import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { blogMatterSchema } from "@/validation/blog";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import { readFileSync } from "fs";
+import { readFileSync, readdirSync } from "fs";
 import { Eye } from "lucide-react";
 import { Metadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import path from "path";
 import { Suspense } from "react";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
@@ -36,6 +37,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: frontmatter ? (frontmatter.summary as string) : "",
   };
 }
+export function generateStaticParams(): Props["params"][] {
+  const filesNames = readdirSync(getPublicPath("content/blog"), "utf8");
+  const slugs = filesNames.map((fileName) => ({
+    slug: path.parse(fileName).name,
+  }));
+  return slugs;
+}
+
 export default async function Page({ params }: Props) {
   const file = lookupPublicFile(
     getPublicPath(`content/blog/${params.slug}`),
@@ -111,7 +120,7 @@ export default async function Page({ params }: Props) {
             </p>
           )}
           {(!matter.draft || process.env.NODE_ENV === "development") && (
-            <div className="prose prose-quoteless mt-4 max-w-full dark:prose-invert md:prose-lg prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-img:rounded-sm sm:prose-h2:text-4xl">
+            <div className="prose prose-quoteless mt-4 max-w-full dark:prose-invert md:prose-lg prose-headings:mb-2 prose-headings:mt-7 prose-h2:mt-12 prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-img:rounded-sm sm:prose-h2:text-4xl">
               <MDXRemote {...post} />
             </div>
           )}
