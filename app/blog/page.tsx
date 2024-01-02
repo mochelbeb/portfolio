@@ -47,10 +47,10 @@ export default async function Page() {
           {parsed.map((post, i) => (
             <li key={post.slug}>
               {i !== 0 && (
-                <hr className="mb-5 h-0.5 rounded-sm bg-purple-200" />
+                <hr className="mb-5 h-1 rounded-lg border-none bg-foreground/5" />
               )}
               <Link href={`/blog/${post.slug}`}>
-                <h2 className="text-2xl text-violet-400">
+                <h2 className="text-2xl text-indigo-400">
                   {post.title}
                   {post.draft && " (draft)"}
                 </h2>

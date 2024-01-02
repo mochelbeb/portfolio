@@ -8,7 +8,7 @@ export const navigation = [
   {
     name: "Blog",
     href: "/blog",
-    color: "rgb(167 139 250)",
+    color: "rgb(99 102 241)",
     startWith: true,
   },
   {
