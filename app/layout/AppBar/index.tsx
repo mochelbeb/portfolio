@@ -104,7 +104,7 @@ export const AppBar = ({}: AppBarProps) => {
   return (
     <motion.nav
       ref={ref}
-      className="pointer-events-none fixed z-50 flex w-fit justify-center gap-2 rounded-3xl bg-card p-4 opacity-0"
+      className="pointer-events-none fixed z-50 flex gap-2 rounded-3xl bg-card p-4 opacity-0"
       drag
       style={navVariants[storedOrigin]}
       draggable
@@ -127,14 +127,13 @@ export const AppBar = ({}: AppBarProps) => {
       }}
       dragMomentum={false}
     >
-      {navigation.map((item, index) => (
-        <AppBarLink
-          item={item}
-          isDragging={isDragging}
-          key={index}
-          origin={origin}
-        />
-      ))}
+      <ul className="flex w-fit justify-center gap-2">
+        {navigation.map((item, index) => (
+          <li key={index}>
+            <AppBarLink item={item} isDragging={isDragging} origin={origin} />
+          </li>
+        ))}
+      </ul>
       <Grip
         role="button"
         className="pointer-events-auto m-auto h-6 w-6 text-muted-foreground"
