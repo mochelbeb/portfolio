@@ -1,7 +1,10 @@
 import { cn } from "@/lib/utils";
 import { Check, Copy } from "lucide-react";
+import NextImage, { ImageProps } from "next/image";
+import { usePathname } from "next/navigation";
 import {
   ComponentPropsWithoutRef,
+  NamedExoticComponent,
   forwardRef,
   memo,
   useEffect,
@@ -9,7 +12,8 @@ import {
   useState,
 } from "react";
 import { Button } from "./button";
-
+import { Divider } from "./divider";
+import { Link } from "./link";
 const P = (p: React.JSX.IntrinsicElements["p"]) => <p {...p} />;
 
 const Strong = (strong: React.JSX.IntrinsicElements["strong"]) => (
@@ -25,13 +29,7 @@ const LI = (p: React.JSX.IntrinsicElements["li"]) => (
 const UL = (p: React.JSX.IntrinsicElements["ul"]) => (
   <ul className="list-disc" {...p} />
 );
-
-const Divider = (hr: React.JSX.IntrinsicElements["hr"]) => (
-  <hr
-    className="dark:border-border-dark my-6 block border-b border-t-0 border-border"
-    {...hr}
-  />
-);
+const HR = (hr: React.JSX.IntrinsicElements["hr"]) => <Divider {...hr} />;
 const A = (a: React.JSX.IntrinsicElements["a"]) => <a target="_blank" {...a} />;
 const Blockquote = ({
   children,
@@ -162,19 +160,24 @@ const CodeBlock = ({
     }
   };
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setCopied(false);
     }, 2000);
-  });
+    return () => clearTimeout(timeoutId);
+  }, [copied]);
   return (
     <div className="relative">
       <Button
         variant={"ghost"}
         onClick={handleCopy}
-        className="absolute  end-1 top-7 flex items-center gap-1 bg-background/40 px-2 py-1 text-sm"
+        className="absolute end-2 top-2 hidden items-center gap-1 bg-background/30 px-2  text-sm hover:bg-background/60 sm:flex"
       >
-        {copied ? <Check /> : <Copy />}
-        {copied ? "Copied!" : "Copy"}
+        {copied ? (
+          <Check className="h-4 w-4 sm:h-5 sm:w-5" />
+        ) : (
+          <Copy className="h-4 w-4 sm:h-5 sm:w-5" />
+        )}
+        {copied ? "Copied!" : ""}
       </Button>
       <pre
         {...props}
@@ -188,7 +191,55 @@ const CodeBlock = ({
   );
 };
 
+const Image = memo(function FC({
+  className,
+  linkClassName,
+  ...props
+}: Omit<ImageProps, "src"> & { linkClassName: string; src: string }) {
+  const src = useContentSrc(props.src);
+
+  return (
+    <Link
+      href={src}
+      target="_blank"
+      className={cn(
+        "relative block aspect-video min-h-fit w-full",
+        linkClassName,
+      )}
+    >
+      <NextImage
+        fill
+        sizes="(max-width: 360px) 90vw, 80vw"
+        {...props}
+        src={src}
+        className={cn("!m-0 rounded-sm object-contain", className)}
+      />
+    </Link>
+  );
+});
+const Source = memo(function FC({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<"source">) {
+  const src = useContentSrc(props.src ?? "");
+  return <source {...props} src={src} />;
+});
+
+function useContentSrc(src: string) {
+  const pathname = usePathname();
+
+  // Check if the current path is a content one (currently content paths are "blog" and "projects")
+  const isContentPath = !!pathname.match(/^\/(blog|projects)\/(.*)$/)?.[0];
+
+  // Check if src is colocated ,doesn't start with a "." nor "/", e.g. "image.png"
+  const isColocatedSrc = !!src.toString().match(/^[^\.|^\/](.*)/)?.[0];
+  const isContentColocated = isContentPath && isColocatedSrc;
+  return isContentColocated ? `/content${pathname}/${src}` : src;
+}
 const MDXComponents = {
+  img: Image as NamedExoticComponent<ComponentPropsWithoutRef<"img">>,
+  Image,
+  Source,
   p: P,
   strong: Strong,
   blockquote: Blockquote,
@@ -200,8 +251,9 @@ const MDXComponents = {
   h3: H3,
   h4: H4,
   a: A,
-  hr: Divider,
+  hr: HR,
   code: Code,
+  Code: Code,
   pre: CodeBlock,
 };
 export default MDXComponents;
