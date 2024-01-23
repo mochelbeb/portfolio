@@ -231,8 +231,8 @@ function useContentSrc(src: string) {
   // Check if the current path is a content one (currently content paths are "blog" and "projects")
   const isContentPath = !!pathname.match(/^\/(blog|projects)\/(.*)$/)?.[0];
 
-  // Check if src is colocated ,doesn't start with a "." nor "/", e.g. "image.png"
-  const isColocatedSrc = !!src.toString().match(/^[^\.|^\/](.*)/)?.[0];
+  // Check if src is colocated ,doesn't start with a "." nor "/" nor "*://", e.g. "image.png"
+  const isColocatedSrc = src.toString().match(/^(?!(\.|\/|[a-zA-Z]+:\/\/)).*/);
   const isContentColocated = isContentPath && isColocatedSrc;
   return isContentColocated ? `/content${pathname}/${src}` : src;
 }
