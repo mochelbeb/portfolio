@@ -30,7 +30,9 @@ const UL = (p: React.JSX.IntrinsicElements["ul"]) => (
   <ul className="list-disc" {...p} />
 );
 const HR = (hr: React.JSX.IntrinsicElements["hr"]) => <Divider {...hr} />;
-const A = (a: React.JSX.IntrinsicElements["a"]) => <a target="_blank" {...a} />;
+const A = (a: React.JSX.IntrinsicElements["a"]) => (
+  <a target={a.href?.startsWith("#") ? "_self" : "_blank"} {...a} />
+);
 const Blockquote = ({
   children,
   ...props
