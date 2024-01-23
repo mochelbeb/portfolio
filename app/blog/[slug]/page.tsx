@@ -29,9 +29,10 @@ type Props = {
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const frontmatter = (
-    await readMdFile(getPublicPath(`content/blog/${params.slug}.mdx`)).catch(
-      (e) => console.error(e),
-    )
+    await readMdFile(
+      lookupPublicFile(getPublicPath(`content/blog/${params.slug}`), "mdx") ??
+        "",
+    ).catch((e) => console.error(e))
   )?.frontmatter;
   return {
     title: frontmatter ? `${frontmatter.title} | Blog` : "Post Not Found",
