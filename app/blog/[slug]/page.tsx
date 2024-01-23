@@ -2,6 +2,7 @@ import { PageHits } from "@/components/PageHits";
 import { PageViewIncrementor } from "@/components/PageViewIncrementor";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Badge } from "@/components/ui/badge";
+import { Divider } from "@/components/ui/divider";
 import { Skeleton } from "@/components/ui/skeleton";
 import { IS_DEVELOPMENT } from "@/constants/flags";
 import { MDXRemote } from "@/lib/MDXRemote";
@@ -109,7 +110,7 @@ export default async function Page({ params }: Props) {
               <li key={tag}>
                 <Badge
                   variant="outline"
-                  className="bg-muted text-sm capitalize sm:text-lg"
+                  className="bg-muted text-sm sm:text-lg"
                 >
                   {tag}
                 </Badge>
@@ -122,10 +123,11 @@ export default async function Page({ params }: Props) {
             </p>
           )}
           {(!matter.draft || IS_DEVELOPMENT) && (
-            <div className="prose prose-quoteless mt-4 max-w-full dark:prose-invert md:prose-lg prose-headings:mb-2 prose-headings:mt-7 prose-h2:mt-12 prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-img:rounded-sm sm:prose-h2:text-4xl">
+            <div className="prose prose-quoteless mt-4 max-w-full text-foreground dark:prose-invert md:prose-lg prose-headings:mb-2 prose-headings:mt-7 prose-h2:mt-12 prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-li:text-foreground prose-img:rounded-sm prose-hr:my-6 prose-hr:border-t-2 prose-hr:border-border  sm:prose-h2:text-4xl">
               <MDXRemote {...post} />
             </div>
           )}
+          <Divider />
         </article>
       </PageViewIncrementor>
     </ScrollProgress>
