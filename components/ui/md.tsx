@@ -190,13 +190,17 @@ const CodeBlock = ({
     </div>
   );
 };
-
+const imageBlacklist = ["https://codesandbox.io"];
 const Image = memo(function FC({
   className,
   linkClassName,
   ...props
 }: Omit<ImageProps, "src"> & { linkClassName: string; src: string }) {
   const src = useContentSrc(props.src);
+  if (imageBlacklist.some((url) => src.startsWith(url))) {
+    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+    return <img {...{ className, ...props }} />;
+  }
 
   return (
     <Link
