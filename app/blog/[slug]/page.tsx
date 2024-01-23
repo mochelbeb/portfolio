@@ -3,6 +3,7 @@ import { PageViewIncrementor } from "@/components/PageViewIncrementor";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { IS_DEVELOPMENT } from "@/constants/flags";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath, lookupPublicFile } from "@/utils/utils";
@@ -119,7 +120,7 @@ export default async function Page({ params }: Props) {
               The post is currently a draft
             </p>
           )}
-          {(!matter.draft || process.env.NODE_ENV === "development") && (
+          {(!matter.draft || IS_DEVELOPMENT) && (
             <div className="prose prose-quoteless mt-4 max-w-full dark:prose-invert md:prose-lg prose-headings:mb-2 prose-headings:mt-7 prose-h2:mt-12 prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-img:rounded-sm sm:prose-h2:text-4xl">
               <MDXRemote {...post} />
             </div>

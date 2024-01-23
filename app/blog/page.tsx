@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { IS_DEVELOPMENT } from "@/constants/flags";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { blogMatterSchema } from "@/validation/blog";
@@ -31,9 +32,7 @@ export default async function Page() {
       ...blogMatterSchema.parse(md.frontmatter),
       slug: files[i].split(".")[0],
     }))
-    .filter(
-      (post) => post.draft !== true || process.env.NODE_ENV === "development",
-    )
+    .filter((post) => post.draft !== true || IS_DEVELOPMENT)
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
   return (
     <>
@@ -65,7 +64,7 @@ export default async function Page() {
                   <ul className="flex items-center gap-0.5">
                     {post.tags.slice(0, 3).map((tag, i) => (
                       <li key={tag}>
-                        <Badge variant="secondary" className="capitalize">
+                        <Badge variant="secondary">
                           {post.tags.length > 3 && i == 2
                             ? `+${post.tags.length - 2}`
                             : tag}
