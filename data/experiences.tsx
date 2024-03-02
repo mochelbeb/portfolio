@@ -144,4 +144,16 @@ export const EXPERIENCES: Experience[] = [
       </>
     ),
   },
+  {
+    title: "Front-end Developer",
+    company: (
+      <Link target="_blank" href="https://studio20.my/">
+        Studio20
+      </Link>
+    ),
+    location: "Kuala Lumpur, Malaysia (Remote)",
+    from: "2024-2-1",
+    to: null,
+    description: <p>{``}</p>,
+  },
 ];
