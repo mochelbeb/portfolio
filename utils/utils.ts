@@ -7,7 +7,10 @@ export function getPublicPath(filePath: string) {
 export function lookupPublicFile(path: string, extension: string) {
   const isFile = existsSync(`${path}.${extension}`);
   const isIndex = existsSync(`${path}/index.${extension}`);
-  if (!isFile && !isIndex) throw new Error(`File not found: ${path}`);
+  if (!isFile && !isIndex) {
+    console.error(`File not found: ${path}`);
+    return;
+  }
 
   if (isIndex) {
     return `${path}/index.${extension}`;

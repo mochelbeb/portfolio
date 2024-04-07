@@ -54,7 +54,11 @@ export default async function Page({ params }: Props) {
     "mdx",
   );
   if (!file)
-    return <p className="mt-20 w-full text-center text-4xl">Post not Found</p>;
+    return (
+      <p className="mb-64 mt-32 w-full text-center text-4xl">
+        Post not Found...
+      </p>
+    );
 
   const fileContents = readFileSync(file, "utf8");
   const post = await serialize(fileContents, {
