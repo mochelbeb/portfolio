@@ -117,7 +117,7 @@ export const EXPERIENCES: Experience[] = [
         </p>
         <p className="pt-1">
           Our work was mainly crafting complex forms and CRUD operations to
-          manage all the the three applications (customer, driver, pioneer) such
+          manage all of the three applications (customer, driver, pioneer) such
           as reviewing new drivers and posting customized notifications. The
           dashboard also has a permission-based authorization system.
         </p>

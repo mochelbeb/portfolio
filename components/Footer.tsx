@@ -37,7 +37,7 @@ export const Footer: FC<FooterProps> = ({}) => {
           </FooterLink>
           <FooterLink
             gradientProps={{ className: "from-blue-900 to-blue-600" }}
-            href={"https://www.linkedin.com/in/islam-nassani-994a32194"}
+            href={"https://www.linkedin.com/in/islam-nassani"}
           >
             <Linkedin aria-label="LinkedIn" />
           </FooterLink>
