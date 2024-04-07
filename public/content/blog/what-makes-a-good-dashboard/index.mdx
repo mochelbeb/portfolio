@@ -1,0 +1,222 @@
+---
+title: What makes a good dashboard
+summary: Some tips that I believe can improve the UX for a dashboard application (or any app).
+tags: Front-end,React
+publishedAt: 2024-04-08
+---
+
+I've worked on a bunch of dashboard applications until now, and I found some aspects that kind of distinguish them from other applications:
+
+- Your user probably uses this app a lot, therefore efficiency and good UX matter more here, a small UX annoyance in an application you use casually will be 10x more annoying if use this app daily.
+- Dashboards are usually desktop-first in design, thus keyboard support should be first-class citizen in your app.
+- Data is dynamic, and changes very frequently, so you should be very careful with caching.
+
+I have a few tips that address the points above which improves the UX of a dashboard application, and any web app actually, but I think they are more relevant in a dashboard context, where UX is very crucial.
+
+{/* START doctoc generated TOC please keep comment here to allow auto update */}
+{/* DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE */}
+**Table of Contents** {/* generated with [DocToc](https://github.com/thlorenz/doctoc) */}
+
+- [State should be in the URL](#state-should-be-in-the-url)
+- [Keyboard navigation](#keyboard-navigation)
+  - [Accidentally removing the outline style](#accidentally-removing-the-outline-style)
+  - [Nesting clickables](#nesting-clickables)
+  - [Buttons should be buttons, links should be links](#buttons-should-be-buttons-links-should-be-links)
+- [Always have fresh data](#always-have-fresh-data)
+  - [Use a well-designed query keys system](#use-a-well-designed-query-keys-system)
+- [Conclusion](#conclusion)
+
+{/* END doctoc generated TOC please keep comment here to allow auto update */}
+
+## State should be in the URL
+
+I started with this one, because of how much I believe it's important and how often I see that it's not implemented.
+
+Because of the way the web is today, it's not enforced to make your URL hold any state, you can make a whole application with only one route! (please don't), but even if it's easier/less work not to implement it, it shouldn't be skipped over, as it's quite frustrating to be missing in any non-trivial application. Consider a simple search bar:
+
+<Image
+  src="searchbox.png"
+  alt="Searchbox with 'Ahmad' typed in"
+  linkClassName="aspect-[10]"
+/>
+
+The user is expecting a new change in the data so they keep refreshing the page, now if your url doesn't look like this `https://dashboard.example.com/customers?s=Ahmad`, the user will need to retype `Ahmad` each time... Also they cannot bookmark nor share a filter state, a page's tab, or a data table pagination position.
+
+Sometimes, it's challenging to put complex objects in the URL with the browser's `URLSearchParams` API, still it's more than enough for a lof of cases, and can help improve the UX with very little work done, if you're using [React router](https://reactrouter.com/en/main/hooks/use-search-params) or [Next.js](https://nextjs.org/docs/app/api-reference/functions/use-search-params), you can use `useSearchParams` hook and you will find something similar in every routing solution, which really won't feel different a lot of a normal `useState` most of the time.
+
+For more complex use cases, I believe Tanner Linsley's new library: [TanStack Router](https://tanstack.com/router/latest/docs/framework/react/guide/search-params) is the way to go, please check it out if you still haven't, it's just as great as [TanStack Query](https://tanstack.com/query/latest)!
+
+## Keyboard navigation
+
+In general, this is more critical for special needs users, but in a dashboard context, this is mostly needed when filling forms, which is very typical for a dashboard.
+
+In which I mean navigating elements with `Tab` keyboard's key, this shouldn't be hard to support this if you're using any respectable UI components library, they all come with this built-in, still there's some ways you can mess this up:
+
+### Accidentally removing the outline style
+
+This is necessary to indicate what element is currently being focused on, if this isn't visible (or hardly visible), keyboard navigation would be impossible.
+
+<div className="flex flex-row">
+  <Image
+    src="button-unfocused.png"
+    alt="An unfocused button"
+    linkClassName="aspect-[1.5]"
+  />
+  <Image
+    src="button-focused.png"
+    alt="A focused Button"
+    linkClassName="aspect-[1.5]"
+  />
+</div>
+
+<div className="flex flex-row">
+  <Image
+    src="input-unfocused.png"
+    alt="An unfocused button"
+    linkClassName="aspect-[4]"
+  />
+  <Image
+    src="input-focused.png"
+    alt="A focused Button"
+    linkClassName="aspect-[4]"
+  />
+</div>
+
+### Nesting clickables
+
+Common scenario is you want a link that looks like a button, so what you do is:
+
+```tsx
+<Link href="/...">
+  <Button>
+    A Link Button!
+  </Button>
+</Link>
+```
+
+First issue of this is that it's semantically incorrect, second is that it will break keyboard navigation, as the first tab you would focus on the link element, the second one you will focus on the button, now consider this for a page full of links that do that, not much fun.
+
+the fix for this is quite easy, just style the link with the button style, the result is exactly the same, all UI component libraries that I know of have this built in, [MUI](https://mui.com/material-ui/api/button-base/#button-base-prop-LinkComponent) for example:
+
+```tsx
+<Button LinkComponent={Link} href="/Login">
+  Login
+</Button>
+```
+
+or [shadcn/ui](https://ui.shadcn.com/docs/components/button#as-child):
+
+```tsx
+<Button asChild>
+  <Link href="/login">Login</Link>
+</Button>
+```
+
+for other situations that you're forced to do this, use [`tabindex="-1"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) for elements that shouldn't be navigable.
+
+### Buttons should be buttons, links should be links
+
+What is worse than having a link nested in a button? not having the link at all! I yet to find a justifiable reason to do:
+
+```tsx
+<Button onClick={() => navigate("/i-am-a-link-actually")}>
+  Button
+</Button>
+```
+
+There's a lot of issues with this, the most annoying for me:
+
+- I don't know where this button will take me (no url preview).
+  <Image
+    src="link-preview.png"
+    alt="A link hovered over with url preview"
+    linkClassName="aspect-[4]"
+  />
+- I can't open the link in a new page (`CTRL + Click`), which is really common to do (multitasking).
+
+The same goes for buttons you don't want to have a button styling, you should never use `<div />` as a button, there's always better alternatives, in MUI, for example, you can either:
+
+- Use [ButtonBase](https://mui.com/material-ui/api/button-base/) component.
+- Or if don't want any styling at all you can use `Box` component (and remove any unwanted styling):
+
+```tsx
+<Box component="button">Button</Box>
+```
+
+**NOTE**: you may be thinking why not just use `<button/>`, we can, but now we won't be able to access the library's styling system and theme.
+
+if you still need to use a div for some reason, at least make sure that it's tabbable (`tabindex="0"`) and there's a visual indication when the button is focused.
+
+## Always have fresh data
+
+Dashboards always have in common that the data is dynamic, it would be sensible to make sure that your data is always up-to-date and let the user have trust in your app, and not refresh the page after any action they do.
+
+if you're using [Tanstack query](https://tanstack.com/query/), that's a very good start! it comes with pretty good defaults, you won't need to do much to always have fresh data (and still have good caching implemented), but you still need to make good use of its features:
+
+### Use a well-designed query keys system
+
+I [posted about it](https://www.linkedin.com/posts/islam-nassani_react-reactquery-activity-7112692351617142786-JNup?utm_source=share&utm_medium=member_android) before, basically make it easy for yourself to find what queries to invalidate or refetch, if you usually throw your `useQuery`s around in your components with random query keys... I can assure you that you won't bother to do any invalidation, or if you do, you have to check what the keys for each query and type them manually, which is error-prone (or worse yet, just force a page refresh!), to avoid all that, just keep track of your query keys (or [tags](https://nextjs.org/docs/app/api-reference/functions/fetch#optionsnexttags) if you're using Next.js) in a type-safe way and allow invalidation to be done in a few keystrokes.
+
+One way to do it that I found pleasant to work with:
+
+```tsx:queries/pet.tsx
+import {
+  addPet,
+  deletePet,
+  findPetsByStatus,
+  getPetById,
+} from "@/services/pet";
+import { createQueryKeys } from "@lukemorales/query-key-factory";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+type PetFindByStatus = Parameters<typeof findPetsByStatus>;
+type PetDetailsParameters = Parameters<typeof getPetById>;
+export const petKeys = createQueryKeys("pet", {
+  findByStatus: (...params: PetFindByStatus) => ({
+    queryFn: findPetsByStatus(...params),
+    queryKey: [params],
+  }),
+  details: (...params: PetDetailsParameters) => ({
+    queryFn: getPetById(...params),
+    queryKey: [params],
+  }),
+});
+
+export const petQueries = {
+  useFindByStatus: (...params: PetFindByStatus) =>
+    useQuery({ ...petKeys.findByStatus(...params), staleTime: Infinity }),
+  useDetails: (...params: PetDetailsParameters) =>
+    useQuery(petKeys.details(...params)),
+
+  useAdd: () =>
+    useMutation({
+      mutationFn: addPet,
+    }),
+  useDelete: () => useMutation({ mutationFn: deletePet }),
+};
+
+```
+
+A new pet was added and we want to reflect that in our pets data table, we can invalidate the findByStatus query to do that like this:
+
+```tsx
+// for a specific pet status
+queryClient.invalidateQueries({
+  queryKey: petKeys.findByStatus({ status: ["available"] }).queryKey,
+});
+// the type of queryKey here is: readonly ["pet",
+// "findByStatus", [params: FindPetsByStatusParams, options?: RequestInit | undefined]]
+
+// ...or for all possible status
+queryClient.invalidateQueries({ queryKey: petKeys.findByStatus._def });
+// the type of queryKey here is: readonly ["pet", "findByStatus"]
+```
+
+Pretty cool right?
+
+**NOTE 1**: I'm using [orval.dev](https://orval.dev/) here to generate the API functions from the swagger spec, give it a look.
+**NOTE 2**: You may see the code above a little bit messy (a lot of `...` usage), and I kinda agree, I believe it can be better, but for now I think this is a good balance between productivity, readability and maintenance, I'm still in the process of improving this, so I might update this section in the future.
+
+## Conclusion
+
+These were a few pain points I found in some dashboard applications I worked on, and a most of them doesn't actually require a lot of effort from you, but still very easy to ignore, and would be hard to reverse after the codebase become large enough, so just be thoughtful from the start, and try to ensure they are addressed from the get-go!
