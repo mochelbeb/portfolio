@@ -1,17 +1,13 @@
-import { PageHits } from "@/components/PageHits";
 import { PageViewIncrementor } from "@/components/PageViewIncrementor";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
 import { getPublicPath, lookupPublicFile } from "@/utils/utils";
 import { projectMatterSchema } from "@/validation/project";
 import { readdirSync } from "fs";
-import { Eye } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import path from "path";
-import { Suspense } from "react";
 
 type Props = {
   params: { slug: string };
@@ -56,16 +52,15 @@ export default async function Page({ params }: Props) {
         <h1 className="text-4xl font-bold sm:text-5xl">{matter.title}</h1>
         <p>{matter.summary}</p>
         <div className="flex flex-wrap items-end justify-between gap-2">
-          <p
+          {/* <p
             title="Page hits"
             className="flex justify-center gap-1 text-xs sm:text-base"
           >
             <Suspense fallback={<Skeleton className="my-auto h-4 w-8" />}>
               <PageHits page={`/projects/${params.slug}`} />
             </Suspense>
-
             <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
-          </p>
+          </p> */}
           <ul className="mt-auto flex list-none  flex-wrap justify-end gap-1  pt-2">
             {matter.skills.map((skill) => (
               <li key={skill}>

@@ -1,9 +1,7 @@
-import { PageHits } from "@/components/PageHits";
 import { PageViewIncrementor } from "@/components/PageViewIncrementor";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Badge } from "@/components/ui/badge";
 import { Divider } from "@/components/ui/divider";
-import { Skeleton } from "@/components/ui/skeleton";
 import { IS_DEVELOPMENT } from "@/constants/flags";
 import { MDXRemote } from "@/lib/MDXRemote";
 import { readMdFile } from "@/utils/md";
@@ -12,11 +10,9 @@ import { blogMatterSchema } from "@/validation/blog";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { readFileSync, readdirSync } from "fs";
-import { Eye } from "lucide-react";
 import { Metadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
-import { Suspense } from "react";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
@@ -99,7 +95,7 @@ export default async function Page({ params }: Props) {
                 </time>
               )}
             </div>
-            <p
+            {/* <p
               title="Page hits"
               className="flex items-center justify-center gap-1 text-xs sm:text-base"
             >
@@ -107,7 +103,7 @@ export default async function Page({ params }: Props) {
               <Suspense fallback={<Skeleton className="my-auto h-4 w-10" />}>
                 <PageHits page={`/blog/${params.slug}`} />
               </Suspense>
-            </p>
+            </p> */}
           </div>
           <ul className="flex w-full list-none flex-wrap justify-end gap-1  pt-2">
             {matter.tags.map((tag) => (
