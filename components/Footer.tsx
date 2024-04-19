@@ -9,23 +9,25 @@ export const Footer: FC<FooterProps> = ({}) => {
     <footer className="grid grid-cols-1 justify-center gap-10 p-5 text-xl md:p-20 lg:grid-cols-3 lg:gap-0">
       <div className="flex flex-col gap-4">
         <h5 className="text-3xl font-semibold">Islam Naasani</h5>
-        <ul className="flex flex-col gap-4 ps-4">
-          <li>
-            <Link href={"/"} className="underline">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href={"/blog"} className="underline">
-              Blog
-            </Link>
-          </li>
-          <li>
-            <Link href={"/projects"} className="underline">
-              Projects
-            </Link>
-          </li>
-        </ul>
+        <nav>
+          <ul className="flex flex-col gap-4 ps-4">
+            <li>
+              <Link href={"/"} className="underline">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href={"/blog"} className="underline">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link href={"/projects"} className="underline">
+                Projects
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
       <div className="order-1 md:order-none">
         <div className="xs:gap-2 flex flex-row flex-wrap items-start justify-center text-xl lg:mt-0">

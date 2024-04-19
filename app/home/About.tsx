@@ -17,6 +17,7 @@ export const About: FC<AboutProps> = ({}) => {
         className=" float-right mx-4 my-1 aspect-square  w-[40%] max-w-xs cursor-pointer rounded-lg"
         alt="Islam's Profile Picture"
         width={500}
+        priority
         height={500}
       />
       <p>
@@ -28,8 +29,8 @@ export const About: FC<AboutProps> = ({}) => {
         >
           full-stack (MERN) course
         </Link>
-        . Throughout this comprehensive program, I delved into both front-end
-        and back-end domains, laying the foundation for my career in web
+        . Throughout this comprehensive program, I dived into both front-end and
+        back-end domains, laying the foundation for my career in web
         development.
       </p>
       <p>
@@ -38,9 +39,13 @@ export const About: FC<AboutProps> = ({}) => {
         to build robust software.
       </p>
       <p>
-        In 2022, I started working professionally as a front-end developer,
-        focusing my work on crafting usable and accessible web apps, mainly PWAs
-        (progressive web application).
+        In 2022, I started{" "}
+        <em className="not-italic">
+          working professionally as a front-end developer, focusing my work on
+          crafting usable and accessible web apps, mainly PWAs (progressive web
+          application)
+        </em>
+        .
       </p>
       <p>
         When I'm not coding, you'll often find me exploring new technologies or
@@ -60,10 +65,13 @@ export const About: FC<AboutProps> = ({}) => {
         <Link target="_blank" href="/blog">
           my blog
         </Link>
-        , I mainly talk about <strong>React</strong>,{" "}
-        <strong>TypeScript</strong> and <strong>JavaScript</strong>, if you're
-        interested, please do connect with me on LinkedIn or subscribe to my
-        newsletter here!
+        ,{" "}
+        <em className="not-italic">
+          I mainly talk about <strong>React</strong>,{" "}
+          <strong>TypeScript</strong> and <strong>JavaScript</strong>
+        </em>
+        , if you're interested, please do connect with me on LinkedIn or
+        subscribe to my newsletter here!
       </p>
     </section>
   );

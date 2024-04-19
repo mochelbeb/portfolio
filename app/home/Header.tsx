@@ -19,14 +19,14 @@ export const Header: FC<HeaderProps> = ({}) => {
         >
           Islam Naasani
         </motion.h1>
-        <motion.p
+        <motion.h2
           initial={{ y: 0, opacity: 1 }}
           whileInView={{ y: [20, 0], opacity: [0.3, 1] }}
           transition={{ type: "spring" }}
           className="w-fit select-none pt-1 text-2xl text-yellow-50 md:pt-5 md:text-5xl"
         >
-          Front-end Developer
-        </motion.p>
+          A Front-end Developer.
+        </motion.h2>
       </motion.header>
     </section>
   );
