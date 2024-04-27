@@ -31,7 +31,11 @@ const UL = (p: React.JSX.IntrinsicElements["ul"]) => (
 );
 const HR = (hr: React.JSX.IntrinsicElements["hr"]) => <Divider {...hr} />;
 const A = (a: React.JSX.IntrinsicElements["a"]) => (
-  <a target={a.href?.startsWith("#") ? "_self" : "_blank"} {...a} />
+  <a
+    target={a.href?.startsWith("#") ? "_self" : "_blank"}
+    {...a}
+    className={cn("visited:text-purple-300", a.className)}
+  />
 );
 const Blockquote = ({
   children,
