@@ -12,6 +12,7 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import { readFileSync, readdirSync } from "fs";
 import { Metadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import Script from "next/script";
 import path from "path";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
@@ -67,35 +68,36 @@ export default async function Page({ params }: Props) {
 
   const matter = blogMatterSchema.parse(post.frontmatter);
   return (
-    <ScrollProgress>
-      <PageViewIncrementor>
-        <article className="mx-3 mb-4 mt-20 flex max-w-4xl flex-col p-4 text-lg md:mx-auto md:p-10">
-          <h1 className="mb-4 text-4xl font-bold sm:text-5xl">
-            {matter.title}
-          </h1>
-          <div className="flex flex-wrap gap-2 sm:gap-3">
-            <div className="flex justify-center gap-0.5">
-              <time
-                className="text-xs sm:text-base"
-                title={`Published at ${dayjs(matter.publishedAt).format(
-                  "YYYY-MM-DD",
-                )}`}
-                dateTime={dayjs(matter.publishedAt).format("YYYY-MM-DD")}
-              >
-                {dayjs(matter.publishedAt).format("MMM Do, YYYY")}
-              </time>
-              {matter.updatedAt && (
+    <>
+      <ScrollProgress>
+        <PageViewIncrementor>
+          <article className="mx-3 mt-20 flex max-w-4xl flex-col p-4 text-lg md:mx-auto md:p-10">
+            <h1 className="mb-4 text-4xl font-bold sm:text-5xl">
+              {matter.title}
+            </h1>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              <div className="flex justify-center gap-0.5">
                 <time
-                  className="text-xs text-muted-foreground sm:text-sm"
-                  dateTime={dayjs(matter.updatedAt).format("YYYY-MM-DD")}
+                  className="text-xs sm:text-base"
+                  title={`Published at ${dayjs(matter.publishedAt).format(
+                    "YYYY-MM-DD",
+                  )}`}
+                  dateTime={dayjs(matter.publishedAt).format("YYYY-MM-DD")}
                 >
-                  {dayjs(matter.updatedAt).format(
-                    " ([Updated at] MMM Do, YYYY)",
-                  )}
+                  {dayjs(matter.publishedAt).format("MMM Do, YYYY")}
                 </time>
-              )}
-            </div>
-            {/* <p
+                {matter.updatedAt && (
+                  <time
+                    className="text-xs text-muted-foreground sm:text-sm"
+                    dateTime={dayjs(matter.updatedAt).format("YYYY-MM-DD")}
+                  >
+                    {dayjs(matter.updatedAt).format(
+                      " ([Updated at] MMM Do, YYYY)",
+                    )}
+                  </time>
+                )}
+              </div>
+              {/* <p
               title="Page hits"
               className="flex items-center justify-center gap-1 text-xs sm:text-base"
             >
@@ -104,32 +106,51 @@ export default async function Page({ params }: Props) {
                 <PageHits page={`/blog/${params.slug}`} />
               </Suspense>
             </p> */}
-          </div>
-          <ul className="flex w-full list-none flex-wrap justify-end gap-1  pt-2">
-            {matter.tags.map((tag) => (
-              <li key={tag}>
-                <Badge
-                  variant="outline"
-                  className="bg-muted text-sm sm:text-lg"
-                >
-                  {tag}
-                </Badge>
-              </li>
-            ))}
-          </ul>
-          {matter.draft && (
-            <p className="text-center text-3xl text-yellow-300">
-              The post is currently a draft
-            </p>
-          )}
-          {(!matter.draft || IS_DEVELOPMENT) && (
-            <div className="prose prose-quoteless mt-4 max-w-full text-foreground dark:prose-invert md:prose-lg prose-headings:mb-2 prose-headings:mt-7 prose-h2:mt-12 prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-li:text-foreground prose-img:rounded-sm prose-hr:my-6 prose-hr:border-t-2 prose-hr:border-border  sm:prose-h2:text-4xl">
-              <MDXRemote {...post} />
             </div>
-          )}
-          <Divider />
-        </article>
-      </PageViewIncrementor>
-    </ScrollProgress>
+            <ul className="flex w-full list-none flex-wrap justify-end gap-1  pt-2">
+              {matter.tags.map((tag) => (
+                <li key={tag}>
+                  <Badge
+                    variant="outline"
+                    className="bg-muted text-sm sm:text-lg"
+                  >
+                    {tag}
+                  </Badge>
+                </li>
+              ))}
+            </ul>
+            {matter.draft && (
+              <p className="text-center text-3xl text-yellow-300">
+                The post is currently a draft
+              </p>
+            )}
+            {(!matter.draft || IS_DEVELOPMENT) && (
+              <div className="prose prose-quoteless mt-4 max-w-full text-foreground dark:prose-invert md:prose-lg prose-headings:mb-2 prose-headings:mt-7 prose-h2:mt-12 prose-h2:text-3xl prose-p:my-2 prose-p:text-foreground prose-a:visited:text-purple-200 prose-blockquote:my-1 prose-ul:ml-0 prose-li:text-foreground prose-img:rounded-sm prose-hr:my-6 prose-hr:border-t-2 prose-hr:border-border  sm:prose-h2:text-4xl">
+                <MDXRemote {...post} />
+              </div>
+            )}
+            <Divider />
+          </article>
+        </PageViewIncrementor>
+      </ScrollProgress>
+      <div className="giscus mx-auto mb-4 max-w-3xl px-4" />
+      <Script
+        src="https://giscus.app/client.js"
+        data-repo="I-3B/portfolio"
+        data-repo-id="R_kgDOKeo5Cw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOKeo5C84Ce_Da"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossOrigin="anonymous"
+        async
+      />
+    </>
   );
 }
