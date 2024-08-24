@@ -3,6 +3,7 @@ title: What makes a good dashboard
 summary: Some tips that I believe can improve the UX for a dashboard application (or any app).
 tags: Front-end,React
 publishedAt: 2024-04-08
+updatedAt: 2024-08-24
 ---
 
 I've worked on a bunch of dashboard applications until now, and I found some aspects that kind of distinguish them from other applications:
@@ -216,6 +217,50 @@ Pretty cool right?
 
 **NOTE 1**: I'm using [orval.dev](https://orval.dev/) here to generate the API functions from the swagger spec, give it a look.
 **NOTE 2**: You may see the code above a little bit messy (a lot of `...` usage), and I kinda agree, I believe it can be better, but for now I think this is a good balance between productivity, readability and maintenance, I'm still in the process of improving this, so I might update this section in the future.
+
+> Update 2024-08-24
+> I started using [The Query Options API](https://tanstack.com/query/latest/docs/framework/react/guides/query-options) recently, and the type-safety that it provides is enough to adopt it. The previous code but using `queryOptions`:
+
+```tsx
+import {
+  addPet,
+  deletePet,
+  findPetsByStatus,
+  getPetById,
+} from "@/services/pet";
+import { createQueryKeys } from "@lukemorales/query-key-factory";
+import { queryOptions, useMutation } from "@tanstack/react-query";
+
+type PetFindByStatus = Parameters<typeof findPetsByStatus>;
+type PetDetailsParameters = Parameters<typeof getPetById>;
+export const petQueries = {
+  rootKey: () => ["pet"],
+  findByStatus: (
+    ...params: PetFindByStatus
+  ) =>
+    queryOptions({
+      queryKey: [...petQueries.rootKey(), "findByStatus", params],
+      queryFn: () => findPetsByStatus(...params),
+    }),
+  details: (
+    params: PetDetailsParameters,
+  ) =>
+    queryOptions({
+      queryKey: [...petQueries.rootKey(), "details", params],
+      queryFn: () => getPetById(params),
+    }),
+};
+
+export const petMutation = {
+  useAdd: () =>
+    useMutation({
+      mutationFn: addPet,
+    }),
+  useDelete: () => useMutation({ mutationFn: deletePet }),
+};
+```
+
+To read on why this is a better approach to write queries, check out [The Query Options API](https://tkdodo.eu/blog/the-query-options-api) by TkDodo.
 
 ## Conclusion
 
