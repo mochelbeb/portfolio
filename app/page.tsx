@@ -16,8 +16,10 @@ export default function Page() {
   return (
     <>
       <div className="flex flex-col gap-52 px-2 md:px-10">
-        <Header />
-        <About />
+        <div>
+          <Header />
+          <About />
+        </div>
         <Experiences />
         <Projects />
         <Skills />

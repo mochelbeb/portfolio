@@ -10,14 +10,14 @@ export const appBarVariants = ({ rect, screenRect }: ContainerVariantParams) =>
     top: {
       x: 0,
       y: 0,
-      left: (screenRect.width - rect.width) / 2,
+      left: (screenRect.width - rect.width + 10) / 2,
       top: 10,
       rotate: "0deg",
     },
     bottom: {
       x: 0,
       y: screenRect.height - rect.height - 10,
-      left: (screenRect.width - rect.width) / 2,
+      left: (screenRect.width - rect.width + 10) / 2,
       top: "unset",
       rotate: "0deg",
     },

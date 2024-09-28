@@ -26,7 +26,7 @@ export const Experiences: FC<ExperiencesProps> = ({}) => {
   });
   return (
     <section className="flex flex-col justify-center" ref={ref}>
-      <h2 className="mb-10 text-5xl">Career</h2>
+      <h2 className="mb-10 text-4xl">Career</h2>
       {[...EXPERIENCES].reverse().map((exp, i, arr) => (
         <motion.article key={i} className="grid grid-cols-11">
           <div
