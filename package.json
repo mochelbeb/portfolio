@@ -9,7 +9,7 @@
     "lint": "next lint",
     "supabase": "supabase",
     "prepare": "husky install",
-    "md-toc": "doctoc-mdx public --update-only"
+    "md-toc": "doctoc-mdx public --maxlevel=3 --update-only"
   },
   "dependencies": {
     "@mdx-js/react": "^2.3.0",

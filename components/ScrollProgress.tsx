@@ -18,7 +18,7 @@ export const ScrollProgress: FC<ScrollProgressProps> = forwardRef(function FC(
   return (
     <>
       <motion.div
-        className="fixed bottom-0 left-0 right-0 z-10 h-1.5 origin-[0%] bg-accent-foreground"
+        className="fixed bottom-0 left-0 right-0 z-10 h-1 origin-[0%] bg-accent-foreground"
         style={{ scaleX }}
       />
       <Slot
