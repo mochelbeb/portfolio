@@ -236,29 +236,29 @@ function Autocomplete<
 
 You can play around with the `Autocomplete` and see how it reflects the correct `value` type for each boolean prop
 
-> **NOTE**
->
-> You can notice that we're using `false` as a default value (`undefined` also works)
->
-> ```ts {3-5}
-> function Autocomplete<
->   Value,
->   Multiple extends boolean | undefined = false,
->   DisableClearable extends boolean | undefined = false,
->   FreeSolo extends boolean | undefined = false,
-> ({}: AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>) {
-> // ...
-> }
-> ```
->
-> This is needed because the generic parameters cannot be inferred if the props that they depend on are not defined,
-> it will only work if you pass `false` or `undefined` explicitly:
->
-> ```tsx
-> <Autocomplete multiple={false} />
-> ```
->
-> This why the default values are needed.
+**NOTE**
+
+You can notice that we're using `false` as a default value (`undefined` also works)
+
+```ts {3-5}
+function Autocomplete<
+  Value,
+  Multiple extends boolean | undefined = false,
+  DisableClearable extends boolean | undefined = false,
+  FreeSolo extends boolean | undefined = false,
+({}: AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo) {
+// ...
+}
+```
+
+This is needed because the generic parameters cannot be inferred if the props that they depend on are not defined,
+it will only work if you pass `false` or `undefined` explicitly:
+
+```tsx
+<Autocomplete multiple={false} />
+```
+
+This why the default values are needed.
 
 ## Deep Modules and Generics
 
