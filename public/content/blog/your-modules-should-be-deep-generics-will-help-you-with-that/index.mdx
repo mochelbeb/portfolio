@@ -1,0 +1,275 @@
+---
+title: "Your Modules Should be Deep, Generics Will Help You with That."
+summary: The best modules are deep ones, a lot of functionality hidden behind a simple interface. We will see how Generics can help us design such interfaces.
+tags: TypeScript
+publishedAt: 2025-02-20
+---
+
+{/* START doctoc generated TOC please keep comment here to allow auto update */}
+{/* DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE */}
+**Table of Contents** {/* generated with [DocToc](https://github.com/thlorenz/doctoc) */}
+
+- [How Generics Help You Design Simple Interfaces](#how-generics-help-you-design-simple-interfaces)
+- [Re-implementing AutocompleteProps](#re-implementing-autocompleteprops)
+  - [Value](#value)
+  - [Multiple](#multiple)
+  - [DisableClearable](#disableclearable)
+  - [FreeSolo](#freesolo)
+  - [Tying It all Together](#tying-it-all-together)
+- [Deep Modules and Generics](#deep-modules-and-generics)
+
+{/* END doctoc generated TOC please keep comment here to allow auto update */}
+First, what is meaning of a deep module? the term "Deep Module" is used by John Ousterhout in his book [_A Philosophy of Software Design_](https://www.goodreads.com/book/show/39996759-a-philosophy-of-software-design):
+
+> The best modules are those that provide powerful functionality yet have simple interfaces. I use the term deep to describe such modules.
+>
+> The best modules are deep: they have a lot of functionality hidden behind a simple interface. A deep module is a good abstraction because only a small fraction of its internal complexity is visible to its users.
+
+A good example of this is MUI's [Autocomplete](https://mui.com/material-ui/react-autocomplete/) component, the most basic usage of it is quite simple:
+
+```tsx
+<Autocomplete
+  options={top100Films}
+  value={film}
+  onChange={setFilm}
+  renderInput={(params) => <TextField {...params} label="Movie" />}
+/>
+```
+
+You probably should create your own `Autocomplete` wrapper component so you don't have to specify `renderInput` on every call,
+but still, the interface is quite simple, even though the capabilities of this component are quite huge and versatile (you can give [the documentation page](https://mui.com/material-ui/react-autocomplete/) a quick read to see what it supports).
+
+so where does Generics help? Say you want to support multiple selection, you can use [`multiple`](https://mui.com/material-ui/react-autocomplete/#multiple-values) prop for this:
+
+```tsx {6}
+<Autocomplete
+  options={top100Films}
+  value={film}
+  onChange={setFilm}
+  renderInput={(params) => <TextField {...params} label="Movie" />}
+  multiple
+/>
+```
+
+You will get the following type error:
+
+```log
+Type 'string' is not assignable to type 'string[]'.
+```
+
+this won't be possible to do without Generics (this specific case is also possible to do with [discrimination unions](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#discriminating-unions)),
+the idea is, you would like to have a simple interface, while also supporting all use cases with minimum **cognitive load**,
+your interface should help its users to provide all correct parameters without them needing to remember all details about the interface,
+and that's what Generics will help us with.
+
+## How Generics Help You Design Simple Interfaces
+
+To drive this home, what would this interface looks like without generics, I can think of two options:
+
+- Create another component, called `MultiAutocomplete` which only accepts array `value`, but now say you want to also have [`freeSolo`](https://mui.com/material-ui/react-autocomplete/#free-solo) so you have to create `FreeSoloMultiAutocomplete`.... you get the idea.
+- Don't bother with typing this and provide the value type as `string | string[]`, and you can see how complex the interface will become.
+
+With generics, by providing `multipe={true}`, it will reflect on other props, requiring the user to provide arrays for `value` prop, I find this interface to be a good example of advanced generic usage, simple yet powerful, we will try to re-implement this interface, bit by bit.
+
+## Re-implementing AutocompleteProps
+
+before we start the implementation, let's look at the library's generic signature:
+
+```tsx
+export interface AutocompleteProps<
+  Value,
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined,
+  FreeSolo extends boolean | undefined,
+  ChipComponent extends React.ElementType = ChipTypeMap['defaultComponent'],
+>
+```
+
+We can skip `ChipComponent` as we can't easily see how it will change the interface, let's go through each parameter one by one, we will also only observe their effects on `options` and `value` props for brevity.
+
+### Value
+
+the autocomplete value can be anything, so we won't use [generic constraints (`extends`)](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints) for the `Value` parameter:
+
+```ts
+interface AutocompleteProps<Value> {
+  options: ReadonlyArray<Value>;
+  value?: Value | null;
+}
+```
+
+> `ReadonlyArray` is needed so our component can accept [`readonly`](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#readonly-and-const) options.
+
+### Multiple
+
+If `true`, `value` must be an array and the menu will support multiple selections. the value of this parameter matches `multiple` prop:
+
+```ts {4}
+interface AutocompleteProps<Value, Multiple extends boolean | undefined> {
+  options: ReadonlyArray<Value>;
+  value?: Value | null;
+  multiple?: Multiple;
+}
+```
+
+Now, if `multiple={true}` then `value` should be an array, to achieve this we need [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html):
+
+```ts {3}
+interface AutocompleteProps<Value, Multiple extends boolean | undefined> {
+  options: ReadonlyArray<Value>;
+  value?: Multiple extends true ? Array<Value> : Value | null;
+  multiple?: Multiple;
+}
+```
+
+### DisableClearable
+
+If `true`, the input can't be cleared (can't be null). similarly to `Multiple` conditional type:
+
+```ts {9-11,13}
+interface AutocompleteProps<
+  Value,
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined,
+> {
+  options: ReadonlyArray<Value>;
+  value?: Multiple extends true
+    ? Value[]
+    : DisableClearable extends true
+      ? NonNullable<Value>
+      : Value | null;
+  multiple?: Multiple;
+  disableClearable?: DisableClearable;
+}
+```
+
+### FreeSolo
+
+If true, the user input is not bounded to the provided options and the user can type in anything,
+thus the type will become `Value | string`, how can we do this conditionally? it's possible to do it this way:
+
+```ts
+FreeSolo extends true ? Value | string : Value
+```
+
+Integrating with the interface:
+
+```ts {9, 11, 12}
+interface AutocompleteProps<
+  Value,
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined,
+  FreeSolo extends boolean | undefined,
+> {
+  options: ReadonlyArray<Value>;
+  value?: Multiple extends true
+    ? Array<FreeSolo extends true ? Value | string : Value>
+    : DisableClearable extends true
+      ? NonNullable<FreeSolo extends true ? Value | string : Value>
+      : (FreeSolo extends true ? Value | string : Value) | null;
+  multiple?: Multiple;
+  disableClearable?: DisableClearable;
+  freeSolo?: FreeSolo;
+}
+```
+
+Okay this doesn't look good, we probably should take `FreeSolo` condition to a separated utility type, a quick refresher:
+`Type | never` is the same as `Type`, we can make use of this:
+
+```ts {11, 13, 14}
+export type AutocompleteFreeSoloValueMapping<FreeSolo> =
+ FreeSolo extends true ? string : never;
+
+interface AutocompleteProps<
+  Value,
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined,
+  FreeSolo extends boolean | undefined,
+> {
+  options: ReadonlyArray<Value>;
+  value?: Multiple extends true
+    ? Array<Value | AutocompleteFreeSoloValueMapping<FreeSolo>>
+    : DisableClearable extends true
+      ? NonNullable<Value | AutocompleteFreeSoloValueMapping<FreeSolo>>
+      : Value | AutocompleteFreeSoloValueMapping<FreeSolo> | null;
+  multiple?: Multiple;
+  disableClearable?: DisableClearable;
+  freeSolo?: FreeSolo;
+}
+```
+
+a little bit better now... okay, it still looks pretty complex (nested ternaries are always hard to read) but again,
+this is something that's hidden inside your component,
+your users won't ever see this. It's part of the "internal complexity" that deep modules hides.
+
+### Tying It all Together
+
+```ts
+export type AutocompleteFreeSoloValueMapping<FreeSolo> =
+ FreeSolo extends true ? string : never;
+interface AutocompleteProps<
+  Value,
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined,
+  FreeSolo extends boolean | undefined,
+> {
+  options: ReadonlyArray<Value>;
+  value?: Multiple extends true
+    ? Array<Value | AutocompleteFreeSoloValueMapping<FreeSolo>>
+    : DisableClearable extends true
+      ? NonNullable<Value | AutocompleteFreeSoloValueMapping<FreeSolo>>
+      : Value | AutocompleteFreeSoloValueMapping<FreeSolo> | null;
+  multiple?: Multiple;
+  disableClearable?: DisableClearable;
+  freeSolo?: FreeSolo;
+}
+
+function Autocomplete<
+  Value,
+  Multiple extends boolean | undefined = false,
+  DisableClearable extends boolean | undefined = false,
+  FreeSolo extends boolean | undefined = false,
+>({}: AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>) {
+  // ...
+}
+```
+
+You can play around with the `Autocomplete` and see how it reflects the correct `value` type for each boolean prop
+
+> **NOTE**
+>
+> You can notice that we're using `false` as a default value (`undefined` also works)
+>
+> ```ts {3-5}
+> function Autocomplete<
+>   Value,
+>   Multiple extends boolean | undefined = false,
+>   DisableClearable extends boolean | undefined = false,
+>   FreeSolo extends boolean | undefined = false,
+> ({}: AutocompleteProps<Value, Multiple, DisableClearable, FreeSolo>) {
+> // ...
+> }
+> ```
+>
+> This is needed because the generic parameters cannot be inferred if the props that they depend on are not defined,
+> it will only work if you pass `false` or `undefined` explicitly:
+>
+> ```tsx
+> <Autocomplete multiple={false} />
+> ```
+>
+> This why the default values are needed.
+
+## Deep Modules and Generics
+
+Your module can be a component, a class, or even an utility function,
+you should always try to hide complexity and only ask your users for the minimum amount of parameters,
+while still allowing advanced usage if needed.
+
+Generics can help you reduce the cognitive load that your users may have in their attempt to provide valid parameters for advanced module usage,
+all without even running the code. It may seems like a waste of time just writing a type this complex,
+but if you're implementing something that is supposed to be used extensively and it needs to support multiple use-cases,
+then it may worth doing this investment, and I also claim that it can help you think more thoroughly about your module interface design
+(props in the case of components) and as a result design better interfaces.
+
+If you're interested, you can see the full type implementation for `AutocompleteProps` in [mui/material-ui](https://github.com/mui/material-ui/blob/master/packages/mui-material/src/Autocomplete/Autocomplete.d.ts) Github repository.
