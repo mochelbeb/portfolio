@@ -13,7 +13,7 @@ import { ArrowRight } from "lucide-react";
 export type ProjectsProps = {};
 export const Projects: FC<ProjectsProps> = async ({}) => {
   const files = readdirSync(getPublicPath("content/projects"), "utf8");
-  const parsed = (
+  let parsed = (
     await Promise.all(
       files.map((file) =>
         readMdFile(
@@ -31,6 +31,8 @@ export const Projects: FC<ProjectsProps> = async ({}) => {
     }))
     .filter((project) => project.featured !== undefined)
     .sort((a, b) => a.rank - b.rank);
+    
+  parsed = parsed.slice(0, 3);
   return (
     <section className="flex flex-col gap-3">
       <h2 className="my-2 text-4xl">Projects</h2>

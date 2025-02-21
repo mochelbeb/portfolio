@@ -6,7 +6,7 @@ import { FC } from "react";
 export type HeaderProps = {};
 export const Header: FC<HeaderProps> = ({}) => {
   return (
-    <section className="pt-[10vh] font-[cursive]">
+    <section className="pt-[12vh] font-[cursive]">
       <motion.header className="flex flex-col gap-1 ">
         <motion.h1
           initial={{ y: 0, opacity: 1 }}
@@ -17,7 +17,7 @@ export const Header: FC<HeaderProps> = ({}) => {
           dragMomentum
           dragSnapToOrigin
         >
-          Islam Naasani
+          🚀 Chelbeb Mohamed Islam
         </motion.h1>
       </motion.header>
     </section>

@@ -42,7 +42,7 @@ export default async function Page() {
           {`My personal Blog, I write about problems I've faced or new things
           I've learned.`}
         </p>
-        <ol className="mt-10 flex flex-col gap-5">
+        {/* <ol className="mt-10 flex flex-col gap-5">
           {parsed.map((post, i) => (
             <li key={post.slug}>
               {i !== 0 && (
@@ -77,7 +77,8 @@ export default async function Page() {
               </Link>
             </li>
           ))}
-        </ol>
+        </ol> */}
+        <h1 className="text-2xl">Coming soon...</h1>
       </div>
     </>
   );

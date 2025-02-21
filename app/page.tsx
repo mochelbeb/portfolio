@@ -7,8 +7,8 @@ import { Projects } from "./home/Projects";
 import { Skills } from "./home/Skills";
 
 export const metadata: Metadata = {
-  title: "Islam Naasani",
-  description: "Front-end Developer",
+  title: "Mohamed Chelbeb | Portfolio",
+  description: "Full-stack Developer",
   icons: ["/favicon.ico"],
 };
 

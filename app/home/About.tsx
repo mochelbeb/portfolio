@@ -6,7 +6,7 @@ export const About: FC<AboutProps> = ({}) => {
   return (
     <section className="max-w-lg flex-1 px-2 py-3 sm:px-10 sm:text-lg [&_p]:mb-4">
       <p>
-        I'm a front-end developer with 2+ years of experience, a linux
+        I'm a Full-stack developer with 3+ years of experience, a problem-solving
         enthusiast, and a TypeScript lover.
       </p>
       <p>
@@ -14,17 +14,17 @@ export const About: FC<AboutProps> = ({}) => {
         faced on{" "}
         <Link
           target="_blank"
-          href="https://www.linkedin.com/in/islam-nassani-994a32194/"
+          href="https://www.linkedin.com/in/mohamedch/"
         >
           LinkedIn
         </Link>{" "}
         or on{" "}
-        <Link target="_blank" href="/blog">
-          my blog
+        <Link target="_blank" href="https://www.github.com/mochelbeb">
+          Github
         </Link>
         ,{" "}
         <em className="not-italic">
-          I mainly talk about <strong>React</strong>,{" "}
+          I mainly talk about <strong>Next.js</strong>,{" "}<strong>Angular</strong>,{" "}
           <strong>TypeScript</strong> and <strong>JavaScript</strong>
         </em>
       </p>
