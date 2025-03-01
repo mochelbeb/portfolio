@@ -1,6 +1,8 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { FC } from "react";
+
 export type AboutProps = {};
 export const About: FC<AboutProps> = ({}) => {
   return (
@@ -27,6 +29,17 @@ export const About: FC<AboutProps> = ({}) => {
           I mainly talk about <strong>Next.js</strong>,{" "}<strong>Angular</strong>,{" "}
           <strong>TypeScript</strong> and <strong>JavaScript</strong>
         </em>
+      </p>
+      <p className="mt-6">
+        <Link
+          href="/content/resume/MOHAMED_CHELBEB_CV.pdf"
+          target="_blank"
+          className="inline-block"
+        >
+          <Button variant="outline">
+            Download Resume
+          </Button>
+        </Link>
       </p>
     </section>
   );

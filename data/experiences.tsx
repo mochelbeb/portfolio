@@ -78,8 +78,8 @@ export const EXPERIENCES: Experience[] = [
       </Link>
     ),
     location: "Harju County, Estonia (Remote)",
-    from: "2025-1",
-    to: null,
+    from: "2024-9",
+    to: "2025-3",
     description: (
       <>
         <p>
