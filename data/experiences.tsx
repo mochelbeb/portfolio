@@ -97,7 +97,7 @@ export const EXPERIENCES: Experience[] = [
     ),
     location: "Dover DE, USA (Remote)",
     from: "2023-6-19",
-    to: null,
+    to: "2025-5-09",
     description: (
       <>
         <p>
@@ -106,4 +106,23 @@ export const EXPERIENCES: Experience[] = [
       </>
     ),
   },
+  {
+    title: "Backend Engineer",
+    company: (
+      <Link target="_blank" href="https://smeetz.com/">
+        Smeetz SA
+      </Link>
+    ),
+    location: "Lausanne, Switzerland (Remote)",
+    from: "2025-4-21",
+    to: null,
+    description: (
+      <>
+        <p>
+          {`At Smeetz, I work on enhancing the core orders logic and architecture, developing internal Smeetz services and packages, and ensuring GraphQL security and maintenance for smooth and secure operations across the platform.`}
+        </p>
+      </>
+    ),
+  },
+
 ];
